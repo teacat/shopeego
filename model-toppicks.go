@@ -9,28 +9,6 @@ type GetTopPicksListRequest struct {
 	Timestamp int `json:"timestamp"`
 }
 
-type Item struct {
-	// Item ID
-	ItemID int `json:"item_id"`
-	// Item name
-	ItemName string `json:"item_name"`
-	// Item discounted price(original price if no discount). Item level price will return if it has variation.
-	ItemPrice float64 `json:"item_price"`
-	// The sales of the item
-	Sales int `json:"sales"`
-}
-
-type Collection struct {
-	// Collection name
-	Name string `json:"name"`
-	// Collection ID
-	TopPicksID int `json:"top_picks_id"`
-	// True or False
-	IsActivated bool `json:"is_activated"`
-	// Item list of the collection
-	Items []Item `json:"items"`
-}
-
 type GetTopPicksListResponse struct {
 	// Collection list
 	Collections []Collection `json:"collections"`
@@ -49,17 +27,6 @@ type AddTopPicksRequest struct {
 	ShopID int `json:"shop_id"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
-}
-
-type Item struct {
-	// Item ID
-	ItemID int `json:"item_id"`
-	// Item name
-	ItemName string `json:"item_name"`
-	// Item discounted price(original price if no discount). Item level price will return if it has variation.
-	ItemPrice float64 `json:"item_price"`
-	// The sales of the item
-	Sales int `json:"sales"`
 }
 
 type AddTopPicksResponse struct {
@@ -88,17 +55,6 @@ type UpdateTopPicksRequest struct {
 	ShopID int `json:"shop_id"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
-}
-
-type Item struct {
-	// Item ID
-	ItemID int `json:"item_id"`
-	// Item name
-	ItemName string `json:"item_name"`
-	// Item discounted price(original price if no discount). Item level price will return if it has variation.
-	ItemPrice float64 `json:"item_price"`
-	// The sales of the item
-	Sales int `json:"sales"`
 }
 
 type UpdateTopPicksResponse struct {

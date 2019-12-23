@@ -1,23 +1,5 @@
 package shopeego
 
-type Variation struct {
-	// Shopee's unique identifier for a variation of an item. If there is no variation of this item, you don't need to input this param. Dafault is 0.
-	VariationID int `json:"variation_id"`
-	// The discount price of the item.
-	VariationPromotionPrice float64 `json:"variation_promotion_price"`
-}
-
-type Item struct {
-	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id"`
-	//
-	Variations []Variation `json:"variations"`
-	// The discount price of the item. If the item has no variation, this param is necessary.
-	ItemPromotionPrice float64 `json:"item_promotion_price"`
-	// The max number of this product in the promotion price.
-	PurchaseLimit int `json:"purchase_limit"`
-}
-
 type AddDiscountRequest struct {
 	// Title of the discount.
 	DiscountName string `json:"discount_name"`
@@ -44,24 +26,6 @@ type AddDiscountResponse struct {
 	Warning string `json:"warning"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
-}
-
-type Variation struct {
-	// Shopee's unique identifier for a variation of an item. If there is no variation of this item, you don't need to input this param. Dafault is 0.
-	VariationID int `json:"variation_id"`
-	// The discount price of the item.
-	VariationPromotionPrice float64 `json:"variation_promotion_price"`
-}
-
-type Item struct {
-	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id"`
-	//
-	Variations []Variation `json:"variations"`
-	// The discount price of the item. If the item has no variation, this param is necessary.
-	ItemPromotionPrice float64 `json:"item_promotion_price"`
-	// The max number of this product in the promotion price.
-	PurchaseLimit int `json:"purchase_limit"`
 }
 
 type AddDiscountItemRequest struct {
@@ -149,36 +113,6 @@ type GetDiscountDetailRequest struct {
 	Timestamp int `json:"timestamp"`
 }
 
-type Variation struct {
-	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id"`
-	// Name of the variation that belongs to the same item.
-	VariationName string `json:"variation_name"`
-	// The original price before discount of the variation.
-	VariationOriginalPrice float64 `json:"variation_original_price"`
-	// The discount price of the variation.
-	VariationPromotionPrice float64 `json:"variation_promotion_price"`
-	// The current stock quantity of the variation.
-	VariationStock int `json:"variation_stock"`
-}
-
-type Item struct {
-	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id"`
-	// Name of the item in local language.
-	ItemName string `json:"item_name"`
-	// The max number of this product in the promotion price.
-	PurchaseLimit int `json:"purchase_limit"`
-	// The original price before discount of the item. If there is variation, this value is 0.
-	ItemOriginalPrice float64 `json:"item_original_price"`
-	// The discount price of the item. If there is variation, this value is 0.
-	ItemPromotionPrice float64 `json:"item_promotion_price"`
-	// The current stock quantity of the item.
-	Stock int `json:"stock"`
-	//
-	Variations []Variation `json:"variations"`
-}
-
 type GetDiscountDetailResponse struct {
 	// Shopee's unique identifier for a discount activity.
 	DiscountID int `json:"discount_id"`
@@ -217,19 +151,6 @@ type GetDiscountsListRequest struct {
 	Timestamp int `json:"timestamp"`
 }
 
-type Discount struct {
-	// Shopee's unique identifier for a discount activity.
-	DiscountID int `json:"discount_id"`
-	// Title of the discount.
-	DiscountName string `json:"discount_name"`
-	// The time when discount activity start.
-	StartTime int `json:"start_time"`
-	// The time when discount activity end.
-	EndTime int `json:"end_time"`
-	// The status of discount, applicable values: expired, ongoing, upcoming.
-	Status string `json:"status"`
-}
-
 type GetDiscountsListResponse struct {
 	//
 	Discount []Discount `json:"discount"`
@@ -263,24 +184,6 @@ type UpdateDiscountResponse struct {
 	ModifyTime int `json:"modify_time"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
-}
-
-type Variation struct {
-	// Shopee's unique identifier for a variation of an item. If there is no variation of this item, you don't need to input this param. Dafault is 0.
-	VariationID int `json:"variation_id"`
-	// The discount price of the item.
-	VariationPromotionPrice float64 `json:"variation_promotion_price"`
-}
-
-type Item struct {
-	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id"`
-	// The max number of this product in the promotion price.
-	PurchaseLimit int `json:"purchase_limit"`
-	// The discount price of the item.
-	ItemOriginalPrice float64 `json:"item_original_price"`
-	//
-	Variations []Variation `json:"variations"`
 }
 
 type UpdateDiscountItemsRequest struct {

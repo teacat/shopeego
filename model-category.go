@@ -33,17 +33,6 @@ type GetShopCategoriesRequest struct {
 	Timestamp int `json:"timestamp"`
 }
 
-type ShopCategory struct {
-	// ShopCategory's unique identifier.
-	ShopCategoryID int `json:"shop_category_id"`
-	// ShopCategory's status. Applicable values: NORMAL, INACTIVE, DELETED.
-	Status string `json:"status"`
-	// ShopCategory's name.
-	Name string `json:"name"`
-	// ShopCategory's sort weight.
-	SortWeight int `json:"sort_weight"`
-}
-
 type GetShopCategoriesResponse struct {
 	//
 	ShopCategorys []ShopCategory `json:"shop_categorys"`
@@ -136,11 +125,6 @@ type GetItemsRequest struct {
 	PartnerID int `json:"partner_id"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
-}
-
-type Item struct {
-	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id"`
 }
 
 type GetItemsResponse struct {

@@ -86,17 +86,6 @@ type PerformanceRequest struct {
 	Timestamp int `json:"timestamp"`
 }
 
-type Performance struct {
-	// The threshold used to compare shop's actual performance to the target performance. It has four types: lt(less than), gt(greater than), lte(less than or equal), gte(greater than or equal).
-	ThresholdType string `json:"threshold_type"`
-	// Null, not applicable.
-	Unit string `json:"unit"`
-	// Your target performance index.
-	Target int `json:"target"`
-	// Your actual performance index.
-	My float64 `json:"my"`
-}
-
 type PerformanceResponse struct {
 	// To ensure that buyers can easily find what they are looking for, any attempts by sellers to manipulate search results to gain an unfair advantage will be penalized.
 	SpamListingViolation []Performance `json:"spam_listing_violation"`

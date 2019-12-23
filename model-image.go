@@ -11,13 +11,6 @@ type UploadImgRequest struct {
 	Timestamp int `json:"timestamp"`
 }
 
-type Image struct {
-	// origin image url
-	ImageURL string `json:"image_url"`
-	// Shopee image url
-	ShopeeImageURL string `json:"shopee_image_url"`
-}
-
 type UploadImgResponse struct {
 	//
 	Images []Image `json:"images"`

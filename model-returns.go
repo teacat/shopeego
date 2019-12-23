@@ -65,75 +65,6 @@ type GetReturnListRequest struct {
 	Timestamp int `json:"timestamp"`
 }
 
-type User struct {
-	// Buyer's nickname.
-	Username int `json:"username"`
-	// Buyer's email.
-	Email string `json:"email"`
-	// Buyer's portrait.
-	Protrait string `json:"protrait"`
-}
-
-type Item struct {
-	// Item id.
-	ItemID int `json:"item_id"`
-	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id"`
-	// Name of item in local language.
-	Name string `json:"name"`
-	// Image URLs of item.
-	Images []string `json:"images"`
-	// Amount of this item.
-	Amount int `json:"amount"`
-	// The price of Item.
-	ItemPrice float64 `json:"item_price"`
-	// To indicate if this item belongs to an addon deal.
-	IsAddOnDeal bool `json:"is_add_on_deal"`
-	// To indicate if this item is main item or sub item. True means main item, false means sub item.
-	IsMainItem bool `json:"is_main_item"`
-	// The unique identity of an addon deal.
-	AddOnDealID int `json:"add_on_deal_id"`
-}
-
-type Return struct {
-	// Image URLs of return.
-	Images []string `json:"images"`
-	// Reason for return product. Applicable values: See Data Definition- ReturnReason.
-	Reason string `json:"reason"`
-	// Reason that buyer provide.
-	TextReason string `json:"text_reason"`
-	// The serial number of return.
-	ReturnSN int `json:"return_sn"`
-	// Amount of the refund.
-	RefundAmount float64 `json:"refund_amount"`
-	// Currency of the return.
-	Currency string `json:"currency"`
-	// The time of return create.
-	CreateTime int `json:"create_time"`
-	// The time of modify return.
-	UpdateTime int `json:"update_time"`
-	// Enumerated type that defines the current status of the return. Applicable values: See Data Definition- ReturnStatus.
-	Status string `json:"status"`
-	// The last time seller deal with this return.
-	DueDate int `json:"due_date"`
-	// The tracking number assigned by the shipping carrier for item shipment.
-	TrackingNumber string `json:"tracking_number"`
-	// The reason of seller dispute return. While the return has been disputed, this field is useful. Applicable values: See Data Definition- ReturnDisputeReason.
-	DisputeReason string `json:"dispute_reason"`
-	// The reason that seller provide. While the return has been disputed, this field is useful.
-	DisputeTextReason string `json:"dispute_text_reason"`
-	// Items to be sent back to seller. Can be either integrated/non-integrated.
-	NeedsLogistics bool `json:"needs_logistics"`
-	// Order price before discount.
-	AmountBeforeDiscount floatt64 `json:"amount_before_discount"`
-	//
-	User User `json:"user"`
-	//
-	Item []Item `json:"item"`
-	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn"`
-}
-
 type GetReturnListResponse struct {
 	Returns []Return `json:"returns"`
 	// This is to indicate whether the item list is more than one page. If this value is true, you may want to continue to check next page to retrieve the rest of items.
@@ -151,34 +82,6 @@ type GetReturnDetailRequest struct {
 	ShopID int `json:"shop_id"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
-}
-
-type User struct {
-	// Buyer's nickname.
-	Username int `json:"username"`
-	// Buyer's email.
-	Email string `json:"email"`
-	// Buyer's portrait.
-	Portrait string `json:"portrait"`
-}
-
-type Item struct {
-	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id"`
-	// Name of item in local language.
-	Name string `json:"name"`
-	// Image URLs of item.
-	Images []string `json:"images"`
-	// Amount of this item.
-	Amount int `json:"amount"`
-	// The price of item.
-	ItemPrice float64 `json:"item_price"`
-	// To indicate if this item belongs to an addon deal.
-	IsAddOnDeal bool `json:"is_add_on_deal"`
-	// To indicate if this item is main item or sub item. True means main item, false means sub item.
-	IsMainItem bool `json:"is_main_item"`
-	// The unique identity of an addon deal.
-	AddOnDealID int `json:"add_on_deal_id"`
 }
 
 type GetReturnDetailResponse struct {

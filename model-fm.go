@@ -1,18 +1,5 @@
 package shopeego
 
-type Info struct {
-	// The full address of the seller.
-	Address string `json:"address"`
-	// Seller's name for the address.
-	Name string `json:"name"`
-	// Seller's postal code.
-	Zipcode string `json:"zipcode"`
-	// Seller's location.
-	Area string `json:"area"`
-	// Seller's phone number.
-	Phone string `json:"phone"`
-}
-
 type GenerateFMTrackingNoRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
@@ -52,15 +39,6 @@ type GetShopFMTrackingNoRequest struct {
 	PaginationOffset int `json:"pagination_offset"`
 }
 
-type List struct {
-	// The specified delivery date.
-	DeclareDate string `json:"declare_date"`
-	// The logistics status for bound orders.
-	Status string `json:"status"`
-	// The first-mile tracking number.
-	FMTN string `json:"fmtn"`
-}
-
 type GetShopFMTrackingNoResponse struct {
 	// This is to indicate whether the order list is more than one page. If this value is true, you may want to continue to check next page to retrieve orders.
 	HasMore bool `json:"has_more"`
@@ -68,13 +46,6 @@ type GetShopFMTrackingNoResponse struct {
 	FMTNList []List `json:"fmtn_list"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
-}
-
-type Order struct {
-	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn"`
-	// The unique identifier for a fulfillment order.
-	ForderID string `json:"forder_id"`
 }
 
 type FirstMileCodeBindOrderRequest struct {
@@ -106,15 +77,6 @@ type FirstMileCodeBindOrderRequest struct {
 	Area string `json:"area"`
 }
 
-type List struct {
-	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn"`
-	// The unique identifier for a fulfillment order.
-	ForderID string `json:"forder_id"`
-	// The reason why the order/fulfillment order cannot be bound.
-	Reason string `json:"reason"`
-}
-
 type FirstMileCodeBindOrderResponse struct {
 	// This is to indicate whether orders are bound successfully.
 	Success bool `json:"success"`
@@ -135,15 +97,6 @@ type GetFmTnDetailRequest struct {
 	Timestamp int `json:"timestamp"`
 	// The first-mile tracking number.
 	FMTN sttring `json:"fmtn"`
-}
-
-type Order struct {
-	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn"`
-	// The unique identifier for a fulfillment order.
-	ForderID string `json:"forder_id"`
-	// The tracking number of SLS for orders/forders.
-	SLSTN string `json:"slstn"`
 }
 
 type GetFmTnDetailResponse struct {
@@ -176,40 +129,6 @@ type GetFMTrackingNoWaybillRequest struct {
 	IsBatch bool `json:"is_batch"`
 }
 
-type Error struct {
-	//
-	ErrorCode string `json:"error_code"`
-	// The detail information of this error.
-	ErrorDescription string `json:"error_description"`
-	// The first-mile tracking number.
-	FMTN string `json:"fmtn"`
-}
-
-type Waybill struct {
-	// The first-mile tracking number.
-	FMTN string `json:"fmtn"`
-	// The url of retrieving waybill.
-	Waybill string `json:"waybill"`
-}
-
-type Result struct {
-	// This Object contains the waybill to each tracking number.
-	Waybills []Waybill `json:"waybills"`
-	// The number of Tracking Number to get waybills in this call.
-	TotalCount int `json:"total_count"`
-	// This list contains the first-mile tracking number and error descriptions of all tracking numbers that failed to retrieve airway bill in this call.
-	Errors []Error `json:"errors"`
-}
-
-type Batch struct {
-	// The list contains urls of retrieving waybill in PDF format. Each url contains the airway bills which is in the same logistics channel.
-	Waybills []string `json:"waybills"`
-	// The number of Tracking Number to get waybills in this call.
-	TotalCount int `json:"total_count"`
-	// This list contains the first-mile tracking number and error descriptions of all tracking numbers that failed to retrieve airway bill in this call.
-	Errors []Error `json:"errors"`
-}
-
 type GetFMTrackingNoWaybillResponse struct {
 	// This object contains the detailed breakdown for the result of this API call if the param is_batch is true.
 	BatchResult Batch `json:"batch_result"`
@@ -232,15 +151,6 @@ type GetShopFirstMileChannelRequest struct {
 	Timestamp int `json:"timestamp"`
 	// Use this field to specify the region you want to ship parcel.
 	Area string `json:"area"`
-}
-
-type Logistic struct {
-	// The identity of logistic channel.
-	LogisticID int `json:"logistic_id"`
-	// The name of logistic.
-	LogisticName string `json:"logistic_name"`
-	// The shipment method for bound orders, should be pickup or dropoff.
-	ShipmentMethod string `json:"shipment_method"`
 }
 
 type GetShopFirstMileChannelResponse struct {
