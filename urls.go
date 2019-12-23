@@ -66,7 +66,7 @@ var availablePaths map[string]string = map[string]string{
 	"UploadImg": "api/v1/image/upload",
 
 	//=======================================================
-	// Discountt
+	// Discount
 	//=======================================================
 
 	"AddDiscount":         "api/v1/discount/add",
@@ -140,7 +140,7 @@ var availablePaths map[string]string = map[string]string{
 	"DeleteTopPicks":  "api/v1/top_picks/delete",
 
 	//=======================================================
-	// FirsttMileTracking
+	// FirstMileTracking
 	//=======================================================
 
 	"GenerateFMTrackingNo":    "api/v1/fm_tn/generate",

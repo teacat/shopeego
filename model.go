@@ -22,7 +22,7 @@ type RequestBase struct {
 // GetShopInfoResponse
 //=======================================================
 
-type AffiliateShop struct {
+type GetShopInfoResponseShop struct {
 	// Affiliate shop's id.
 	AShopID string `json:"a_shop_id"`
 	// Affiliate Shop's area.
@@ -33,7 +33,7 @@ type AffiliateShop struct {
 // PerformanceResponse
 //=======================================================
 
-type Performance struct {
+type PerformanceResponsePerformance struct {
 	// The threshold used to compare shop's actual performance to the target performance. It has four types: lt(less than), gt(greater than), lte(less than or equal), gte(greater than or equal).
 	ThresholdType string `json:"threshold_type"`
 	// Null, not applicable.
@@ -48,7 +48,7 @@ type Performance struct {
 // GetShopCategoriesResponse
 //=======================================================
 
-type ShopCategory struct {
+type GetShopCategoriesResponseCategory struct {
 	// ShopCategory's unique identifier.
 	ShopCategoryID int `json:"shop_category_id"`
 	// ShopCategory's status. Applicable values: NORMAL, INACTIVE, DELETED.
@@ -63,7 +63,7 @@ type ShopCategory struct {
 // GetItemsResponse
 //=======================================================
 
-type Item struct {
+type GetItemsResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 }
@@ -72,14 +72,14 @@ type Item struct {
 // GetCategoriesResponse
 //=======================================================
 
-type DaysToShipLimits struct {
+type GetCategoriesResponseLimits struct {
 	// The maximum of dts，-1 means no dts.
 	MaxLimit int `json:"max_limit"`
 	// The minimum of dts, -1 means no dts.
 	MinLimit int `json:"min_limit"`
 }
 
-type Category struct {
+type GetCategoriesResponseCategory struct {
 	// The Identify of each category.
 	CategoryID int `json:"category_id"`
 	// The Identify of the parent of the category.
@@ -96,14 +96,14 @@ type Category struct {
 // GetAttributesResponse
 //=======================================================
 
-type Value struct {
+type GetAttributesResponseValue struct {
 	// Value in original language. It's MANDATORY to use attributes in original_value to add items.
 	OriginalValue string `json:"original_value"`
 	// Value in translated language. As referrence only, CANNOT be used to add item. If the selected language is not supported in certain shop location, this field will be empty.
 	TranslateValue string `json:"translate_value"`
 }
 
-type Attribute struct {
+type GetAttributesResponseAttribute struct {
 	// The Identify of each category.
 	AttributeID int `json:"attribute_id"`
 	// The name of each attribute.
@@ -124,7 +124,7 @@ type Attribute struct {
 // AddRequest
 //=======================================================
 
-type Variation struct {
+type AddRequestVariation struct {
 	// Name of the variation that belongs to the same item. A seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate variation. Each variation can have a different quantity and price. Max Length: 20 letters
 	Name string `json:"name"`
 	// The current stock quantity of the variation in the listing currency.
@@ -135,20 +135,20 @@ type Variation struct {
 	VariationSku string `json:"variation_sku"`
 }
 
-type Image struct {
+type AddRequestImage struct {
 	// Url of items' image.The system would synchronous download the image one by one.if one of those image can not fetch, would get a warning in result.But can continue the AddItem proccessing.
 	// if all image failed to fetch, would return an error.
 	URL string `json:"url"`
 }
 
-type Attribute struct {
+type AddRequestAttribute struct {
 	// related to shopee.item.GetAttributes result.attributes.attribute_id
 	AttributesID int `json:"attributes_id"`
 	// related to shopee.item.GetAttributes one of result.attributes.options. Max length is 40 letters.
 	Value string `json:"value"`
 }
 
-type Logistics struct {
+type AddRequestLogistic struct {
 	// related to shopee.logistics.GetLogistics result.logistics.logistic_id
 	LogisticID int `json:"logistic_id"`
 	// related to shopee.logistics.GetLogistics result.logistics.enabled only affect current item
@@ -165,7 +165,7 @@ type Logistics struct {
 // AddResponse
 //=======================================================
 
-type Wholesale struct {
+type AddResponseWholesale struct {
 	// The min count of this tier wholesale. If the wholesale is not the first one, the min count must equal to max count of last tier plus one.
 	Min int `json:"min"`
 	// The max count of this tier wholesale.
@@ -174,7 +174,7 @@ type Wholesale struct {
 	UnitPrice float64 `json:"unit_price"`
 }
 
-type Variation struct {
+type AddResponseVariation struct {
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int `json:"variation_id"`
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
@@ -197,7 +197,7 @@ type Variation struct {
 	DiscountID int `json:"discount_id"`
 }
 
-type Attribute struct {
+type AddResponseAttribute struct {
 	// The Identify of each category.
 	AttributeID int `json:"attribute_id"`
 	// The name of each attribute.
@@ -210,7 +210,7 @@ type Attribute struct {
 	AtributeValue string `json:"atribute_value"`
 }
 
-type Logistics struct {
+type AddResponseLogistic struct {
 	// The identity of logistic channel.
 	LogisticID int `json:"logistic_id"`
 	// The name of logistic.
@@ -227,7 +227,7 @@ type Logistics struct {
 	EstimatedShippingFee float64 `json:"estimated_shipping_fee"`
 }
 
-type Wholesale struct {
+type AddResponseWholesale struct {
 	// The min count of this tier wholesale.
 	Min int `json:"min"`
 	// The max count of this tier wholesale.
@@ -236,7 +236,7 @@ type Wholesale struct {
 	UnitPrice float64 `json:"unit_price"`
 }
 
-type Item struct {
+type AddResponseItem struct {
 	// Shopee's unique identifier for a shop.
 	ShopID int `json:"shop_id"`
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
@@ -305,7 +305,7 @@ type Item struct {
 // UnlistItemRequest
 //=======================================================
 
-type Item struct {
+type UnlistItemRequestItem struct {
 	// Item's unique identifier.
 	ItemID int `json:"item_id"`
 	// True: unlist this item; False: list this item.
@@ -316,14 +316,14 @@ type Item struct {
 // UnlistItemResponse
 //=======================================================
 
-type Failed struct {
+type UnlistItemResponseFailed struct {
 	// Item's unique identifier.
 	ItemID int `json:"item_id"`
 	// Error message.
 	ErrorDesciption string `json:"error_desciption"`
 }
 
-type Success struct {
+type UnlistItemResponseSuccess struct {
 	// Item's unique identifier.
 	ItemID int `json:"item_id"`
 	// True: item is unlisted; False: item is listed.
@@ -334,7 +334,7 @@ type Success struct {
 // AddVariationsRequest
 //=======================================================
 
-type Variation struct {
+type AddVariationsRequestVariation struct {
 	// Name of the variation that belongs to the same item.A seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate variation. Each variation can have a different quantity and price.
 	Name string `json:"name"`
 	// The current stock quantity of the variation in the listing currency.
@@ -349,7 +349,7 @@ type Variation struct {
 // AddVariationsResponse
 //=======================================================
 
-type Variation struct {
+type AddVariationsResponseVariation struct {
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int `json:"variation_id"`
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
@@ -374,14 +374,14 @@ type Variation struct {
 // GetItemsListResponse
 //=======================================================
 
-type Variation struct {
+type GetItemsListResponseVariation struct {
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
 	VariationSKU string `json:"variation_sku"`
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int `json:"variation_id"`
 }
 
-type Item struct {
+type GetItemsListResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// Shopee's unique identifier for a shop.
@@ -404,7 +404,7 @@ type Item struct {
 // GetItemDetailResponse
 //=======================================================
 
-type Variaion struct {
+type GetItemDetailResponseVariaion struct {
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int `json:"variation_id"`
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
@@ -427,7 +427,7 @@ type Variaion struct {
 	DiscountID int `json:"discount_id"`
 }
 
-type Attribute struct {
+type GetItemDetailResponseAttribute struct {
 	// The Identify of each category
 	AttributeID int `json:"attribute_id"`
 	// The name of each attribute
@@ -440,7 +440,7 @@ type Attribute struct {
 	AttributeValue string `json:"attribute_value"`
 }
 
-type Logistic struct {
+type GetItemDetailResponseLogistic struct {
 	// The identity of logistic channel
 	LogisticID int `json:"logistic_id"`
 	// The name of logistic
@@ -457,7 +457,7 @@ type Logistic struct {
 	EstimatedShippingFee float64 `json:"estimated_shipping_fee"`
 }
 
-type Wholesale struct {
+type GetItemDetailResponseWholesale struct {
 	// The min count of this tier wholesale.
 	Min int `json:"min"`
 	// The max count of this tier wholesale.
@@ -466,7 +466,7 @@ type Wholesale struct {
 	UnitPrice float64 `json:"unit_price"`
 }
 
-type Item struct {
+type GetItemDetailResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// Shopee's unique identifier for a shop.
@@ -545,7 +545,7 @@ type Item struct {
 // UpdateItemRequest
 //=======================================================
 
-type Variation struct {
+type UpdateItemRequestVariation struct {
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int `json:"variation_id"`
 	// Name of the variation that belongs to the same item. A seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate variation. Each variation can have a different quantity and price.
@@ -554,14 +554,14 @@ type Variation struct {
 	VariationSKU string `json:"variation_sku"`
 }
 
-type Attribute struct {
+type UpdateItemRequestAttribute struct {
 	// related to shopee.item.GetAttributes result.attributes.attribute_id
 	AttributesID int `json:"attributtes_id"`
 	// related to shopee.item.GetAttributes one of result.attributes.options
 	Value string `json:"value"`
 }
 
-type Wholesale struct {
+type UpdateItemRequestWholesale struct {
 	// The min count of this tier wholesale. If the wholesale is not the first one, the min count must equal to max count of last tier plus one.
 	Min int `json:"min"`
 	// The max count of this tier wholesale.
@@ -570,7 +570,7 @@ type Wholesale struct {
 	UnitPrice float64 `json:"unity_price"`
 }
 
-type Logistic struct {
+type UpdateItemRequestLogistic struct {
 	// related to shopee.logistics.GetLogistics result.logistics.logistic_id
 	LogisticID int `json:"logistic_id"`
 	// related to shopee.logistics.GetLogistics result.logistics.enabled only affect current item
@@ -587,7 +587,7 @@ type Logistic struct {
 // UpdateItemResponse
 //=======================================================
 
-type Variation struct {
+type UpdateItemResponseVariation struct {
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int `json:"variation_id"`
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
@@ -610,7 +610,7 @@ type Variation struct {
 	DiscountID int `json:"discount_id"`
 }
 
-type Attribute struct {
+type UpdateItemResponseAttribute struct {
 	// The Identify of each category
 	AttributeID int `json:"attribute_id"`
 	// The name of each attribute
@@ -623,7 +623,7 @@ type Attribute struct {
 	AttribueValue string `json:"attribue_value"`
 }
 
-type Logistic struct {
+type UpdateItemResponseLogistic struct {
 	// The identity of logistic channel
 	LogisticID int `json:"logistic_id"`
 	// The name of logistic
@@ -640,7 +640,7 @@ type Logistic struct {
 	EstimatedShippingFee float64 `json:"estimated_shipping_fee"`
 }
 
-type Wholesale struct {
+type UpdateItemResponseWholesale struct {
 	// The min count of this tier wholesale.
 	Min int `json:"min"`
 	// The max count of this tier wholesale.
@@ -649,7 +649,7 @@ type Wholesale struct {
 	UnitPrice float64 `json:"unit_price"`
 }
 
-type Item struct {
+type UpdateItemResponseItem struct {
 	// Shopee's unique identifier for a shop.
 	ShopID int `json:"shop_id"`
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
@@ -718,7 +718,7 @@ type Item struct {
 // UpdatePriceResponse
 //=======================================================
 
-type Item struct {
+type UpdatePriceResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// The time when price of the item is updated.
@@ -731,7 +731,7 @@ type Item struct {
 // UpdateStockResponse
 //=======================================================
 
-type Item struct {
+type UpdateStockResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// The time when price of the item is updated.
@@ -744,7 +744,7 @@ type Item struct {
 // UpdateVariationPriceResponse
 //=======================================================
 
-type Item struct {
+type UpdateVariationPriceResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// The time when price of the item is updated.
@@ -759,7 +759,7 @@ type Item struct {
 // UpdateVariationStockResponse
 //=======================================================
 
-type Item struct {
+type UpdateVariationStockResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// The time when price of the item is updated.
@@ -774,7 +774,7 @@ type Item struct {
 // UpdatePriceBatchRequest
 //=======================================================
 
-type Item struct {
+type UpdatePriceBatchRequestItem struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
 	ItemID int `json:"item_id"`
 	// New price value for this item.
@@ -785,14 +785,14 @@ type Item struct {
 // UpdatePriceBatchResponse
 //=======================================================
 
-type Failure struct {
+type UpdatePriceBatchResponseFailure struct {
 	// Shopee's unique identifier for an item. Indicating items which failed to update.
 	ItemID int `json:"item_id"`
 	// Detailed information for the failed updating.
 	ErrorDescription string `json:"error_description"`
 }
 
-type BatchResult struct {
+type UpdatePriceBatchResponseBatchResult struct {
 	// List of item_id which have been updated successfully.
 	Modifications []string `json:"modifications"`
 	// Informations for failed stock updating.
@@ -803,7 +803,7 @@ type BatchResult struct {
 // UpdateStockBatchRequest
 //=======================================================
 
-type Item struct {
+type UpdateStockBatchRequestItem struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
 	ItemID int `json:"item_id"`
 	// New stock value for this item.
@@ -814,14 +814,14 @@ type Item struct {
 // UpdateStockBatchResponse
 //=======================================================
 
-type Failure struct {
+type UpdateStockBatchResponseFailure struct {
 	// Shopee's unique identifier for an item. Indicating items which failed to update.
 	ItemID int `json:"item_id"`
 	// Detailed information for the failed updating.
 	ErrorDescription string `json:"error_description"`
 }
 
-type BatchResult struct {
+type UpdateStockBatchResponseBatchResult struct {
 	// List of item_id which have been updated successfully.
 	Modifications []string `json:"modifications"`
 	// Informations for failed stock updating.
@@ -832,7 +832,7 @@ type BatchResult struct {
 // UpdateVariationPriceBatchRequest
 //=======================================================
 
-type Variation struct {
+type UpdateVariationPriceBatchRequestVariation struct {
 	// Shopee's unique identifier for a variation of an item. Please input the variation_id of a variation to be changed. The variation_id and item_id pair must be matched in order to perform the update.
 	VariationID int `json:"variation_id"`
 	// New price value of this variation.
@@ -845,7 +845,7 @@ type Variation struct {
 // UpdateVariationPriceBatchResponse
 //=======================================================
 
-type Failure struct {
+type UpdateVariationPriceBatchResponseFailure struct {
 	// Shopee's unique identifier for an item. Indicating items which failed to update.
 	ItemID int `json:"item_id"`
 	// Detailed information for the failed updating.
@@ -854,14 +854,14 @@ type Failure struct {
 	VariationID int `json:"variation_id"`
 }
 
-type Modification struct {
+type UpdateVariationPriceBatchResponseModification struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int `json:"variation_id"`
 }
 
-type BatchResult struct {
+type UpdateVariationPriceBatchResponseBatchResult struct {
 	// List of item_id which have been updated successfully.
 	Modifications []Modification `json:"modifications"`
 	// Informations for failed stock updating.
@@ -872,7 +872,7 @@ type BatchResult struct {
 // UpdateVariationStockBatchRequest
 //=======================================================
 
-type Variation struct {
+type UpdateVariationStockBatchRequestVariation struct {
 	// Shopee's unique identifier for a variation of an item. Please input the variation_id of a variation to be changed. The variation_id and item_id pair must be matched in order to perform the update.
 	VariationID int `json:"variation_id"`
 	// New stock value of this variation.
@@ -885,7 +885,7 @@ type Variation struct {
 // UpdateVariationStockBatchResponse
 //=======================================================
 
-type Failure struct {
+type UpdateVariationStockBatchResponseFailure struct {
 	// Shopee's unique identifier for an item. Indicating items which failed to update.
 	ItemID int `json:"item_id"`
 	// Detailed information for the failed updating.
@@ -894,14 +894,14 @@ type Failure struct {
 	VariationID int `json:"variation_id"`
 }
 
-type Modification struct {
+type UpdateVariationStockBatchResponseModification struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int `json:"variation_id"`
 }
 
-type BatchResult struct {
+type UpdateVariationStockBatchResponseBatchResult struct {
 	// List of item_id which have been updated successfully.
 	Modifications []Modification `json:"modifications"`
 	// Informations for failed stock updating.
@@ -912,7 +912,7 @@ type BatchResult struct {
 // InitTierVariationRequest
 //=======================================================
 
-type TierVariation struct {
+type InitTierVariationRequestTierVariation struct {
 	// Tier variation name.
 	Name string `json:"name"`
 	// Tier variation value options list. Option length should be under 20. Quantity of combinations of all 2 tier options is up to 50.
@@ -921,7 +921,7 @@ type TierVariation struct {
 	ImagesURL []string `json:"images_url"`
 }
 
-type Variation struct {
+type InitTierVariationRequestVariation struct {
 	// A list of tier variation combination index, which indicates variation's option position in tier_variation['options'] list. e.g. [0,1] means tier variation 1 option 1 and tier variation 2 option 2.
 	TierIndex []int `json:"tier_index"`
 	// Stock value of this variation item. The original variation stock will be override when calling this API to initialize 2-tier structure for an existed item. 0 stock will make this variation a greyout option for buyer.
@@ -936,7 +936,7 @@ type Variation struct {
 // InitTierVariationResponse
 //=======================================================
 
-type Variation struct {
+type InitTierVariationResponseVariation struct {
 	// A list of tier variation indexes, which indicate variation's options in tier_variation['options'] list.
 	TierIndex []int `json:"tier_index"`
 	// The identity of the variation.
@@ -947,7 +947,7 @@ type Variation struct {
 // AddTierVariationRequest
 //=======================================================
 
-type Variation struct {
+type AddTierVariationRequestVariation struct {
 	// A list of tier variation combination index, which indicates variation's option position in tier_variation['options'] list. e.g. [0,1] means tier variation 1 option 1 and tier variation 2 option 2.
 	TierIndex []int `json:"tier_index"`
 	// Stock value of this variation item. 0 stock will make this variation a greyout option for buyer.
@@ -962,7 +962,7 @@ type Variation struct {
 // AddTierVariationResponse
 //=======================================================
 
-type Variation struct {
+type AddTierVariationResponseVariation struct {
 	// A list of tier variation indexes, which indicate variation's options in tier_variation['options'] list.
 	TierIndex []int `json:"tier_index"`
 	// The identity of the variation.
@@ -973,7 +973,7 @@ type Variation struct {
 // GetVariationResponse
 //=======================================================
 
-type TierVariation struct {
+type GetVariationResponseTierVariation struct {
 	// Tier variation name.
 	Name string `json:"name"`
 	// Tier variation value options list.
@@ -982,7 +982,7 @@ type TierVariation struct {
 	ImagesURL []string `json:"images_url"`
 }
 
-type Variation struct {
+type GetVariationResponseVariation struct {
 	// Unique identifier of the variation.
 	VariationID
 	// A list of tier variation combination index, which indicates variation's option position in tier_variation['options'] list. e.g. [0,1] means tier variation 1 option 1 and tier variation 2 option 2.
@@ -993,7 +993,7 @@ type Variation struct {
 // UpdateTierVariationListRequest
 //=======================================================
 
-type TierVariation struct {
+type UpdateTierVariationListRequestTierVariation struct {
 	// Tier variation name.
 	Name string `json:"name"`
 	// Tier variation value options list. Lenght should be under 20. Combinations of 2 level options should be under 50.
@@ -1006,7 +1006,7 @@ type TierVariation struct {
 // UpdateTierVariationIndexRequest
 //=======================================================
 
-type Variation struct {
+type UpdateTierVariationIndexRequestVariation struct {
 	// A list of tier variation indexes, which indicate variation's options in tier_variation['options'] list.
 	TierIndex []int `json:"tier_index"`
 	// The identity of product item variation.
@@ -1017,7 +1017,7 @@ type Variation struct {
 // BoostItemResponse
 //=======================================================
 
-type Failure struct {
+type BoostItemResponseFailure struct {
 	// to indicate error type.
 	ErrorCode string `json:"error_code"`
 	// Failed item id.
@@ -1026,7 +1026,7 @@ type Failure struct {
 	Description string `json:"description"`
 }
 
-type BatchResult struct {
+type BoostItemResponseBatchResult struct {
 	// A list of item ids which have been boosted successfully.
 	Successes []int `json:"successes"`
 	// A list of failed-to-boost items, including error details.
@@ -1037,7 +1037,7 @@ type BatchResult struct {
 // GetBoostedItemResponse
 //=======================================================
 
-type Item struct {
+type GetBoostedItemResponseItem struct {
 	// boosted items' id.
 	ItemID int `json:"item_id"`
 	// Cooldown_second time is four hours after boost. After four hours you can boost this item again.
@@ -1048,7 +1048,7 @@ type Item struct {
 // GetPromotionInfoResponse
 //=======================================================
 
-type Promotion struct {
+type GetPromotionInfoResponsePromotion struct {
 	//
 	PromotionType string `json:"promotion_type"`
 	// The ID of promotion.
@@ -1069,14 +1069,14 @@ type Promotion struct {
 	Staging string `json:"staging"`
 }
 
-type Error struct {
+type GetPromotionInfoResponseError struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
 	ItemID int `json:"item_id"`
 	// Error Message.
 	ErrorMsg string `json:"error_msg"`
 }
 
-type Item struct {
+type GetPromotionInfoResponseItem struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
 	ItemID int `json:"item_id"`
 	// Promotion information list.
@@ -1089,7 +1089,7 @@ type Item struct {
 // GetPromotionInfoResponse
 //=======================================================
 
-type UploadImgResponse struct {
+type GetPromotionInfoResponseUploadImgResponse struct {
 	// origin image url
 	ImageURL string `json:"image_url"`
 	// Shopee image url
@@ -1100,14 +1100,14 @@ type UploadImgResponse struct {
 // AddDiscountRequest
 //=======================================================
 
-type Variation struct {
+type AddDiscountRequestVariation struct {
 	// Shopee's unique identifier for a variation of an item. If there is no variation of this item, you don't need to input this param. Dafault is 0.
 	VariationID int `json:"variation_id"`
 	// The discount price of the item.
 	VariationPromotionPrice float64 `json:"variation_promotion_price"`
 }
 
-type Item struct {
+type AddDiscountRequestItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	//
@@ -1122,14 +1122,14 @@ type Item struct {
 // AddDiscountItemRequest
 //=======================================================
 
-type Variation struct {
+type AddDiscountItemRequestVariation struct {
 	// Shopee's unique identifier for a variation of an item. If there is no variation of this item, you don't need to input this param. Dafault is 0.
 	VariationID int `json:"variation_id"`
 	// The discount price of the item.
 	VariationPromotionPrice float64 `json:"variation_promotion_price"`
 }
 
-type Item struct {
+type AddDiscountItemRequestItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	//
@@ -1144,7 +1144,7 @@ type Item struct {
 // GetDiscountDetailResponse
 //=======================================================
 
-type Variation struct {
+type GetDiscountDetailResponseVariation struct {
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int `json:"variation_id"`
 	// Name of the variation that belongs to the same item.
@@ -1157,7 +1157,7 @@ type Variation struct {
 	VariationStock int `json:"variation_stock"`
 }
 
-type Item struct {
+type GetDiscountDetailResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// Name of the item in local language.
@@ -1178,7 +1178,7 @@ type Item struct {
 // GetDiscountsListResponse
 //=======================================================
 
-type Discount struct {
+type GetDiscountsListResponseDiscount struct {
 	// Shopee's unique identifier for a discount activity.
 	DiscountID int `json:"discount_id"`
 	// Title of the discount.
@@ -1195,14 +1195,14 @@ type Discount struct {
 // UpdateDiscountResponse
 //=======================================================
 
-type Variation struct {
+type UpdateDiscountResponseVariation struct {
 	// Shopee's unique identifier for a variation of an item. If there is no variation of this item, you don't need to input this param. Dafault is 0.
 	VariationID int `json:"variation_id"`
 	// The discount price of the item.
 	VariationPromotionPrice float64 `json:"variation_promotion_price"`
 }
 
-type Item struct {
+type UpdateDiscountResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// The max number of this product in the promotion price.
@@ -1217,7 +1217,7 @@ type Item struct {
 // GetOrdersListResponse
 //=======================================================
 
-type Order struct {
+type GetOrdersListResponseOrder struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// Enumerated type that defines the current status of the order. Applicable values: See Data Definition- OrderStatus.
@@ -1230,7 +1230,7 @@ type Order struct {
 // GetOrdersByStatusResponse
 //=======================================================
 
-type Order struct {
+type GetOrdersByStatusResponseOrder struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// Enumerated type that defines the current status of the order. Applicable values: See Data Definition- OrderStatus.
@@ -1243,7 +1243,7 @@ type Order struct {
 // GetOrderDetailsRequest
 //=======================================================
 
-type Address struct {
+type GetOrderDetailsRequestAddress struct {
 	// Recipient's name for the address.
 	Name string `json:"name"`
 	// Recipient's phone number input when order was placed.
@@ -1264,7 +1264,7 @@ type Address struct {
 	FullAddress string `json:"full_address"`
 }
 
-type Item struct {
+type GetOrderDetailsRequestItem struct {
 	// ID of item
 	ItemID int `json:"item_id"`
 	// Name of item
@@ -1301,7 +1301,7 @@ type Item struct {
 	PromotionID int `json:"promotion_id"`
 }
 
-type Order struct {
+type GetOrderDetailsRequestOrder struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// The two-digit code representing the country where the order was made.
@@ -1346,7 +1346,7 @@ type Order struct {
 // GetEscrowDetailsResponse
 //=======================================================
 
-type Income struct {
+type GetEscrowDetailsResponseIncome struct {
 	// The three-digit code representing the currency unit used for all transactional amount under
 	LocalCurrency string `json:"local_currency"`
 	// The total amount paid by the buyer for the order. This amount includes the total sale price of items, shipping cost beared by buyer; and offset by Shopee promotions if applicable.
@@ -1391,7 +1391,7 @@ type Income struct {
 	CreditCardPromotion float64 `json:"credit_card_promotion"`
 }
 
-type BankAccount struct {
+type GetEscrowDetailsResponseBankAccount struct {
 	// Name of the seller's receiving bank
 	BankName string `json:"bank_name"`
 	// Account number of the seller's receiving bank
@@ -1400,7 +1400,7 @@ type BankAccount struct {
 	BankAccountCountry string `json:"bank_account_country"`
 }
 
-type Item struct {
+type GetEscrowDetailsResponseItem struct {
 	// ID of item.
 	ItemID int `json:"item_id"`
 	// ID of the variation that belongs to the same item.
@@ -1411,7 +1411,7 @@ type Item struct {
 	OriginalPrice float64 `json:"original_price"`
 }
 
-type Activity struct {
+type GetEscrowDetailsResponseActivity struct {
 	// ID of activity.
 	ActivityID int `json:"activity_id"`
 	// Type of activity. Currently only one type: bundle_deal
@@ -1424,7 +1424,7 @@ type Activity struct {
 	Items []Item `json:"items"`
 }
 
-type Item struct {
+type GetEscrowDetailsResponseItem struct {
 	// ID of item
 	ItemID int `json:"item_id"`
 	// Name of item
@@ -1470,7 +1470,7 @@ type Item struct {
 	AddOnDealID int `json:"add_on_deal_id"`
 }
 
-type Order struct {
+type GetEscrowDetailsResponseOrder struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// The two-digit code representing the country where the order was made.
@@ -1499,14 +1499,14 @@ type Order struct {
 // GetForderInfoResponse
 //=======================================================
 
-type Log struct {
+type GetForderInfoResponseLog struct {
 	// The time when logistics info has been updated.
 	Ctime int `json:"ctime"`
 	// The order logistics tracking info.
 	Description string `json:"description"`
 }
 
-type Item struct {
+type GetForderInfoResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// Shopee's unique identifier for a variation of an item.
@@ -1519,7 +1519,7 @@ type Item struct {
 	VariationPrice float64 `json:"variation_price"`
 }
 
-type LogisticsInfo struct {
+type GetForderInfoResponseLogisticsInfo struct {
 	// The logistics service provider that the buyer selected for the order to deliver items.
 	ShippingCarrier string `json:"shipping_carrier"`
 	// Only work for cross-border order. This value indicates whether the order contains goods that are required to declare at customs. "T" means true and it will mark as "T" on the shipping label; "F" means false and it will mark as "P" on the shipping label. This value is accurate ONLY AFTER the order trackingNo is generated, please capture this value AFTER your retrieve the trackingNo.
@@ -1530,7 +1530,7 @@ type LogisticsInfo struct {
 	TrackingNo string `json:"tracking_no"`
 }
 
-type Forder struct {
+type GetForderInfoResponseForder struct {
 	// The unique identifier for a fulfill order.
 	ForderID string `json:"forder_id"`
 	// The fulfill order logistics status. Applicable values: See Data Definition - LogisticsStatus.
@@ -1549,7 +1549,7 @@ type Forder struct {
 // GetEscrowReleasedOrdersResponse
 //=======================================================
 
-type Order struct {
+type GetEscrowReleasedOrdersResponseOrder struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// Order's escrow amount.
@@ -1562,7 +1562,7 @@ type Order struct {
 // SplitOrderRequest
 //=======================================================
 
-type Parcel struct {
+type SplitOrderRequestParcel struct {
 	// Itemids that will be put into a fullfillment order.
 	ItemID int `json:"item_id"`
 }
@@ -1571,12 +1571,12 @@ type Parcel struct {
 // SplitOrderResponse
 //=======================================================
 
-type Item struct {
+type SplitOrderResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 }
 
-type Forder struct {
+type SplitOrderResponseForder struct {
 	// Shopee's unique identifier for a fulfillment order.
 	ForderID string `json:"forder_id"`
 	// Item information contained in fulfillment orders.Number of items must be greater than or equal to 2. eg.[[{"item_id": 123}],[{"item_id": 456}]]
@@ -1587,7 +1587,7 @@ type Forder struct {
 // GetUnbindOrderListResponse
 //=======================================================
 
-type Order struct {
+type GetUnbindOrderListResponseOrder struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// The Shopee logistics status for the order. Applicable values: See Data Definition- LogisticsStatus.
@@ -1600,7 +1600,7 @@ type Order struct {
 // GetLogisticsResponse
 //=======================================================
 
-type Size struct {
+type GetLogisticsResponseSize struct {
 	// The identity of size.
 	SizeID int `json:"size_id"`
 	// The name of size.
@@ -1609,14 +1609,14 @@ type Size struct {
 	DefaultPrice int `json:"default_price"`
 }
 
-type Limit struct {
+type GetLogisticsResponseLimit struct {
 	// The max weight for an item on this logistic channel.If the value is 0 or null, that means there is no limit.
 	ItemMaxWeight
 	// The min weight for an item on this logistic channel. If the value is 0 or null, that means there is no limit.
 	ItemMinWeight
 }
 
-type Dimension struct {
+type GetLogisticsResponseDimension struct {
 	// The max height limit.
 	Height float64 `json:"height"`
 	// The max width limit.
@@ -1627,7 +1627,7 @@ type Dimension struct {
 	Unit string `json:"unit"`
 }
 
-type Logistic struct {
+type GetLogisticsResponseLogistic struct {
 	// The identity of logistic channel
 	LogisticID int `json:"logistic_id"`
 	// The name of logistic channel
@@ -1650,7 +1650,7 @@ type Logistic struct {
 // GetAddressResponse
 //=======================================================
 
-type Address struct {
+type GetAddressResponseAddress struct {
 	// The identity of address
 	AddressID int `json:"address_id"`
 	// The country of specify address
@@ -1673,7 +1673,7 @@ type Address struct {
 // GetTimeSlotResponse
 //=======================================================
 
-type Time struct {
+type GetTimeSlotResponseTime struct {
 	// The identity of pickuptime.
 	PickupTimeID string `json:"pickup_time_id"`
 	// The date of pickup time. In timestamp.
@@ -1686,7 +1686,7 @@ type Time struct {
 // GetBranchResponse
 //=======================================================
 
-type Branch struct {
+type GetBranchResponseBranch struct {
 	// The identity of branch.
 	BranchID int `json:"branch_id"`
 	// The country of specify branch.
@@ -1709,7 +1709,7 @@ type Branch struct {
 // GetLogisticInfoResponse
 //=======================================================
 
-type Address struct {
+type GetLogisticInfoResponseAddress struct {
 	// The identity of address.
 	AddressID int `json:"address_id"`
 	// The country of specify branch.
@@ -1736,7 +1736,7 @@ type Address struct {
 	TimeText string `json:"time_text"`
 }
 
-type Branch struct {
+type GetLogisticInfoResponseBranch struct {
 	// The identity of branch.
 	BranchID int `json:"branch_id"`
 	// The country of specify branch.
@@ -1755,17 +1755,17 @@ type Branch struct {
 	Town string `json:"town"`
 }
 
-type Pickup struct {
+type GetLogisticInfoResponsePickup struct {
 	// List of available pickup address info.
 	AddressList []Address `json:"address_list"`
 }
 
-type Dropoff struct {
+type GetLogisticInfoResponseDropoff struct {
 	// List of available dropoff branches info.
 	BranchList []Branch `json:"branch_list"`
 }
 
-type Info structt {
+type GetLogisticInfoResponseInfo struct {
 	// Logistics information for pickup mode order.
 	Pickup []string `json:"pickup"`
 	// Logistics information for dropoff mode order.
@@ -1778,14 +1778,14 @@ type Info structt {
 // InitRequest
 //=======================================================
 
-type Pickup struct {
+type InitRequestPickup struct {
 	// The identity of address. Retrieved from shopee.logistics.GetAddress.
 	AddressID int `json:"address_id"`
 	// The pickup time id. Retrieved from shopee.logistics.GetTimeSlot.
 	PickupItemID string `json:"pickup_item_id"`
 }
 
-type Dropoff struct {
+type InitRequestDropoff struct {
 	// The identity of branch. Retrieved from shopee.logistics.GetBranch branch.
 	BranchID int `json:"branch_id"`
 	// The real name of sender.
@@ -1794,7 +1794,7 @@ type Dropoff struct {
 	TrackingNo string `json:"tracking_no"`
 }
 
-type NonIntegrated struct {
+type InitRequestNonIntegrated struct {
 	// Optional parameter for non-integrated channel order. The tracking number assigned by the shipping carrier for item shipment.
 	TrackingNo string `json:"tracking_no"`
 }
@@ -1803,14 +1803,14 @@ type NonIntegrated struct {
 // GetAirwayBillResponse
 //=======================================================
 
-type AirwayBill struct {
+type GetAirwayBillResponseAirwayBill struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// The url of retrieving airway bill.
 	AirwayBill string `json:"airway_bill"`
 }
 
-type Error struct {
+type GetAirwayBillResponseError struct {
 	// The ordersn of orders which occurred error.
 	OrderSN string `json:"order_sn"`
 	//
@@ -1819,7 +1819,7 @@ type Error struct {
 	ErrorDescription string `json:"error_description"`
 }
 
-type Result struct {
+type GetAirwayBillResponseResult struct {
 	// The number of ordersn to get airway bills in this call.
 	TotalCount int `json:"total_count"`
 	// This Object contains the airway bill to each order.
@@ -1828,7 +1828,7 @@ type Result struct {
 	Errors []Error `json:"errors"`
 }
 
-type BatchResult struct {
+type GetAirwayBillResponseBatchResult struct {
 	// The number of orderSN to get airway bills in this call.
 	TotalCount int `json:"total_count"`
 	// The list contains urls of retrieving airway bill in PDF format. Each url contains the airway bills which is in the same logistics channel.
@@ -1839,7 +1839,7 @@ type BatchResult struct {
 // GetOrderLogisticsResponse
 //=======================================================
 
-type Address struct {
+type GetOrderLogisticsResponseAddress struct {
 	// Recipient's name for the address.
 	Name string `json:"name"`
 	// Recipient's phone number input when order was placed.
@@ -1860,7 +1860,7 @@ type Address struct {
 	FullAddress string `json:"full_address"`
 }
 
-type Logistic struct {
+type GetOrderLogisticsResponseLogistic struct {
 	// The logistics service provider that the buyer selected for the order to deliver items.
 	ShippingCarrier string `json:"shipping_carrier"`
 	// The identity of logistic channel.
@@ -1893,7 +1893,7 @@ type Logistic struct {
 // GetLogisticsMessageResponse
 //=======================================================
 
-type Info struct {
+type GetLogisticsMessageResponseInfo struct {
 	// The time when logistics info has been updated.
 	CTime int `json:"c_time"`
 	// The order logistics tracking info.
@@ -1906,7 +1906,7 @@ type Info struct {
 // GetForderWaybillRequest
 //=======================================================
 
-type List struct {
+type GetForderWaybillRequestList struct {
 	// The order serial numbers. Make sure the order has trackingNo generated before calling this API.
 	OrderSN string `json:"order_sn"`
 	// The unique identifier for a fulfillment order.
@@ -1917,7 +1917,7 @@ type List struct {
 // GetForderWaybillResponse
 //=======================================================
 
-type Waybill struct {
+type GetForderWaybillResponseWaybill struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// The unique identifier for a fulfillment order.
@@ -1926,7 +1926,7 @@ type Waybill struct {
 	Waybill string `json:"waybill"`
 }
 
-type Error struct {
+type GetForderWaybillResponseError struct {
 	// The ordersn of orders which occurred error.
 	OrderSN string `json:"order_sn"`
 	// The forder_id of fulfillment orders which occurred error.
@@ -1937,7 +1937,7 @@ type Error struct {
 	ErrorDescription string `json:"error_description"`
 }
 
-type Result struct {
+type GetForderWaybillResponseResult struct {
 	// The number of ordersn to get airway bills in this call.
 	TotalCount int `json:"total_count"`
 	// This Object contains the airway bill to each order.
@@ -1946,7 +1946,7 @@ type Result struct {
 	Errors []Error `json:"errors"`
 }
 
-type BatchResult struct {
+type GetForderWaybillResponseBatchResult struct {
 	// The number of orderSN to get airway bills in this call.
 	TotalCount int `json:"total_count"`
 	// This list contains the ordersn and error descriptions of all orders that failed to retrieve airway bill in this call.
@@ -1959,7 +1959,7 @@ type BatchResult struct {
 // GetReturnListResponse
 //=======================================================
 
-type User struct {
+type GetReturnListResponseUser struct {
 	// Buyer's nickname.
 	Username int `json:"username"`
 	// Buyer's email.
@@ -1968,7 +1968,7 @@ type User struct {
 	Protrait string `json:"protrait"`
 }
 
-type Item struct {
+type GetReturnListResponseItem struct {
 	// Item id.
 	ItemID int `json:"item_id"`
 	// Shopee's unique identifier for a variation of an item.
@@ -1989,7 +1989,7 @@ type Item struct {
 	AddOnDealID int `json:"add_on_deal_id"`
 }
 
-type Return struct {
+type GetReturnListResponseReturn struct {
 	// Image URLs of return.
 	Images []string `json:"images"`
 	// Reason for return product. Applicable values: See Data Definition- ReturnReason.
@@ -2032,7 +2032,7 @@ type Return struct {
 // GetReturnDetailResponse
 //=======================================================
 
-type User struct {
+type GetReturnDetailResponseUser struct {
 	// Buyer's nickname.
 	Username int `json:"username"`
 	// Buyer's email.
@@ -2041,7 +2041,7 @@ type User struct {
 	Portrait string `json:"portrait"`
 }
 
-type Item struct {
+type GetReturnDetailResponseItem struct {
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int `json:"variation_id"`
 	// Name of item in local language.
@@ -2064,14 +2064,14 @@ type Item struct {
 // GetShopsByPartnerResponse
 //=======================================================
 
-type SIP struct {
+type GetShopsByPartnerResponseSIP struct {
 	// Affiliate Shop's area
 	Country string `json:"country"`
 	// Affiliate shop's id
 	AShopID int `json:"a_shop_id"`
 }
 
-type Shop struct {
+type GetShopsByPartnerResponseShop struct {
 	// The two-digit code representing the country where the order was made.
 	Country string `json:"country"`
 	// Shopee's unique identifier for a shop.
@@ -2079,7 +2079,7 @@ type Shop struct {
 	// The timestamp when the shop was authorized to the partner.
 	AuthTime int `json:"auth_time"`
 	// SIP affiliate shops info list
-	SIPAShops []SIP `json:"sipa_shops"`
+	SIPAShops []SIP `json:"sip_a_shops"`
 	// Use this field to indicate the expiration date for shop authorization.
 	ExpireTime int `json:"expire_time"`
 }
@@ -2088,7 +2088,7 @@ type Shop struct {
 // GetCategoriesByCountryResponse
 //=======================================================
 
-type Category struct {
+type GetCategoriesByCountryResponseCategory struct {
 	// The Identify of the parent of the category
 	ParentID int `json:"parent_id"`
 	// This is to indicate whether the category has children.
@@ -2105,7 +2105,7 @@ type Category struct {
 // GetPaymentListResponse
 //=======================================================
 
-type Method struct {
+type GetPaymentListResponseMethod struct {
 	// The payment method
 	PaymentMethod string `json:"payment_method"`
 	// The country for this payment method
@@ -2116,7 +2116,7 @@ type Method struct {
 // GetTopPicksListResponse
 //=======================================================
 
-type Item struct {
+type GetTopPicksListResponseItem struct {
 	// Item ID
 	ItemID int `json:"item_id"`
 	// Item name
@@ -2127,7 +2127,7 @@ type Item struct {
 	Sales int `json:"sales"`
 }
 
-type Collection struct {
+type GetTopPicksListResponseCollection struct {
 	// Collection name
 	Name string `json:"name"`
 	// Collection ID
@@ -2142,7 +2142,7 @@ type Collection struct {
 // AddTopPicksResponse
 //=======================================================
 
-type Item struct {
+type AddTopPicksResponseItem struct {
 	// Item ID
 	ItemID int `json:"item_id"`
 	// Item name
@@ -2157,7 +2157,7 @@ type Item struct {
 // UpdateTopPicksResponse
 //=======================================================
 
-type Item struct {
+type UpdateTopPicksResponseItem struct {
 	// Item ID
 	ItemID int `json:"item_id"`
 	// Item name
@@ -2172,7 +2172,7 @@ type Item struct {
 // GenerateFMTrackingNoRequest
 //=======================================================
 
-type Info struct {
+type GenerateFMTrackingNoRequestInfo struct {
 	// The full address of the seller.
 	Address string `json:"address"`
 	// Seller's name for the address.
@@ -2189,7 +2189,7 @@ type Info struct {
 // GetShopFMTrackingNoResponse
 //=======================================================
 
-type List struct {
+type GetShopFMTrackingNoResponseList struct {
 	// The specified delivery date.
 	DeclareDate string `json:"declare_date"`
 	// The logistics status for bound orders.
@@ -2202,7 +2202,7 @@ type List struct {
 // FirstMileCodeBindOrderRequest
 //=======================================================
 
-type Order struct {
+type FirstMileCodeBindOrderRequestOrder struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// The unique identifier for a fulfillment order.
@@ -2213,7 +2213,7 @@ type Order struct {
 // FirstMileCodeBindOrderResponse
 //=======================================================
 
-type List struct {
+type FirstMileCodeBindOrderResponseList struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// The unique identifier for a fulfillment order.
@@ -2226,7 +2226,7 @@ type List struct {
 // GetFmTnDetailResponse
 //=======================================================
 
-type Order struct {
+type GetFmTnDetailResponseOrder struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// The unique identifier for a fulfillment order.
@@ -2239,7 +2239,7 @@ type Order struct {
 // GetFMTrackingNoWaybillResponse
 //=======================================================
 
-type Error struct {
+type GetFMTrackingNoWaybillResponseError struct {
 	//
 	ErrorCode string `json:"error_code"`
 	// The detail information of this error.
@@ -2248,14 +2248,14 @@ type Error struct {
 	FMTN string `json:"fmtn"`
 }
 
-type Waybill struct {
+type GetFMTrackingNoWaybillResponseWaybill struct {
 	// The first-mile tracking number.
 	FMTN string `json:"fmtn"`
 	// The url of retrieving waybill.
 	Waybill string `json:"waybill"`
 }
 
-type Result struct {
+type GetFMTrackingNoWaybillResponseResult struct {
 	// This Object contains the waybill to each tracking number.
 	Waybills []Waybill `json:"waybills"`
 	// The number of Tracking Number to get waybills in this call.
@@ -2264,7 +2264,7 @@ type Result struct {
 	Errors []Error `json:"errors"`
 }
 
-type Batch struct {
+type GetFMTrackingNoWaybillResponseBatch struct {
 	// The list contains urls of retrieving waybill in PDF format. Each url contains the airway bills which is in the same logistics channel.
 	Waybills []string `json:"waybills"`
 	// The number of Tracking Number to get waybills in this call.
@@ -2277,7 +2277,7 @@ type Batch struct {
 // GetShopFirstMileChannelResponse
 //=======================================================
 
-type Logistic struct {
+type GetShopFirstMileChannelResponseLogistic struct {
 	// The identity of logistic channel.
 	LogisticID int `json:"logistic_id"`
 	// The name of logistic.

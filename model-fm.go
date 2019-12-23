@@ -80,7 +80,7 @@ type GetFmTnDetailRequest struct {
 	//
 	RequestBase
 	// The first-mile tracking number.
-	FMTN sttring `json:"fmtn"`
+	FMTN string `json:"fmtn"`
 }
 
 type GetFmTnDetailResponse struct {

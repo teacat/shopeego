@@ -30,7 +30,7 @@ type GetShopInfoResponse struct {
 	// Only for TW seller. The status of whether shop support installment: 1 means true and 0 means false
 	InstallmentStatus int `json:"installment_status"`
 	// SIP affiliate shops info list
-	SIPAShops []AffiliateShop `json:"sipa_shops"`
+	SIPAShops []GetShopInfoAffiliateShop `json:"sip_a_shops"`
 }
 
 type UpdateShopInfoRequest struct {

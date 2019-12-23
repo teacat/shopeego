@@ -796,7 +796,7 @@ func (s *ShopeeClient) UploadImg(req *UploadImgRequest) (resp *UploadImgResponse
 }
 
 //=======================================================
-// Discountt
+// Discount
 //=======================================================
 
 // AddDiscount Use this api to add shop discount activity
@@ -1393,7 +1393,7 @@ func (s *ShopeeClient) DeleteTopPicks(req *DeleteTopPicksRequest) (resp *DeleteT
 }
 
 //=======================================================
-// FirsttMileTracking
+// FirstMileTracking
 //=======================================================
 
 // GenerateFMTrackingNo Use this API to generate first-mile tracking number for the shipment method of pickup. Please note that the prerequisite for using this API is that the order status is ready_to_ship and the tracking number of order has been obtained.
