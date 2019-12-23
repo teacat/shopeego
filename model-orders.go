@@ -14,12 +14,8 @@ type GetOrdersListRequest struct {
 	PaginationEntriesPerPage int `json:"pagination_entries_per_page"`
 	// Specifies the starting entry of data to return in the current call. Default is 0. if data is more than one page, the offset can be some entry to start next call.
 	PaginationOffset int `json:"pagination_offset"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type GetOrdersListResponse struct {
@@ -43,12 +39,8 @@ type GetOrdersByStatusRequest struct {
 	PaginationEntriesPerPage int `json:"pagination_entries_per_page"`
 	// Specifies the starting entry of data to return in the current call. Default is 0. if data is more than one page, the offset can be some entry to start next call.
 	PaginationOffset int `json:"pagination_offset"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type GetOrdersByStatusResponse struct {
@@ -63,12 +55,8 @@ type GetOrdersByStatusResponse struct {
 type GetOrderDetailsRequest struct {
 	// The set of ordersn. You can specify up to 50 ordersns in this call.
 	OrderSNList []string `json:"order_sn_list"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type GetOrderDetailsResponse struct {
@@ -83,12 +71,8 @@ type GetOrderDetailsResponse struct {
 type GetEscrowDetailsRequest struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type GetEscrowDetailsResponse struct {
@@ -103,12 +87,8 @@ type AddOrderNoteRequest struct {
 	OrderSN string `json:"order_sn"`
 	// The note seller made for own reference.
 	Note string `json:"note"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type AddOrderNoteResponse struct {
@@ -129,12 +109,8 @@ type CancelOrderRequest struct {
 	ItemID int `json:"item_id"`
 	// ID of the variation that belongs to the same item.Required when cancel_reason is OUT_OF_STOCK.
 	VariationID int `json:"variation_id"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type CancelOrderResponse struct {
@@ -147,12 +123,8 @@ type CancelOrderResponse struct {
 type AcceptBuyerCancellationRequest struct {
 	// The order to be accepted cancellation request.
 	OrderSN string `json:"order_sn"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type AcceptBuyerCancellationResponse struct {
@@ -165,12 +137,8 @@ type AcceptBuyerCancellationResponse struct {
 type RejectBuyerCancellationRequest struct {
 	// The order to be rejected cancellation request.
 	OrderSN string `json:"order_sn"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type RejectBuyerCancellationResponse struct {
@@ -183,12 +151,8 @@ type RejectBuyerCancellationResponse struct {
 type GetForderInfoRequest struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type GetForderInfoResponse struct {
@@ -201,12 +165,8 @@ type GetForderInfoResponse struct {
 }
 
 type GetEscrowReleasedOrdersRequest struct {
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 	// If many orders are available to retrieve, you may need to call GetEscrowReleaseTime multiple times to retrieve all the data. Each result set is returned as a page of entries. Use the Pagination filters to control the maximum number of entries to retrieve per page (i.e., per call), the offset number to start next call. This integer value is used to specify the maximum number of entries to return in a single "page" of data. Max entries per page is 100.
 	PaginationEntriesPerPage int `json:"pagination_entries_per_page"`
 	// Specifies the starting entry of data to return in the current call. Default is 0. if data is more than one page, the offset can be some entry to start next call.
@@ -223,12 +183,8 @@ type GetEscrowReleasedOrdersResponse struct {
 }
 
 type SplitOrderRequest struct {
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// Item information contained in fulfilment orders.
@@ -245,12 +201,8 @@ type SplitOrderResponse struct {
 }
 
 type UndoSplitOrderRequest struct {
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 }
@@ -263,12 +215,8 @@ type UndoSplitOrderResponse struct {
 }
 
 type GetUnbindOrderListRequest struct {
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 	// Specifies the starting entry of data to return in the current call. Default is 0. if data is more than one page, the offset can be some entry to start next call.
 	PaginationOffset int `json:"pagination_offset"`
 	// If many unbind orders are available to retrieve, you may need to call GetUnbindOrderList multiple times to retrieve all the data. Each result set is returned as a page of entries. Use the Pagination filters to control the maximum number of entries to retrieve per page (i.e., per call), the offset number to start next call. This integer value is used to specify the maximum number of entries to return in a single "page" of data.

@@ -3,12 +3,8 @@ package shopeego
 type ConfirmReturnRequest struct {
 	// The serial number of return.
 	ReturnSN string `json:"return_sn"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type ConfirmReturnResponse struct {
@@ -31,12 +27,8 @@ type DisputeReturnRequest struct {
 	DisputeTextReason string `json:"dispute_text_reason"`
 	// Image URLs that seller provide. Seller can upload up 3 images at most.
 	Images []string `json:"images"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type DisputeReturnResponse struct {
@@ -57,12 +49,8 @@ type GetReturnListRequest struct {
 	CreateTimeFrom int `json:"create_time_from"`
 	// The create_time_from and create_time_to fields specify a date range for retrieving orders (based on the order create time). The create_time_from field is the starting date range. The maximum date range that may be specified with the create_time_from and create_time_to fields is 15 days.
 	CreateTimeTo int `json:"create_time_to"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type GetReturnListResponse struct {
@@ -76,12 +64,8 @@ type GetReturnListResponse struct {
 type GetReturnDetailRequest struct {
 	// The serial number of return.
 	ReturnSN int `json:"return_sn"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type GetReturnDetailResponse struct {

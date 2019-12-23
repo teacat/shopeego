@@ -1,10 +1,8 @@
 package shopeego
 
 type GetShopsByPartnerRequest struct {
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestLiteBase
 }
 
 type GetShopsByPartnerResponse struct {
@@ -15,10 +13,8 @@ type GetShopsByPartnerResponse struct {
 }
 
 type GetCategoriesByCountryRequest struct {
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestLiteBase
 	// Two-digit country code(capital letter).
 	Country string `json:"country"`
 	// Is cross border or not. 1: cross border; 0: not cross border
@@ -35,10 +31,8 @@ type GetCategoriesByCountryResponse struct {
 }
 
 type GetPaymentListRequest struct {
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestLiteBase
 	// ID/MY/SG/VN/PH/TH/TW
 	Country string `json:"country"`
 }

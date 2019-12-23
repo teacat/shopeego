@@ -1,5 +1,14 @@
 package shopeego
 
+//
+type RequestLiteBase struct {
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
+}
+
+//
 type RequestBase struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`

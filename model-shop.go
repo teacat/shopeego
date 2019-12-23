@@ -46,12 +46,8 @@ type UpdateShopInfoRequest struct {
 	EnableDisplayUnitNo bool `json:"enable_display_unit_no"`
 	// Description of the shop.
 	ShopDescription string `json:"shop_description"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type UpdateShopInfoResponse struct {
@@ -78,12 +74,8 @@ type UpdateShopInfoResponse struct {
 }
 
 type PerformanceRequest struct {
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type PerformanceResponse struct {
@@ -116,14 +108,10 @@ type PerformanceResponse struct {
 }
 
 type SetShopInstallmentStatusRequest struct {
-	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
 	// The status of whether shop support installment: 1 means true and 0 means false.
 	InstallmentStatus int `json:"installment_status"`
-	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id"`
-	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int `json:"timestamp"`
+	//
+	RequestBase
 }
 
 type SetShopInstallmentStatusResponse struct {
