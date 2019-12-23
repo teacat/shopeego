@@ -1,8 +1,12 @@
 package shopeego
 
 type GetTopPicksListRequest struct {
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type GetTopPicksListResponse struct {
@@ -17,8 +21,12 @@ type AddTopPicksRequest struct {
 	ItemIDs []int `json:"item_i_ds"`
 	// True or False
 	IsActivated bool `json:"is_activated"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type AddTopPicksResponse struct {
@@ -41,8 +49,12 @@ type UpdateTopPicksRequest struct {
 	ItemIDs []int `json:"item_i_ds"`
 	// True or False. If true, it will activate this collection and deactivate the original one.
 	IsActivated bool `json:"is_activated"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type UpdateTopPicksResponse struct {
@@ -59,8 +71,12 @@ type UpdateTopPicksResponse struct {
 type DeleteTopPicksRequest struct {
 	// Collection id. Cannot delete an activated collection.
 	TopPicksID int `json:"top_picks_id"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type DeleteTopPicksResponse struct {

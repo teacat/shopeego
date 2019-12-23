@@ -5,8 +5,12 @@ type AddShopCategoryRequest struct {
 	Name string `json:"name"`
 	// ShopCategory's sort weight.
 	SortWeight int `json:"sort_weight"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type AddShopCategoryResponse struct {
@@ -21,8 +25,12 @@ type GetShopCategoriesRequest struct {
 	PaginationOffset int `json:"pagination_offset"`
 	// If many items are available to retrieve, you may need to call GetItemsList multiple times to retrieve all the data. Each result set is returned as a page of entries. Use the Pagination filters to control the maximum number of entries (<= 100) to retrieve per page (i.e., per call), the offset number to start next call. This integer value is usUed to specify the maximum number of entries to return in a single ""page"" of data.
 	PaginationEntriesPerPage int `json:"pagination_entries_per_page"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type GetShopCategoriesResponse struct {
@@ -37,8 +45,12 @@ type GetShopCategoriesResponse struct {
 type DeleteShopCategoryRequest struct {
 	// ShopCategory's unique identifier.
 	ShopCategoryID int `json:"shop_category_id"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type DeleteShopCategoryResponse struct {
@@ -59,8 +71,12 @@ type UpdateShopCategoryRequest struct {
 	SortWeight int `json:"sort_weight"`
 	// ShopCategory's status. Applicable values: NORMAL, INACTIVE, DELETED.
 	Status string `json:"status"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type UpdateShopCategoryResponse struct {
@@ -81,8 +97,12 @@ type AddItemsRequest struct {
 	ShopCategoryID int `json:"shop_category_id"`
 	// Shopee's unique identifiers list for an item.
 	Items []int `json:"items"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type AddItemsResponse struct {
@@ -99,8 +119,12 @@ type AddItemsResponse struct {
 type GetItemsRequest struct {
 	// ShopCategory's unique identifier.
 	ShopCategoryID int `json:"shop_category_id"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type GetItemsResponse struct {
@@ -115,8 +139,12 @@ type DeleteItemsRequest struct {
 	ShopCategoryID int `json:"shop_category_id"`
 	// The list of items need to be deleted
 	Items []int `json:"items"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type DeleteItemsResponse struct {

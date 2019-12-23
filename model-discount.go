@@ -9,8 +9,12 @@ type AddDiscountRequest struct {
 	EndTime int `json:"end_time"`
 	// Max item to upload is 50 in one API call.
 	Items []AddDiscountRequestItem `json:"items"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type AddDiscountResponse struct {
@@ -29,8 +33,12 @@ type AddDiscountItemRequest struct {
 	DiscountID int `json:"discount_id"`
 	// Max item to upload is 50 in one API call.
 	Items []AddDiscountItemRequestItem `json:"items"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type AddDiscountItemResponse struct {
@@ -45,8 +53,12 @@ type AddDiscountItemResponse struct {
 type DeleteDiscountRequest struct {
 	// Shopee's unique identifier for a discount activity.
 	DiscountID int `json:"discount_id"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type DeleteDiscountResponse struct {
@@ -65,8 +77,12 @@ type DeleteDiscountItemRequest struct {
 	ItemID int `json:"item_id"`
 	// Shopee's unique identifier for a variation of an item. If there is no variation of this item, you don't need to input this param. Dafault is 0.
 	VariationID int `json:"variation_id"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type DeleteDiscountItemResponse struct {
@@ -89,8 +105,12 @@ type GetDiscountDetailRequest struct {
 	PaginationOffset int `json:"pagination_offset"`
 	// If many items of this discount are available to retrieve, you may need to call GetDiscountDetail multiple times to retrieve all the data. Each result set is returned as a page of entries. Use the Pagination filters to control the maximum number of entries (<= 100) to retrieve per page (i.e., per call), the offset number to start next call. This integer value is used to specify the maximum number of entries to return in a single "page" of data.
 	PaginationEntriesPerPage int `json:"pagination_entries_per_page"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type GetDiscountDetailResponse struct {
@@ -123,8 +143,12 @@ type GetDiscountsListRequest struct {
 	UpdateTimeFrom int `json:"update_time_from"`
 	// The update_time_from and update_time_to fields specify a date range for retrieving orders (based on the discount update time). The create_time_from field is the starting date range. The maximum date range that may be specified with the update_time_from and update_time_to fields is 15 days.
 	UpdateTimeTo int `json:"update_time_to"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type GetDiscountsListResponse struct {
@@ -145,8 +169,12 @@ type UpdateDiscountRequest struct {
 	EndTime int `json:"end_time"`
 	// The time when discount activity start. The new start time must later than original start time. Start time cannot be changed after discount starts.
 	StartTime int `json:"start_time"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type UpdateDiscountResponse struct {
@@ -163,8 +191,12 @@ type UpdateDiscountItemsRequest struct {
 	DiscountID int `json:"discount_id"`
 	//
 	Items []UpdateDiscountItemsRequestItem `json:"items"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type UpdateDiscountItemsResponse struct {

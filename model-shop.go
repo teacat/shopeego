@@ -1,7 +1,12 @@
 package shopeego
 
 type GetShopInfoRequest struct {
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type GetShopInfoResponse struct {
@@ -46,8 +51,12 @@ type UpdateShopInfoRequest struct {
 	EnableDisplayUnitNo bool `json:"enable_display_unit_no"`
 	// Description of the shop.
 	ShopDescription string `json:"shop_description"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type UpdateShopInfoResponse struct {
@@ -74,8 +83,12 @@ type UpdateShopInfoResponse struct {
 }
 
 type PerformanceRequest struct {
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type PerformanceResponse struct {
@@ -110,8 +123,12 @@ type PerformanceResponse struct {
 type SetShopInstallmentStatusRequest struct {
 	// The status of whether shop support installment: 1 means true and 0 means false.
 	InstallmentStatus int `json:"installment_status"`
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 }
 
 type SetShopInstallmentStatusResponse struct {

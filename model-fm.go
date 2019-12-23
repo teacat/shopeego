@@ -1,8 +1,12 @@
 package shopeego
 
 type GenerateFMTrackingNoRequest struct {
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 	// This field is used for seller to specify the declare time.
 	DeclareDate string `json:"declare_date"`
 	// The number of first-mile tracking numbers generated.
@@ -19,8 +23,12 @@ type GenerateFMTrackingNoResponse struct {
 }
 
 type GetShopFMTrackingNoRequest struct {
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 	// The start time of declare_date.
 	FromDate string `json:"from_date"`
 	// The end time of declare_date
@@ -41,8 +49,12 @@ type GetShopFMTrackingNoResponse struct {
 }
 
 type FirstMileCodeBindOrderRequest struct {
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 	// The set of ordersn. You can specify up to 50 ordersns in this call.
 	OrderList []FirstMileCodeBindOrderRequestOrder `json:"order_list"`
 	// The first-mile tracking number.
@@ -77,8 +89,12 @@ type FirstMileCodeBindOrderResponse struct {
 }
 
 type GetFmTnDetailRequest struct {
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 	// The first-mile tracking number.
 	FMTN string `json:"fmtn"`
 }
@@ -101,8 +117,12 @@ type GetFmTnDetailResponse struct {
 }
 
 type GetFMTrackingNoWaybillRequest struct {
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 	// The set of first-mile tracking numbers. Up to 50 tracking numbers in one call.
 	FMTNList []string `json:"fmtn_list"`
 	// Option to get batch airway bills in single file. Default value is false.
@@ -123,8 +143,12 @@ type GetFMTrackingNoWaybillResponse struct {
 }
 
 type GetShopFirstMileChannelRequest struct {
-	//
-	RequestBase
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int `json:"partner_id"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int `json:"shop_id"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int `json:"timestamp"`
 	// Use this field to specify the region you want to ship parcel.
 	Area string `json:"area"`
 }

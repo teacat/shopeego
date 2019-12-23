@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 
 	"github.com/parnurzeal/gorequest"
@@ -32,17 +33,20 @@ var (
 type ClientOptions struct {
 	Secret string
 	// 非必要
-	PartnerID int
+	//PartnerID int
 	// 非必要
-	ShopID int
+	//ShopID int
 	//
 	IsSandbox bool
 }
 
 // CONSTS
 
-func NewClient(opts *ClientOptions) {
-
+func NewClient(opts *ClientOptions) Client {
+	return &ShopeeClient{
+		Secret:    opts.Secret,
+		IsSandbox: opts.IsSandbox,
+	}
 }
 
 // Client 定義了一個蝦皮的客戶端該有什麼功能。
@@ -159,20 +163,24 @@ type ShopeeClient struct {
 }
 
 type ResponseError struct {
-	RequestID string
-	Msg       string
-	Error     error
+	RequestID string `json:"request_id"`
+	Msg       string `json:"msg"`
+	ErrorType string `json:"error"`
+}
+
+func (e ResponseError) Error() string {
+	return fmt.Sprintf("shopeego: %s - %s", e.ErrorType, e.Msg)
 }
 
 //
-func (s *ShopeeClient) getPath(method string) {
+func (s *ShopeeClient) getPath(method string) string {
 	var host string
 	if s.IsSandbox {
-		host := "https://partner.shopeemobile.com/"
+		host = "https://partner.shopeemobile.com/"
 	} else {
-		host := "https://partner.uat.shopeemobile.com/"
+		host = "https://partner.uat.shopeemobile.com/"
 	}
-	return fmt.Sprtinf("%s%s", host, availablePaths[method])
+	return fmt.Sprintf("%s%s", host, availablePaths[method])
 }
 
 //
@@ -189,18 +197,28 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 		return []byte(``), err
 	}
 	url := s.getPath(method)
-	req := gorequest.New()
-	req.post(url)
+	req := gorequest.New().Post(url).Send(string(body))
 	//
 	req.Set("Authorization", s.sign(url, body))
 
 	//
 	// HANDLE ERRROR!
 
-	resp, _, err := req.End()
+	_, respBody, errs := req.End()
+	if len(errs) > 0 {
+		return []byte(``), errs[0]
+	}
+
+	var errResp ResponseError
+	err = json.Unmarshal([]byte(respBody), &errResp)
 	if err != nil {
 		return []byte(``), err
 	}
+	if errResp.ErrorType != "" {
+		return []byte(``), errResp
+	}
+
+	return []byte(respBody), nil
 }
 
 //=======================================================
