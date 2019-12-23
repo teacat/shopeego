@@ -231,10 +231,6 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	}
 	url := s.getPath(method)
 
-	//panic(string(body))
-
-	//panic(fmt.Sprintf("%s", string(body)))
-
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(body))
 	req.Header.Set("Authorization", s.sign(url, body))
 	req.Header.Set("Content-Type", "application/json")
@@ -245,11 +241,6 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 		panic(err)
 	}
 	defer resp.Body.Close()
-
-	//fmt.Println("response Status:", resp.Status)
-	//fmt.Println("response Headers:", resp.Header)
-	//body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println("response Body:", string(body))
 
 	//
 	// HANDLE ERRROR!
