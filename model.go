@@ -9,7 +9,7 @@ type RequestBase struct {
 	Timestamp int `json:"timestamp"`
 }
 
-type GetShopInfoResponseAffiliateShop struct {
+type AffiliateShop struct {
 	// Affiliate shop's id.
 	AShopID string `json:"a_shop_id"`
 	// Affiliate Shop's area.
