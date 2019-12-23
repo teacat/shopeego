@@ -6,7 +6,7 @@ type GetLogisticsRequest struct {
 }
 
 type GetLogisticsResponse struct {
-	Logistics []Logistic `json:"logistics"`
+	Logistics []GetLogisticsResponseLogistic `json:"logistics"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -64,7 +64,7 @@ type GetAddressRequest struct {
 
 type GetAddressResponse struct {
 	// All pickup address that you can choose.
-	AddressList []Address `json:"address_list"`
+	AddressList []GetAddressResponseAddress `json:"address_list"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -80,7 +80,7 @@ type GetTimeSlotRequest struct {
 
 type GetTimeSlotResponse struct {
 	//
-	PickupTime []Time `json:"pickup_time"`
+	PickupTime []GetTimeSlotResponseTime `json:"pickup_time"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -94,7 +94,7 @@ type GetBranchRequest struct {
 
 type GetBranchResponse struct {
 	// All dropoff branches you can choose.
-	Branch []Branch `json:"branch"`
+	Branch []GetBranchResponseBranch `json:"branch"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -108,11 +108,11 @@ type GetLogisticInfoRequest struct {
 
 type GetLogisticInfoResponse struct {
 	// Logistics information for pickup mode order.
-	Pickup Pickup `json:"pickup"`
+	Pickup GetLogisticInfoResponsePickup `json:"pickup"`
 	// Logistics information for dropoff mode order.
-	Dropoff Dropoff `json:"dropoff"`
+	Dropoff GetLogisticInfoResponseDropoff `json:"dropoff"`
 	// The parameters required based on each specific order to Init. Must use the fields included under info_needed to call Init.
-	InfoNeeded Info `json:"info_needed"`
+	InfoNeeded GetLogisticInfoResponseInfo `json:"info_needed"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -121,11 +121,11 @@ type InitRequest struct {
 	// The order serial numbers.
 	OrderSN string `json:"order_sn"`
 	// Required parameter ONLY if GetParameterForInit returns "pickup" or if GetLogisticsInfo returns "pickup" under "info_needed" for the same order. Developer should still include "pickup" field in the call even if "pickup" has empty value.
-	Pickup Pickup `json:"pickup"`
+	Pickup InitRequestPickup `json:"pickup"`
 	// Required parameter ONLY if GetParameterForInit returns "dropoff" or if GetLogisticsInfo returns "dropoff" under "info_needed" for the same order. Developer should still include "dropoff" field in the call even if "dropoff" has empty value.
-	Dropoff Dropoff `json:"dropoff"`
+	Dropoff InitRequestDropoff `json:"dropoff"`
 	// Optional parameter when GetParameterForInit returns "non-integrated" or GetLogisticsInfo returns "non-integrated" under "info_needed".
-	NonIntegrated NonIntegrated `json:"non_integrated"`
+	NonIntegrated InitRequestNonIntegrated `json:"non_integrated"`
 	//
 	RequestBase
 	// Shopee's unique identifier for a fulfillment order.
@@ -150,9 +150,9 @@ type GetAirwayBillRequest struct {
 
 type GetAirwayBillResponse struct {
 	// This object contains the detailed breakdown for the result of this API call if the param is_batch is false.
-	Result Result `json:"result"`
+	Result GetAirwayBillResponseResult `json:"result"`
 	// This object contains the detailed breakdown for the result of this API call if the param is_batch is true.
-	BatchResult BatchResult `json:"batch_result"`
+	BatchResult GetAirwayBillResponseBatchResult `json:"batch_result"`
 	// This list contains the ordersn of all orders that failed to retrieve airway bill in this call. AirwayBill is no longer fetchable after the order status is updated to SHIPPED.
 	Errors []string `json:"errors"`
 	// The identifier for an API request for error tracking
@@ -170,7 +170,7 @@ type GetOrderLogisticsRequest struct {
 
 type GetOrderLogisticsResponse struct {
 	// The logistics of order.
-	Logistics []Logistic `json:"logistics"`
+	Logistics []GetOrderLogisticsResponseLogistic `json:"logistics"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -188,11 +188,11 @@ type GetLogisticsMessageRequest struct {
 
 type GetLogisticsMessageResponse struct {
 	// The tracking number assigned by the shipping carrier for item shipment.
-	TrackingNumber
+	TrackingNumber string `json:"tracking_number"`
 	//
-	TrackingInfo []Info `json:"tracking_info"`
+	TrackingInfo []GetLogisticsMessageResponseInfo `json:"tracking_info"`
 	// The Shopee logistics status for the order. Applicable values: See Data Definition- LogisticsStatus.
-	LogisticStatus
+	LogisticStatus string `json:"logisttic_status"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 	// The order serial numbers.
@@ -205,16 +205,16 @@ type GetForderWaybillRequest struct {
 	//
 	RequestBase
 	// The set of order serial numbers. Up to 50 ordersn in one call.
-	OrdersList []List `json:"orders_list"`
+	OrdersList []GetForderWaybillRequestOrder `json:"orders_list"`
 	// Option to get batch airway bills in single file. Default value is false.
 	IsBatch bool `json:"is_batch"`
 }
 
 type GetForderWaybillResponse struct {
 	// This object contains the detailed breakdown for the result of this API call if the param is_batch is false.
-	Result Result `json:"result"`
+	Result GetForderWaybillResponseResult `json:"result"`
 	// This object contains the detailed breakdown for the result of this API call if the param is_batch is true.
-	BatchResult BatchResult `json:"batch_result"`
+	BatchResult GetForderWaybillResponseBatchResult `json:"batch_result"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }

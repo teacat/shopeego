@@ -27,7 +27,7 @@ type GetShopCategoriesRequest struct {
 
 type GetShopCategoriesResponse struct {
 	//
-	ShopCategorys []ShopCategory `json:"shop_categorys"`
+	ShopCategorys []GetShopCategoriesResponseCategory `json:"shop_categorys"`
 	// This is to indicate whether the shop categorys list is more than one page. If this value is true, you may want to continue to check next page to retrieve the rest of shop categorys.
 	More bool `json:"more"`
 	// The identifier for an API request for error tracking
@@ -105,7 +105,7 @@ type GetItemsRequest struct {
 
 type GetItemsResponse struct {
 	//
-	Items []Item `json:"items"`
+	Items []GetItemsResponseItem `json:"items"`
 	// The identifier for an API request for error tracking.
 	RequestID string `json:"request_id"`
 }

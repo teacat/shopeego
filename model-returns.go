@@ -54,7 +54,7 @@ type GetReturnListRequest struct {
 }
 
 type GetReturnListResponse struct {
-	Returns []Return `json:"returns"`
+	Returns []GetReturnListResponseReturn `json:"returns"`
 	// This is to indicate whether the item list is more than one page. If this value is true, you may want to continue to check next page to retrieve the rest of items.
 	More bool `json:"more"`
 	// The identifier for an API request for error tracking
@@ -100,9 +100,9 @@ type GetReturnDetailResponse struct {
 	// Order price before discount.
 	AmountBeforeDiscount float64 `json:"amount_before_discount"`
 	//
-	User User `json:"user"`
+	User GetReturnDetailResponseUser `json:"user"`
 	//
-	Item []Item `json:"item"`
+	Item []GetReturnDetailResponseItem `json:"item"`
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// The identifier for an API request for error tracking

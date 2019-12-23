@@ -8,7 +8,7 @@ type AddDiscountRequest struct {
 	// The time when discount activity end. The end time must be 1 hour later than start time.
 	EndTime int `json:"end_time"`
 	// Max item to upload is 50 in one API call.
-	Items []Item `json:"items"`
+	Items []AddDiscountRequestItem `json:"items"`
 	//
 	RequestBase
 }
@@ -28,7 +28,7 @@ type AddDiscountItemRequest struct {
 	// Shopee's unique identifier for a discount activity.
 	DiscountID int `json:"discount_id"`
 	// Max item to upload is 50 in one API call.
-	Items []Item `json:"items"`
+	Items []AddDiscountItemRequestItem `json:"items"`
 	//
 	RequestBase
 }
@@ -105,7 +105,7 @@ type GetDiscountDetailResponse struct {
 	// This is to indicate whether the item list is more than one page. If this value is true, you may want to continue to check next page to retrieve the rest of items.
 	More bool `json:"more"`
 	//
-	Items []Item `json:"items"`
+	Items []GetDiscountDetailResponseItem `json:"items"`
 	// The status of discount, applicable values: expired, ongoing, upcoming.
 	Status string `json:"status"`
 	// The identifier for an API request for error tracking
@@ -129,7 +129,7 @@ type GetDiscountsListRequest struct {
 
 type GetDiscountsListResponse struct {
 	//
-	Discount []Discount `json:"discount"`
+	Discount []GetDiscountsListResponseDiscount `json:"discount"`
 	// This is to indicate whether the item list is more than one page. If this value is true, you may want to continue to check next page to retrieve the rest of items.
 	More bool `json:"more"`
 	// The identifier for an API request for error tracking
@@ -162,7 +162,7 @@ type UpdateDiscountItemsRequest struct {
 	// Shopee's unique identifier for a discount activity.
 	DiscountID int `json:"discount_id"`
 	//
-	Items []Item `json:"items"`
+	Items []UpdateDiscountItemsRequestItem `json:"items"`
 	//
 	RequestBase
 }

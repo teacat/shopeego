@@ -7,7 +7,7 @@ type GetTopPicksListRequest struct {
 
 type GetTopPicksListResponse struct {
 	// Collection list
-	Collections []Collection `json:"collections"`
+	Collections []GetTopPicksListResponseCollection `json:"collections"`
 }
 
 type AddTopPicksRequest struct {
@@ -29,7 +29,7 @@ type AddTopPicksResponse struct {
 	// Collection name
 	Name string `json:"name"`
 	// Item list of the collection
-	Items []Item `json:"items"`
+	Items []AddTopPicksResponseItem `json:"items"`
 }
 
 type UpdateTopPicksRequest struct {
@@ -53,7 +53,7 @@ type UpdateTopPicksResponse struct {
 	// Collection name
 	Name string `json:"name"`
 	// Item list of the collection
-	Items []Item `json:"items"`
+	Items []UpdateTopPicksResponseItem `json:"items"`
 }
 
 type DeleteTopPicksRequest struct {

@@ -20,7 +20,7 @@ type GetOrdersListRequest struct {
 
 type GetOrdersListResponse struct {
 	// The set of orders that match the ordersn or filter criteria specified.
-	Orders []Order `json:"orders"`
+	Orders []GetOrdersListResponseOrder `json:"orders"`
 	// This is to indicate whether the order list is more than one page. If this value is true, you may want to continue to check next page to retrieve orders.
 	More bool `json:"more"`
 	// The identifier for an API request for error tracking
@@ -45,7 +45,7 @@ type GetOrdersByStatusRequest struct {
 
 type GetOrdersByStatusResponse struct {
 	// The set of orders that match the ordersn or filter criteria specified.
-	Orders []Order `json:"orders"`
+	Orders []GetOrdersByStatusResponseOrder `json:"orders"`
 	// This is to indicate whether the order list is more than one page. If this value is true, you may want to continue to check next page to retrieve orders.
 	More bool `json:"more"`
 	// The identifier for an API request for error tracking
@@ -61,7 +61,7 @@ type GetOrderDetailsRequest struct {
 
 type GetOrderDetailsResponse struct {
 	// The set of orders that match the ordersn or filter criteria specified.
-	Orders []Order `json:"orders"`
+	Orders []GetOrderDetailsResponseOrder `json:"orders"`
 	// Orders that encountered error
 	Errors []string `json:"errors"`
 	// The identifier for an API request for error tracking
@@ -77,7 +77,7 @@ type GetEscrowDetailsRequest struct {
 
 type GetEscrowDetailsResponse struct {
 	// My Income infomation
-	Order Order `json:"order"`
+	Order GetEscrowDetailsResponseOrder `json:"order"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -115,7 +115,7 @@ type CancelOrderRequest struct {
 
 type CancelOrderResponse struct {
 	// The time when the order is updated.
-	ModifiedTime
+	ModifiedTime int `json:"modified_time"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -159,7 +159,7 @@ type GetForderInfoResponse struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// The fulfill order list
-	ForderList []Forder `json:"forder_list"`
+	ForderList []GetForderInfoResponseForder `json:"forder_list"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -179,7 +179,7 @@ type GetEscrowReleasedOrdersRequest struct {
 
 type GetEscrowReleasedOrdersResponse struct {
 	// Filtered orders' escrow information.
-	Orders []Order `json:"orders"`
+	Orders []GetEscrowReleasedOrdersResponseOrder `json:"orders"`
 }
 
 type SplitOrderRequest struct {
@@ -188,14 +188,14 @@ type SplitOrderRequest struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// Item information contained in fulfilment orders.
-	Parcels []Parcel `json:"parcels"`
+	Parcels []SplitOrderRequestParcel `json:"parcels"`
 }
 
 type SplitOrderResponse struct {
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"order_sn"`
 	// Information of fulfillment orders.
-	Forders []Forder `json:"forders"`
+	Forders []SplitOrderResponseForder `json:"forders"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -227,7 +227,7 @@ type GetUnbindOrderListResponse struct {
 	// This is to indicate whether the item list is more than one page. If this value is true, you may want to continue to check next page to retrieve the rest of items.
 	More bool `json:"more"`
 	//
-	Orders []Order `json:"orders"`
+	Orders []GetUnbindOrderListResponseOrder `json:"orders"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }

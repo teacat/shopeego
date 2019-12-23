@@ -9,7 +9,7 @@ type UploadImgRequest struct {
 
 type UploadImgResponse struct {
 	//
-	Images []Image `json:"images"`
+	Images []UploadImgResponseImage `json:"images"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }

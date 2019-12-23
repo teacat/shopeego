@@ -8,7 +8,7 @@ type GenerateFMTrackingNoRequest struct {
 	// The number of first-mile tracking numbers generated.
 	Quantity int `json:"quantity"`
 	// This object contains detailed breakdown for the seller address.
-	SellerInfo Info `json:"seller_info"`
+	SellerInfo GenerateFMTrackingNoRequestSellerInfo `json:"seller_info"`
 }
 
 type GenerateFMTrackingNoResponse struct {
@@ -35,7 +35,7 @@ type GetShopFMTrackingNoResponse struct {
 	// This is to indicate whether the order list is more than one page. If this value is true, you may want to continue to check next page to retrieve orders.
 	HasMore bool `json:"has_more"`
 	//
-	FMTNList []List `json:"fmtn_list"`
+	FMTNList []GetShopFMTrackingNoResponseFMTNList `json:"fmtn_list"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -44,7 +44,7 @@ type FirstMileCodeBindOrderRequest struct {
 	//
 	RequestBase
 	// The set of ordersn. You can specify up to 50 ordersns in this call.
-	OrderList []Order `json:"order_list"`
+	OrderList []FirstMileCodeBindOrderRequestOrder `json:"order_list"`
 	// The first-mile tracking number.
 	FMTN string `json:"fmtn"`
 	// The shipment method for bound orders, should be pickup or dropoff.
@@ -71,7 +71,7 @@ type FirstMileCodeBindOrderResponse struct {
 	// The first-mile tracking number.
 	FMTN string `json:"fmtn"`
 	//
-	FailList []List `json:"fail_list"`
+	FailList []FirstMileCodeBindOrderResponseFail `json:"fail_list"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -93,7 +93,7 @@ type GetFmTnDetailResponse struct {
 	// The logistics status for first-mile tracking number.
 	Status string `json:"status"`
 	//
-	Orders []Order `json:"orders"`
+	Orders []GetFmTnDetailResponseOrder `json:"orders"`
 	// The specified delivery date.
 	DeclareDate string `json:"declare_date"`
 	// The identifier for an API request for error tracking
@@ -111,13 +111,13 @@ type GetFMTrackingNoWaybillRequest struct {
 
 type GetFMTrackingNoWaybillResponse struct {
 	// This object contains the detailed breakdown for the result of this API call if the param is_batch is true.
-	BatchResult Batch `json:"batch_result"`
+	BatchResult GetFMTrackingNoWaybillResponseBatchResult `json:"batch_result"`
 	// This object contains the detailed breakdown for the result of this API call if the param is_batch is false.
-	Result Result `json:"result"`
+	Result GetFMTrackingNoWaybillResponseResult `json:"result"`
 	// The number of Tracking Number to get waybills in this call.
 	TotalCount int `json:"total_count"`
 	// This list contains the first-mile tracking number and error descriptions of all tracking numbers that failed to retrieve airway bill in this call.
-	Errors []Error `json:"errors"`
+	Errors []GetFMTrackingNoWaybillResponseError `json:"errors"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -131,7 +131,7 @@ type GetShopFirstMileChannelRequest struct {
 
 type GetShopFirstMileChannelResponse struct {
 	//
-	Logistics []Logistic `json:"logistics"`
+	Logistics []GetShopFirstMileChannelResponseLogistic `json:"logistics"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }

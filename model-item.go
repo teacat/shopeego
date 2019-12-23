@@ -9,7 +9,7 @@ type GetCategoriesRequest struct {
 
 type GetCategoriesResponse struct {
 	// The category list.
-	Categories []Category `json:"categories"`
+	Categories []GetCategoriesResponseCategory `json:"categories"`
 	// The identifier for an API request for error tracking.
 	RequestID string `json:"request_id"`
 }
@@ -31,7 +31,7 @@ type GetAttributesRequest struct {
 
 type GetAttributesResponse struct {
 	// The attributes list.
-	Attributes []Attribute `json:"attributes"`
+	Attributes []GetAttributesResponseAttribute `json:"attributes"`
 	// The identifier for an API request for error tracking.
 	RequestID string `json:"request_id"`
 }
@@ -50,13 +50,13 @@ type AddRequest struct {
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
 	ItemSKU string `json:"item_sku"`
 	// Please skip this field and use the dedicated APIs to create 2-tier variation. More details: https://open.shopee.com/documents?module=63&type=2&id=54
-	Variations []Variation `json:"variations"`
+	Variations []AddRequestVariation `json:"variations"`
 	// Image URLs of the item. Up to 9 images(12 images for TW mall seller), max 2.0 MB each.Image format accepted: JPG, JPEG, PNG.Suggested dimension: 1024 x 1024 px. Max size: 2MB
-	Images []Image `json:"images"`
+	Images []AddRequestImage `json:"images"`
 	// This field is optional depending on the specific attribute under different categories. Should call shopee.item.GetAttributes to get attribute first. Must contain all all mandatory attribute.
-	Attributes []Attribute `json:"attributes"`
+	Attributes []AddRequestAttribute `json:"attributes"`
 	// Should call shopee.logistics.GetLogistics to get logistics first. Should contain all all logistics.
-	Logistics []Logistics `json:"logistics"`
+	Logistics []AddRequestLogistic `json:"logistics"`
 	// the net weight of this item, the unit is KG.
 	Weight float64 `json:"weight"`
 	// The length of package for this single item, the unit is CM
@@ -68,7 +68,7 @@ type AddRequest struct {
 	// The guaranteed days to ship orders. For pre-order, please input value from 7 to 30; for non pre-order, please exclude this field and it will default to the respective standard value per your shop location.(e.g. 3 for CrossBorder)
 	DaysToShip int `json:"days_to_ship"`
 	// The wholesales tier list. Please put the wholesale tier info in order by min count.
-	WholeSales []WholeSale `json:"whole_sales"`
+	Wholesales []AddRequestWholesale `json:"wholesales"`
 	//
 	RequestBase
 	// Url of size chart image. Only particular categories support it. max size: 500KB. 2000*2000 pixels
@@ -85,7 +85,7 @@ type AddResponse struct {
 	//
 	ItemID int `json:"item_id"`
 	// Item's info.
-	Item Item `json:"item"`
+	Item AddResponseItem `json:"item"`
 	//
 	Warning string `json:"warning"`
 	// Image URLs for fail download.
@@ -116,14 +116,14 @@ type UnlistItemRequest struct {
 	//
 	RequestBase
 	// List of item_ids and expected status. Up to 50 items for one call.
-	Items []Item `json:"items"`
+	Items []UnlistItemRequestItem `json:"items"`
 }
 
 type UnlistItemResponse struct {
 	// List of item ids which failed to update status, including their reasons
-	Failed []Failed `json:"failed"`
+	Failed []UnlistItemResponseFailed `json:"failed"`
 	// List of item ids which succeed to update status, including their current status.
-	Success []Success `json:"success"`
+	Success []UnlistItemResponseSuccess `json:"success"`
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -132,7 +132,7 @@ type AddVariationsRequest struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
 	ItemID int `json:"item_id"`
 	// The variation of item is to list out all models of this product. For example, iPhone has model of White and Black, then its variations includes "White iPhone" and "Black iPhone".
-	Variations []Variation `json:"variations"`
+	Variations []AddVariationsRequestVariation `json:"variations"`
 	//
 	RequestBase
 }
@@ -143,7 +143,7 @@ type AddVariationsResponse struct {
 	// The time when stock of the variation is updated.
 	ModifiedTime int `json:"modified_time"`
 	// The variation list of item.
-	Variations []Variation `json:"variations"`
+	Variations []AddVariationsResponseVariation `json:"variations"`
 	// The identifier for an API request for error tracking.
 	RequestID string `json:"request_id"`
 }
@@ -183,7 +183,7 @@ type GetItemsListRequest struct {
 
 type GetItemsListResponse struct {
 	//
-	Items []Item `json:"items"`
+	Items []GetItemsListResponseItem `json:"items"`
 	// This is to indicate whether the item list is more than one page. If this value is true, you may want to continue to check next page to retrieve the rest of items.
 	More bool `json:"more"`
 	// The identifier for an API request for error tracking
@@ -199,7 +199,7 @@ type GetItemDetailRequest struct {
 
 type GetItemDetailResponse struct {
 	//
-	Item Item `json:"item"`
+	Item GetItemDetailResponseItem `json:"item"`
 	// Warning returned when the category or attributes are missing/invalid.
 	Warning string `json:"warning"`
 	// The identifier for an API request for error tracking
@@ -218,15 +218,15 @@ type UpdateItemRequest struct {
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
 	ItemSKU string `json:"item_sku"`
 	// The variation of item is to list out all models of this product, for example, iPhone has model of White and Black, then its variations includes "White iPhone" and "Black iPhone".
-	Variations []Variation `json:"variations"`
+	Variations []UpdateItemRequestVariation `json:"variations"`
 	// Should call shopee.item.GetAttributes to get attribute first. Should contain all all mandatory attribute if change the category.
-	Attributes []Attribute `json:"attributes"`
+	Attributes []UpdateItemRequestAttribute `json:"attributes"`
 	// The guaranteed days to ship orders. Update value to less than 7 will default the value to the respective standard per your shop location and make this item non pre-order.(e.g. 3 for CrossBorder)
 	DaysToShip int `json:"days_to_ship"`
 	// The wholesales tier list. If the item has already had wholesale info, the wholesale info will be replaced. Please put the wholesale tier info in order by min count.
-	Wholesales []Wholesale `json:"wholesales"`
+	Wholesales []UpdateItemRequestWholesale `json:"wholesales"`
 	// Should call shopee.logistics.GetLogistics to get logistics first. Should contain all all logistics.
-	Logistics []Logistics `json:"logistics"`
+	Logistics []UpdateItemRequestLogistic `json:"logistics"`
 	// the net weight of this item, the unit is KG.
 	Weight float64 `json:"weight"`
 	// The length of package for this single item, the unit is CM
@@ -249,7 +249,7 @@ type UpdateItemResponse struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	//
-	Item Item `json:"item"`
+	Item UpdateItemResponseItem `json:"item"`
 	//
 	Warning string `json:"warning"`
 	// The identifier for an API request for error tracking
@@ -343,7 +343,7 @@ type UpdatePriceRequest struct {
 
 type UpdatePriceResponse struct {
 	//
-	Item Item `json:"item"`
+	Item UpdatePriceResponseItem `json:"item"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -359,7 +359,7 @@ type UpdateStockRequest struct {
 
 type UpdateStockResponse struct {
 	//
-	Item Item `json:"item"`
+	Item UpdateStockResponseItem `json:"item"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -377,7 +377,7 @@ type UpdateVariationPriceRequest struct {
 
 type UpdateVariationPriceResponse struct {
 	//
-	Item Item `json:"item"`
+	Item UpdateVariationPriceResponseItem `json:"item"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -395,7 +395,7 @@ type UpdateVariationStockRequest struct {
 
 type UpdateVariationStockResponse struct {
 	//
-	Item Item `json:"item"`
+	Item UpdateVariationStockResponseItem `json:"item"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -404,12 +404,12 @@ type UpdatePriceBatchRequest struct {
 	//
 	RequestBase
 	// List of items to update price. Up to 50 items in one call.
-	Items []Item `json:"items"`
+	Items []UpdatePriceBatchRequestItem `json:"items"`
 }
 
 type UpdatePriceBatchResponse struct {
 	// Result of batch updating.
-	BatchResult []BatchResult `json:"batch_result"`
+	BatchResult []UpdatePriceBatchResponseBatchResult `json:"batch_result"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -418,12 +418,12 @@ type UpdateStockBatchRequest struct {
 	//
 	RequestBase
 	// List of items to update stock. Up to 50 items in one call.
-	Items []Item `json:"items"`
+	Items []UpdateStockBatchRequestItem `json:"items"`
 }
 
 type UpdateStockBatchResponse struct {
 	// Result of batch updating.
-	BatchResult []BatchResult `json:"batch_result"`
+	BatchResult []UpdateStockBatchResponseBatchResult `json:"batch_result"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -432,12 +432,12 @@ type UpdateVariationPriceBatchRequest struct {
 	//
 	RequestBase
 	// List of variations to update price. Up to 50 variations in one call.
-	Variations []Variation `json:"variations"`
+	Variations []UpdateVariationPriceBatchRequestVariation `json:"variations"`
 }
 
 type UpdateVariationPriceBatchResponse struct {
 	// Result of batch updating.
-	BatchResult []BatchResult `json:"batch_result"`
+	BatchResult []UpdateVariationPriceBatchResponseBatchResult `json:"batch_result"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -446,12 +446,12 @@ type UpdateVariationStockBatchRequest struct {
 	//
 	RequestBase
 	// List of variations to update price. Up to 50 variations in one call.
-	Variations []Variation `json:"variations"`
+	Variations []UpdateVariationStockBatchRequestVariation `json:"variations"`
 }
 
 type UpdateVariationStockBatchResponse struct {
 	// Result of batch updating.
-	BatchResult []BatchResult `json:"batch_result"`
+	BatchResult []UpdateVariationStockBatchResponseBatchResult `json:"batch_result"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -460,9 +460,9 @@ type InitTierVariationRequest struct {
 	// The identity of product item.
 	ItemID int `json:"item_id"`
 	// Tier_variation list. Up to 2 tiers.
-	TierVariation []TierVariation `json:"tier_variation"`
+	TierVariation []InitTierVariationRequestTierVariation `json:"tier_variation"`
 	// 2-Tier variation list.
-	Variation []Variation `json:"variation"`
+	Variation []InitTierVariationRequestVariation `json:"variation"`
 	//
 	RequestBase
 }
@@ -473,14 +473,14 @@ type InitTierVariationResponse struct {
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id"`
 	// Current variation ids under this item
-	VariationIDList []Variation `json:"variation_id_list"`
+	VariationIDList []InitTierVariationResponseVariation `json:"variation_id_list"`
 }
 
 type AddTierVariationRequest struct {
 	// The identity of product item.
 	ItemID int `json:"item_id"`
 	// 2-Tier variation list.
-	Variation []Variation `json:"variation"`
+	Variation []AddTierVariationRequestVariation `json:"variation"`
 	//
 	RequestBase
 }
@@ -491,7 +491,7 @@ type AddTierVariationResponse struct {
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id"`
 	// Current variations information under this item.
-	VariationIDList []Variation `json:"variation_id_list"`
+	VariationIDList []AddTierVariationResponseVariation `json:"variation_id_list"`
 }
 
 type GetVariationRequest struct {
@@ -505,9 +505,9 @@ type GetVariationResponse struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// Tier_variation list.
-	TierVariation []TierVariation `json:"tier_variation"`
+	TierVariation []GetVariationResponseTierVariation `json:"tier_variation"`
 	// Item's variation list.
-	Variations []Variation `json:"variations"`
+	Variations []GetVariationResponseVariation `json:"variations"`
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -516,7 +516,7 @@ type UpdateTierVariationListRequest struct {
 	// The identity of product item.
 	ItemID int `json:"item_id"`
 	// Tier_variation list. Length must be 1 or 2.
-	TierVariation []TierVariation `json:"tier_variation"`
+	TierVariation []UpdateTierVariationListRequestTierVariation `json:"tier_variation"`
 	//
 	RequestBase
 }
@@ -532,7 +532,7 @@ type UpdateTierVariationIndexRequest struct {
 	// The identity of product item.
 	ItemID int `json:"item_id"`
 	// 2-Tier variation list.
-	Variation []Variation `json:"variation"`
+	Variation []UpdateTierVariationIndexRequestVariation `json:"variation"`
 	//
 	RequestBase
 }
@@ -553,7 +553,7 @@ type BoostItemRequest struct {
 
 type BoostItemResponse struct {
 	// batch result details
-	BatchResult BatchResult `json:"batch_result"`
+	BatchResult BoostItemResponseBatchResult `json:"batch_result"`
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -567,7 +567,7 @@ type GetBoostedItemResponse struct {
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id"`
 	//
-	Items []Item `json:"items"`
+	Items []GetBoostedItemResponseItem `json:"items"`
 }
 
 type SetItemInstallmentTenuresRequest struct {
@@ -597,7 +597,7 @@ type GetPromotionInfoRequest struct {
 
 type GetPromotionInfoResponse struct {
 	// The set of item's promotion list.
-	Items []Item `json:"items"`
+	Items []GetPromotionInfoResponseItem `json:"items"`
 	// The identifier of the API request for error tracking.
 	RequestID string `json:"request_id"`
 }

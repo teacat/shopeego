@@ -7,7 +7,7 @@ type GetShopsByPartnerRequest struct {
 
 type GetShopsByPartnerResponse struct {
 	// A list of shops authorized to the partner.
-	AuthedShops []Shop `json:"authed_shops"`
+	AuthedShops []GetShopsByPartnerResponseShop `json:"authed_shops"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -25,7 +25,7 @@ type GetCategoriesByCountryRequest struct {
 
 type GetCategoriesByCountryResponse struct {
 	// List of categories info.
-	Categories []Category `json:"categories"`
+	Categories []GetCategoriesByCountryResponseCategory `json:"categories"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id"`
 }
@@ -39,5 +39,5 @@ type GetPaymentListRequest struct {
 
 type GetPaymentListResponse struct {
 	//
-	PaymentMethodList []Method `json:"payment_method_list"`
+	PaymentMethodList []GetPaymentListResponseMethod `json:"payment_method_list"`
 }
