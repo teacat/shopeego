@@ -19,8 +19,8 @@ var availablePaths map[string]string = map[string]string{
 	"DeleteShopCategory": "api/v1/shop_category/delete",
 	"UpdateShopCategory": "api/v1/shop_category/update",
 	"AddItems":           "api/v1/shop_category/add/items",
-	"GetItems":           "api/v1/shop_category/get/item",
-	"DeleteItems":        "api/v1/shop_category/del/item",
+	"GetItems":           "api/v1/shop_category/get/items",
+	"DeleteItems":        "api/v1/shop_category/del/items",
 
 	//=======================================================
 	// Item

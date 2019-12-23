@@ -13,7 +13,7 @@ $ go get gopkg.in/teacat/shopeego.v1
 # 開始使用
 
 ```golang
-client := NewClient(&ClientOptions{
+client := shopeego.NewClient(&ClientOptions{
 	Secret: "0c2c7b3bd59c2503f49a307fcf49dc985df43a1214821d5453e9ba54ca8e2e44",
 })
 client.GetShopInfo(&GetShopInfoRequest{

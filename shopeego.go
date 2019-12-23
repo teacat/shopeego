@@ -1,14 +1,15 @@
 package shopeego
 
 import (
+	"bytes"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
-
-	"github.com/parnurzeal/gorequest"
+	"io/ioutil"
+	"net/http"
 )
 
 var (
@@ -163,9 +164,9 @@ type ShopeeClient struct {
 }
 
 type ResponseError struct {
-	RequestID string `json:"request_id"`
-	Msg       string `json:"msg"`
-	ErrorType string `json:"error"`
+	RequestID string `json:"request_id,omitempty"`
+	Msg       string `json:"msg,omitempty"`
+	ErrorType string `json:"error,omitempty"`
 }
 
 func (e ResponseError) Error() string {
@@ -179,6 +180,7 @@ func (s *ShopeeClient) getPath(method string) string {
 		host = "https://partner.uat.shopeemobile.com/"
 	} else {
 		host = "https://partner.shopeemobile.com/"
+		//host = "http://localhost:8080/"
 	}
 	return fmt.Sprintf("%s%s", host, availablePaths[method])
 }
@@ -191,7 +193,7 @@ func (s *ShopeeClient) sign(url string, body []byte) string {
 }
 
 //
-func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
+/*func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	body, err := json.Marshal(in)
 	if err != nil {
 		return []byte(``), err
@@ -201,7 +203,7 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	//
 	req.Set("Content-Type", "application/json")
 	req.Set("Authorization", s.sign(url, body))
-
+	panic(string(body))
 	//
 	// HANDLE ERRROR!
 
@@ -213,13 +215,60 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	var errResp ResponseError
 	err = json.Unmarshal([]byte(respBody), &errResp)
 	if err != nil {
-		return []byte(``), err
+
 	}
 	if errResp.ErrorType != "" {
 		return []byte(``), errResp
 	}
 
 	return []byte(respBody), nil
+}*/
+
+func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
+	body, err := json.Marshal(in)
+	if err != nil {
+		return []byte(``), err
+	}
+	url := s.getPath(method)
+
+	//panic(string(body))
+
+	//panic(fmt.Sprintf("%s", string(body)))
+
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(body))
+	req.Header.Set("Authorization", s.sign(url, body))
+	req.Header.Set("Content-Type", "application/json")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	//fmt.Println("response Status:", resp.Status)
+	//fmt.Println("response Headers:", resp.Header)
+	//body, _ := ioutil.ReadAll(resp.Body)
+	//fmt.Println("response Body:", string(body))
+
+	//
+	// HANDLE ERRROR!
+
+	body, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
+
+	}
+
+	var errResp ResponseError
+	err = json.Unmarshal(body, &errResp)
+	if err != nil {
+
+	}
+	if errResp.ErrorType != "" {
+		return []byte(``), errResp
+	}
+
+	return body, nil
 }
 
 //=======================================================
