@@ -4,14 +4,14 @@ type GetShopInfoRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
 
 type GetShopInfoResponse struct {
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// Name of the shop.
 	ShopName string `json:"shop_name"`
 	// The two-digit code representing the country where the order was made.
@@ -54,14 +54,14 @@ type UpdateShopInfoRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
 
 type UpdateShopInfoResponse struct {
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// Shop name of this shop.
 	ShopName string `json:"shop_name"`
 	// List of images url of shop banners.
@@ -86,7 +86,7 @@ type PerformanceRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
@@ -126,7 +126,7 @@ type SetShopInstallmentStatusRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }

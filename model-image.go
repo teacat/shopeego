@@ -6,7 +6,7 @@ type UploadImgRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }

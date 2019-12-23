@@ -17,7 +17,7 @@ type GetOrdersListRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
@@ -46,7 +46,7 @@ type GetOrdersByStatusRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
@@ -66,7 +66,7 @@ type GetOrderDetailsRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
@@ -86,7 +86,7 @@ type GetEscrowDetailsRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
@@ -106,7 +106,7 @@ type AddOrderNoteRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
@@ -132,7 +132,7 @@ type CancelOrderRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
@@ -150,7 +150,7 @@ type AcceptBuyerCancellationRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
@@ -168,7 +168,7 @@ type RejectBuyerCancellationRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
@@ -186,7 +186,7 @@ type GetForderInfoRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 }
@@ -204,7 +204,7 @@ type GetEscrowReleasedOrdersRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 	// If many orders are available to retrieve, you may need to call GetEscrowReleaseTime multiple times to retrieve all the data. Each result set is returned as a page of entries. Use the Pagination filters to control the maximum number of entries to retrieve per page (i.e., per call), the offset number to start next call. This integer value is used to specify the maximum number of entries to return in a single "page" of data. Max entries per page is 100.
@@ -226,7 +226,7 @@ type SplitOrderRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 	// Shopee's unique identifier for an order.
@@ -248,7 +248,7 @@ type UndoSplitOrderRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 	// Shopee's unique identifier for an order.
@@ -266,7 +266,7 @@ type GetUnbindOrderListRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp"`
 	// Specifies the starting entry of data to return in the current call. Default is 0. if data is more than one page, the offset can be some entry to start next call.

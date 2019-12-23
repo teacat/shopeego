@@ -6,7 +6,7 @@ package shopeego
 
 type GetShopInfoResponseShop struct {
 	// Affiliate shop's id.
-	AShopID string `json:"a_shop_id"`
+	AShopID string `json:"a_shopid"`
 	// Affiliate Shop's area.
 	Country string `json:"country"`
 }
@@ -220,7 +220,7 @@ type AddResponseItemWholesale struct {
 
 type AddResponseItem struct {
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
 	ItemSKU string `json:"item_sku"`
 	// Enumerated type that defines the current status of the item. Applicable values: NORMAL, DELETED, UNLIST and BANNED.
@@ -367,7 +367,7 @@ type GetItemsListResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// The latest update time of the item.
 	UpdateTime int `json:"update_time"`
 	// Enumerated type that defines the current status of the item. Applicable values: NORMAL, BANNED and UNLIST.
@@ -452,7 +452,7 @@ type GetItemDetailResponseItem struct {
 	// Shopee's unique identifier for an item.
 	ItemID int `json:"item_id"`
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
 	ItemSKU string `json:"item_sku"`
 	// Enumerated type that defines the current status of the item. Applicable values: NORMAL, DELETED, BANNED and UNLIST.
@@ -633,7 +633,7 @@ type UpdateItemResponseItemWholesale struct {
 
 type UpdateItemResponseItem struct {
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
 	ItemSKU string `json:"item_sku"`
 	// Enumerated type that defines the current status of the item. Applicable values: NORMAL, DELETED and BANNED.
@@ -2048,14 +2048,14 @@ type GetShopsByPartnerResponseShopSIP struct {
 	// Affiliate Shop's area
 	Country string `json:"country"`
 	// Affiliate shop's id
-	AShopID int `json:"a_shop_id"`
+	AShopID int `json:"a_shopid"`
 }
 
 type GetShopsByPartnerResponseShop struct {
 	// The two-digit code representing the country where the order was made.
 	Country string `json:"country"`
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shop_id"`
+	ShopID int `json:"shopid"`
 	// The timestamp when the shop was authorized to the partner.
 	AuthTime int `json:"auth_time"`
 	// SIP affiliate shops info list

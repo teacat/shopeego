@@ -176,9 +176,9 @@ func (e ResponseError) Error() string {
 func (s *ShopeeClient) getPath(method string) string {
 	var host string
 	if s.IsSandbox {
-		host = "https://partner.shopeemobile.com/"
-	} else {
 		host = "https://partner.uat.shopeemobile.com/"
+	} else {
+		host = "https://partner.shopeemobile.com/"
 	}
 	return fmt.Sprintf("%s%s", host, availablePaths[method])
 }
@@ -199,6 +199,7 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	url := s.getPath(method)
 	req := gorequest.New().Post(url).Send(string(body))
 	//
+	req.Set("Content-Type", "application/json")
 	req.Set("Authorization", s.sign(url, body))
 
 	//
