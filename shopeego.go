@@ -251,21 +251,10 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 
 	}
 
-	//for _, v := range replaces {
-	//	body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s":""`, v), fmt.Sprintf(`"%s":"0"`, v)))
-	//}
-
 	for _, v := range replaces {
-		//r := regexp.MustCompile(fmt.Sprintf(`"%s": (.*?),`, v))
-		//body = []byte(r.ReplaceAllString(string(body), fmt.Sprintf(`"%s": "$1",`, v)))
 		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": 0`, v), fmt.Sprintf(`"%s": "0"`, v)))
 		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": ""`, v), fmt.Sprintf(`"%s": "0"`, v)))
-
-		//r := regexp.MustCompile(fmt.Sprintf(`"%s": "(.*?)"`, v))
-		//body = []byte(r.ReplaceAllString(string(body), fmt.Sprintf(`"%s": $1`, v)))
 	}
-
-	fmt.Printf("%+v", string(body))
 
 	var errResp ResponseError
 	err = json.Unmarshal(body, &errResp)
