@@ -194,37 +194,6 @@ func (s *ShopeeClient) sign(url string, body []byte) string {
 }
 
 //
-/*func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
-	body, err := json.Marshal(in)
-	if err != nil {
-		return []byte(``), err
-	}
-	url := s.getPath(method)
-	req := gorequest.New().Post(url).Send(string(body))
-	//
-	req.Set("Content-Type", "application/json")
-	req.Set("Authorization", s.sign(url, body))
-	panic(string(body))
-	//
-	// HANDLE ERRROR!
-
-	_, respBody, errs := req.End()
-	if len(errs) > 0 {
-		return []byte(``), errs[0]
-	}
-
-	var errResp ResponseError
-	err = json.Unmarshal([]byte(respBody), &errResp)
-	if err != nil {
-
-	}
-	if errResp.ErrorType != "" {
-		return []byte(``), errResp
-	}
-
-	return []byte(respBody), nil
-}*/
-
 func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	body, err := json.Marshal(in)
 	if err != nil {
@@ -251,6 +220,7 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 
 	}
 
+	//
 	for _, v := range replaces {
 		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": 0`, v), fmt.Sprintf(`"%s": "0"`, v)))
 		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": ""`, v), fmt.Sprintf(`"%s": "0"`, v)))
