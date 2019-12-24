@@ -55,7 +55,7 @@ type GetParameterForInitRequest struct {
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// The serial numbers of the order needs to be initiated logistic.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 }
 
 type GetParameterForInitResponse struct {
@@ -87,7 +87,7 @@ type GetAddressResponse struct {
 
 type GetTimeSlotRequest struct {
 	// The order serial numbers.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The identify of address.
 	AddressID int `json:"address_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
@@ -107,7 +107,7 @@ type GetTimeSlotResponse struct {
 
 type GetBranchRequest struct {
 	// The order serial numbers.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
@@ -125,7 +125,7 @@ type GetBranchResponse struct {
 
 type GetLogisticInfoRequest struct {
 	// The order serial numbers.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
@@ -147,7 +147,7 @@ type GetLogisticInfoResponse struct {
 
 type InitRequest struct {
 	// The order serial numbers.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Required parameter ONLY if GetParameterForInit returns "pickup" or if GetLogisticsInfo returns "pickup" under "info_needed" for the same order. Developer should still include "pickup" field in the call even if "pickup" has empty value.
 	Pickup InitRequestPickup `json:"pickup,omitempty"`
 	// Required parameter ONLY if GetParameterForInit returns "dropoff" or if GetLogisticsInfo returns "dropoff" under "info_needed" for the same order. Developer should still include "dropoff" field in the call even if "dropoff" has empty value.
@@ -173,7 +173,7 @@ type InitResponse struct {
 
 type GetAirwayBillRequest struct {
 	// The set of order serial numbers. Up to 50 ordersn in one call.
-	OrderSNList []string `json:"order_sn_list,omitempty"`
+	OrderSNList []string `json:"ordersn_list,omitempty"`
 	// Option to get batch airway bills in single file. Default value is false.
 	IsBatch bool `json:"is_batch,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
@@ -197,7 +197,7 @@ type GetAirwayBillResponse struct {
 
 type GetOrderLogisticsRequest struct {
 	// The order serial numbers. Make sure the order has trackingNo generated before calling this API.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
@@ -217,7 +217,7 @@ type GetOrderLogisticsResponse struct {
 
 type GetLogisticsMessageRequest struct {
 	// The order serial numbers.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The tracking number assigned by the shipping carrier for item shipment. If there are more than one tracking number in one order, this param is necessary.
 	TrackingNumber string `json:"tracking_number,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
@@ -240,7 +240,7 @@ type GetLogisticsMessageResponse struct {
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
 	// The order serial numbers.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Shopee's unique identifier for a fulfillment order.
 	ForderID string `json:"forder_id,omitempty"`
 }

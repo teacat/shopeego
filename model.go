@@ -1201,7 +1201,7 @@ type UpdateDiscountItemsRequestItem struct {
 
 type GetOrdersListResponseOrder struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Enumerated type that defines the current status of the order. Applicable values: See Data Definition- OrderStatus.
 	OrderStatus string `json:"order_status,omitempty"`
 	// Timestamp that indicates the last time that there was a change in value of order, such as order status changed from 'Paid' to 'Completed'.
@@ -1214,7 +1214,7 @@ type GetOrdersListResponseOrder struct {
 
 type GetOrdersByStatusResponseOrder struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Enumerated type that defines the current status of the order. Applicable values: See Data Definition- OrderStatus.
 	OrderStatus string `json:"order_status,omitempty"`
 	// Timestamp that indicates the last time that there was a change in value of order, such as order status changed from 'Paid' to 'Completed'.
@@ -1283,9 +1283,56 @@ type GetOrderDetailsResponseOrderItem struct {
 	PromotionID int `json:"promotion_id,omitempty"`
 }
 
+/*func tidyEmptyFloat64(data []byte, dest interface{}, list []string) error {
+	var tempStruct map[string]interface{}
+	err := json.Unmarshal(data, &tempStruct)
+	if err != nil {
+		return err
+	}
+	for k, v := range tempStruct {
+		for _, j := range list {
+			if k == j && v == "" {
+				tempStruct[k] = "0"
+			}
+		}
+	}
+	return mapstructure.Decode(tempStruct, dest)
+}*/
+
+//
+/*func tidyEmptyFloat64(data []byte, dest interface{}, list []string) error {
+	var tempStruct map[string]interface{}
+	err := json.Unmarshal(data, &tempStruct)
+	if err != nil {
+		return err
+	}
+	for k, v := range tempStruct {
+		for _, j := range list {
+			if k == j && v == "" {
+				tempStruct[k] = "0"
+			}
+		}
+	}
+	return mapstructure.Decode(tempStruct, dest)
+}*/
+
+/*func (s *GetOrderDetailsResponseOrder) UnmarshalJSON(data []byte) error {
+	return tidyEmptyFloat64(data, s, []string{"estimated_shipping_fee", "actual_shipping_cost", "total_amount", "escrow_amount"})
+}
+
+func
+
+func tidyEmptyFloat64(data, s interface{}) error {
+	switch v := s.(type) {
+	case *GetOrderDetailsResponseOrder:
+		type getOrderDetailsResponseOrder GetOrderDetailsResponseOrder
+
+	}
+}*/
+
 type GetOrderDetailsResponseOrder struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The two-digit code representing the country where the order was made.
 	Country string `json:"country,omitempty"`
 	// The three-digit code representing the currency unit for which the order was paid.
@@ -1298,6 +1345,33 @@ type GetOrderDetailsResponseOrder struct {
 	DaysToShip int `json:"days_to_ship,omitempty"`
 	// This object contains detailed breakdown for the recipient address.
 	RecipientAddress GetOrderDetailsResponseOrderAddress `json:"recipient_address,omitempty"`
+	// The estimated shipping fee is an estimation calculated by Shopee based on specific logistics courier's standard.
+	EstimatedShippingFee float64 `json:"estimated_shipping_fee,omitempty"`
+	// The actual shipping cost of the order if available from external logistics partners.
+	ActualShippingCost float64 `json:"actual_shipping_cost,omitempty"`
+	// The total amount paid by the buyer for the order. This amount includes the total sale price of items, shipping cost beared by buyer; and offset by Shopee promotions if applicable. This value will only return after the buyer has completed payment for the order.
+	TotalAmount float64 `json:"total_amount,omitempty"`
+	// The total amount that the seller is expected to receive for the order. This amount includes buyer paid order amount (total_amount), all forms of Shopee platform subsidy; and offset by any cost and commission incurred.
+	EscrowAmount float64 `json:"escrow_amount,omitempty"`
+	// Enumerated type that defines the current status of the order.
+	OrderStatus string `json:"order_status,omitempty"`
+	// The logistics service provider that the buyer selected for the order to deliver items.
+	ShippingCarrier string `json:"shipping_carrier,omitempty"`
+	// The payment method that the buyer selected to pay for the order.
+	// Applicable values: See Data Definition- Payment Methods.
+	PaymentMethod string `json:"payment_method,omitempty"`
+	// Only work for cross-border order.This value indicates whether the order contains goods that are required to declare at customs. "T" means true and it will mark as "T" on the shipping label; "F" means false and it will mark as "P" on the shipping label. This value is accurate ONLY AFTER the order trackingNo is generated, please capture this value AFTER your retrieve the trackingNo.
+	GoodsToDeclare bool `json:"goods_to_declare,omitempty"`
+	// Message to seller.
+	MessageToSeller string `json:"message_to_seller,omitempty"`
+	// The note seller made for own reference.
+	Note string `json:"note,omitempty"`
+	// Update time for the note.
+	NoteUpdateTime int `json:"note_update_time,omitempty"`
+	// Timestamp that indicates the date and time that the order was created.
+	CreateTime int `json:"create_time,omitempty"`
+	// Timestamp that indicates the last time that there was a change in value of order, such as order status changed from 'Paid' to 'Completed'.
+	UpdateTime int `json:"update_time,omitempty"`
 	// This object contains the detailed breakdown for the result of this API call.
 	Items []GetOrderDetailsResponseOrderItem `json:"items,omitempty"`
 	// The time when the order status is updated from UNPAID to PAID. This value is NULL when order is not paid yet.
@@ -1452,7 +1526,7 @@ type GetEscrowDetailsResponseOrderItem struct {
 
 type GetEscrowDetailsResponseOrder struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The two-digit code representing the country where the order was made.
 	Country string `json:"country,omitempty"`
 	// This object contains detailed income breakdown for the order.
@@ -1531,7 +1605,7 @@ type GetForderInfoResponseForder struct {
 
 type GetEscrowReleasedOrdersResponseOrder struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Order's escrow amount.
 	PayoutAmount float64 `json:"payout_amount,omitempty"`
 	// Timestamp of escrow amount transaction finished.
@@ -1569,7 +1643,7 @@ type SplitOrderResponseForder struct {
 
 type GetUnbindOrderListResponseOrder struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The Shopee logistics status for the order. Applicable values: See Data Definition- LogisticsStatus.
 	LogisticStatus string `json:"logistic_status,omitempty"`
 	// The unique identifier for a fulfillment order.
@@ -1785,14 +1859,14 @@ type InitRequestNonIntegrated struct {
 
 type GetAirwayBillResponseResultAirwayBill struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The url of retrieving airway bill.
 	AirwayBill string `json:"airway_bill,omitempty"`
 }
 
 type GetAirwayBillResponseResultError struct {
 	// The ordersn of orders which occurred error.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	//
 	ErrorCode string `json:"error_code,omitempty"`
 	// The detail information of this error.
@@ -1888,7 +1962,7 @@ type GetLogisticsMessageResponseInfo struct {
 
 type GetForderWaybillRequestOrder struct {
 	// The order serial numbers. Make sure the order has trackingNo generated before calling this API.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The unique identifier for a fulfillment order.
 	ForderID string `json:"forder_id,omitempty"`
 }
@@ -1899,7 +1973,7 @@ type GetForderWaybillRequestOrder struct {
 
 type GetForderWaybillResponseResultWaybill struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The unique identifier for a fulfillment order.
 	ForderID string `json:"forder_id,omitempty"`
 	// The url of retrieving airway bill.
@@ -1908,7 +1982,7 @@ type GetForderWaybillResponseResultWaybill struct {
 
 type GetForderWaybillResponseError struct {
 	// The ordersn of orders which occurred error.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The forder_id of fulfillment orders which occurred error.
 	ForderID string `json:"forder_id,omitempty"`
 	//
@@ -2005,7 +2079,7 @@ type GetReturnListResponseReturn struct {
 	//
 	Item []GetReturnListResponseReturnItem `json:"item,omitempty"`
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 }
 
 //=======================================================
@@ -2184,7 +2258,7 @@ type GetShopFMTrackingNoResponseFMTNList struct {
 
 type FirstMileCodeBindOrderRequestOrder struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The unique identifier for a fulfillment order.
 	ForderID string `json:"forder_id,omitempty"`
 }
@@ -2195,7 +2269,7 @@ type FirstMileCodeBindOrderRequestOrder struct {
 
 type FirstMileCodeBindOrderResponseFail struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The unique identifier for a fulfillment order.
 	ForderID string `json:"forder_id,omitempty"`
 	// The reason why the order/fulfillment order cannot be bound.
@@ -2208,7 +2282,7 @@ type FirstMileCodeBindOrderResponseFail struct {
 
 type GetFmTnDetailResponseOrder struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The unique identifier for a fulfillment order.
 	ForderID string `json:"forder_id,omitempty"`
 	// The tracking number of SLS for orders/forders.

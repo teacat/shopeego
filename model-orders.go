@@ -62,7 +62,7 @@ type GetOrdersByStatusResponse struct {
 
 type GetOrderDetailsRequest struct {
 	// The set of ordersn. You can specify up to 50 ordersns in this call.
-	OrderSNList []string `json:"order_sn_list,omitempty"`
+	OrderSNList []string `json:"ordersn_list,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
@@ -82,7 +82,7 @@ type GetOrderDetailsResponse struct {
 
 type GetEscrowDetailsRequest struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
@@ -100,7 +100,7 @@ type GetEscrowDetailsResponse struct {
 
 type AddOrderNoteRequest struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The note seller made for own reference.
 	Note string `json:"note,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
@@ -113,7 +113,7 @@ type AddOrderNoteRequest struct {
 
 type AddOrderNoteResponse struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The success or error message.
 	Msg string `json:"msg,omitempty"`
 	// The identifier for an API request for error tracking
@@ -122,7 +122,7 @@ type AddOrderNoteResponse struct {
 
 type CancelOrderRequest struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The reason seller want to cancel this order. Applicable values: OUT_OF_STOCK, CUSTOMER_REQUEST, UNDELIVERABLE_AREA, COD_NOT_SUPPORTED.
 	CancelReason string `json:"cancel_reason,omitempty"`
 	// ID of item. Required when cancel_reason is OUT_OF_STOCK.
@@ -146,7 +146,7 @@ type CancelOrderResponse struct {
 
 type AcceptBuyerCancellationRequest struct {
 	// The order to be accepted cancellation request.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
@@ -164,7 +164,7 @@ type AcceptBuyerCancellationResponse struct {
 
 type RejectBuyerCancellationRequest struct {
 	// The order to be rejected cancellation request.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
@@ -182,7 +182,7 @@ type RejectBuyerCancellationResponse struct {
 
 type GetForderInfoRequest struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
@@ -193,7 +193,7 @@ type GetForderInfoRequest struct {
 
 type GetForderInfoResponse struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The fulfill order list
 	ForderList []GetForderInfoResponseForder `json:"forder_list,omitempty"`
 	// The identifier for an API request for error tracking
@@ -230,14 +230,14 @@ type SplitOrderRequest struct {
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Item information contained in fulfilment orders.
 	Parcels []SplitOrderRequestParcel `json:"parcels,omitempty"`
 }
 
 type SplitOrderResponse struct {
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// Information of fulfillment orders.
 	Forders []SplitOrderResponseForder `json:"forders,omitempty"`
 	// The identifier for an API request for error tracking
@@ -252,7 +252,7 @@ type UndoSplitOrderRequest struct {
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 }
 
 type UndoSplitOrderResponse struct {

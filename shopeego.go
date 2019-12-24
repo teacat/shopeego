@@ -10,6 +10,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 var (
@@ -248,6 +249,10 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
 
+	}
+
+	for _, v := range replaces {
+		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s":""`, v), fmt.Sprintf(`"%s":"0"`)))
 	}
 
 	var errResp ResponseError

@@ -120,7 +120,7 @@ type GetReturnDetailResponse struct {
 	//
 	Item []GetReturnDetailResponseItem `json:"item,omitempty"`
 	// Shopee's unique identifier for an order.
-	OrderSN string `json:"order_sn,omitempty"`
+	OrderSN string `json:"ordersn,omitempty"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
 }
