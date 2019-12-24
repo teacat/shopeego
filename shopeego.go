@@ -159,11 +159,13 @@ type Client interface {
 	GetShopFirstMileChannel(*GetShopFirstMileChannelRequest) (*GetShopFirstMileChannelResponse, error)
 }
 
+// ShopeeClient represents a client to Shopee
 type ShopeeClient struct {
 	Secret    string
 	IsSandbox bool
 }
 
+// ResponseError defines a error response
 type ResponseError struct {
 	RequestID string `json:"request_id,omitempty"`
 	Msg       string `json:"msg,omitempty"`
@@ -181,7 +183,6 @@ func (s *ShopeeClient) getPath(method string) string {
 		host = "https://partner.uat.shopeemobile.com/"
 	} else {
 		host = "https://partner.shopeemobile.com/"
-		//host = "http://localhost:8080/"
 	}
 	return fmt.Sprintf("%s%s", host, availablePaths[method])
 }
@@ -212,12 +213,9 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	}
 	defer resp.Body.Close()
 
-	//
-	// HANDLE ERRROR!
-
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-
+		return []byte(``), err
 	}
 
 	//
@@ -229,7 +227,7 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	var errResp ResponseError
 	err = json.Unmarshal(body, &errResp)
 	if err != nil {
-
+		return []byte(``), err
 	}
 	if errResp.ErrorType != "" {
 		return []byte(``), errResp

@@ -38,7 +38,7 @@ fmt.Println(shop.ShopName) // 輸出：yamiodymel
 
 * 有些[「必填欄位」被標註為「可選」](https://github.com/minchao/shopee-php/issues/5)。
 * 名為 `name` 的名稱欄位[但型態卻是 `float64` 或 `int`](https://open.shopee.com/documents?module=2&type=1&id=373)。
-* 欄位明明是 `float64` 但卻會收到空字串作為零值（這部份 Shopeego 已經透過字串更換將 `""` 改為 `"0"` 以便解析了）。
+* 欄位明明是 `float64` 但卻會收到空字串作為零值（這部份 Shopeego 已經透過[字串更換](https://github.com/teacat/shopeego/blob/master/replaces.go)將 `""` 改為 `"0"` 以便解析了）。
 
 這些問題你可能會在使用時遇到，當遇到 API 無法正常使用或是出現 `error_param` 時，請考慮到 Issue 中回報。
 
