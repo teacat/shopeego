@@ -2,7 +2,7 @@
 
 由 [Golang](https://golang.org/) 所實作的 Shopee Open Platform API，包含所有 Shopee API v1 所提供的功能，這些功能都已經列舉在[本專案的 Go Doc](https://godoc.org/github.com/teacat/shopeego) 之中。使用方式詳見 [Shopee Open Platform Documentation](https://open.shopee.com/documents)。
 
-**注意：**Shopeego 是根據 Shopee 所提供的 API 文件與資料型態進行開發，但有些資料型態明顯是不正確的，且有些[「必填欄位」被標註為「可選」](https://github.com/minchao/shopee-php/issues/5)。基於這個狀況，當遇到 API 無法正常使用或是出現 `error_param` 時，請考慮到 Issue 中回報。
+**注意：** Shopeego 是根據 Shopee 所提供的 API 文件與資料型態進行開發，但有些資料型態明顯是不正確的，這部份請參閱「[參差不齊的官方文件](#參差不齊的官方文件)」章節。
 
 # 安裝方式
 
@@ -14,17 +14,33 @@ $ go get gopkg.in/teacat/shopeego.v1
 
 # 開始使用
 
+透過 `NewClient` 並傳入你的 Partner 金鑰，如此一來就可以初始化一個 Shopee 客戶端。
+
 ```golang
+// 初始化一個 Shopee 客戶端。
 client := shopeego.NewClient(&ClientOptions{
 	Secret: "0c2c7b3bd59c2503f49a307fcf49dc985df43a1214821d5453e9ba54ca8e2e44",
 })
+
+// 取得指定商店的資料。
 shop := client.GetShopInfo(&GetShopInfoRequest{
 	PartnerID: 841237,
 	ShopID:    307271,
 	Timestamp: int(time.Now().Unix()),
 })
+
 fmt.Println(shop.ShopName) // 輸出：Yami Odymel 的早餐店！
 ```
+
+# 參差不齊的官方文件
+
+這個 API 套件在開發的時候發現了下列幾個問題。
+
+* 有些[「必填欄位」被標註為「可選」](https://github.com/minchao/shopee-php/issues/5)。
+* 名為 `name` 的名稱欄位[但型態卻是 `float64` 或 `int`](https://open.shopee.com/documents?module=2&type=1&id=373)。
+* 欄位明明是 `float64` 但卻會收到空字串作為零值（這部份 Shopeego 已經透過字串更換將 `""` 改為 `"0"` 以便解析了）。
+
+這些問題你可能會在使用時遇到，當遇到 API 無法正常使用或是出現 `error_param` 時，請考慮到 Issue 中回報。
 
 # 驗證介面
 
@@ -32,7 +48,7 @@ fmt.Println(shop.ShopName) // 輸出：Yami Odymel 的早餐店！
 
 # 簽署
 
-應[蝦皮官方要求](https://open.shopee.com/documents?module=63&type=2&id=53)所有的請求都必須簽署 HMAC-SHA256，很明顯這是有點神奇的蹦蹦安全手段，但這個套件仍然有幫你作這件事。如果你不明白，這裡舉個範例。
+這個套件仍然有幫你作這件事，但還是想讓你知道發生了什麼。應[蝦皮官方要求](https://open.shopee.com/documents?module=63&type=2&id=53)所有的請求都必須簽署 HMAC-SHA256，很明顯這是有點神奇的蹦蹦安全手段（畢竟都已經有了 HTTPS）。如果你不明白，這裡舉個範例。
 
 ```
 POST /api/v1/orders/detail HTTP/1.1
