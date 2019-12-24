@@ -94,7 +94,7 @@ type GetReturnDetailResponse struct {
 	// The serial number of return.
 	ReturnSN int `json:"return_sn,omitempty"`
 	// Amount of the refund.
-	RefundAmount float64 `json:"refund_amount,omitempty"`
+	RefundAmount float64 `json:"refund_amount,omitempty,string"`
 	// Currency of the return.
 	Currency string `json:"currency,omitempty"`
 	// The time of return create.
@@ -114,7 +114,7 @@ type GetReturnDetailResponse struct {
 	// Items to be sent back to seller. Can be either integrated/non-integrated.
 	NeedsLogistics bool `json:"needs_logistics,omitempty"`
 	// Order price before discount.
-	AmountBeforeDiscount float64 `json:"amount_before_discount,omitempty"`
+	AmountBeforeDiscount float64 `json:"amount_before_discount,omitempty,string"`
 	//
 	User GetReturnDetailResponseUser `json:"user,omitempty"`
 	//

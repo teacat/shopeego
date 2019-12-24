@@ -50,7 +50,7 @@ type AddRequest struct {
 	// Description of the item in local language. HTML is not supported.
 	Description string `json:"description,omitempty"`
 	// The current price of the item in the listing currency. This value will be ignored if there is variation level price input.
-	Price float64 `json:"price,omitempty"`
+	Price float64 `json:"price,omitempty,string"`
 	// The current stock quantity of the item. This value will be ignored if there is variation level stock input.
 	Stock int `json:"stock,omitempty"`
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
@@ -64,7 +64,7 @@ type AddRequest struct {
 	// Should call shopee.logistics.GetLogistics to get logistics first. Should contain all all logistics.
 	Logistics []AddRequestLogistic `json:"logistics,omitempty"`
 	// the net weight of this item, the unit is KG.
-	Weight float64 `json:"weight,omitempty"`
+	Weight float64 `json:"weight,omitempty,string"`
 	// The length of package for this single item, the unit is CM
 	PackageLength int `json:"package_length,omitempty"`
 	// The width of package for this single item, the unit is CM
@@ -262,7 +262,7 @@ type UpdateItemRequest struct {
 	// Should call shopee.logistics.GetLogistics to get logistics first. Should contain all all logistics.
 	Logistics []UpdateItemRequestLogistic `json:"logistics,omitempty"`
 	// the net weight of this item, the unit is KG.
-	Weight float64 `json:"weight,omitempty"`
+	Weight float64 `json:"weight,omitempty,string"`
 	// The length of package for this single item, the unit is CM
 	PackageLength int `json:"package_length,omitempty"`
 	// The width of package for this single item, the unit is CM
@@ -392,7 +392,7 @@ type UpdatePriceRequest struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
 	ItemID int `json:"item_id,omitempty"`
 	// Specify the revised price of the item. This value will be ignored if there is variation level price input.
-	Price float64 `json:"price,omitempty"`
+	Price float64 `json:"price,omitempty,string"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
@@ -432,7 +432,7 @@ type UpdateVariationPriceRequest struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
 	ItemID int `json:"item_id,omitempty"`
 	// Specify the revised price of one variation of the item.
-	Price float64 `json:"price,omitempty"`
+	Price float64 `json:"price,omitempty,string"`
 	// Shopee's unique identifier for a variation of an item. Please input the variation_id of a variation to be changed. The variation_id and item_id pair must be matched in order to perform the update.
 	VariationID int `json:"variation_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
