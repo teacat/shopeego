@@ -10,6 +10,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"regexp"
 	"strings"
 )
 
@@ -219,20 +220,19 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	}
 
 	//
+	replaceConcat := strings.Join(replaces, "|")
 	for _, v := range replaces {
-		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": 0`, v), fmt.Sprintf(`"%s": "0"`, v)))
 		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": ""`, v), fmt.Sprintf(`"%s": "0"`, v)))
 	}
 
+	var r = regexp.MustCompile(fmt.Sprintf(`"(%s)": ([^"].*?)(,|})`, replaceConcat))
+	body = []byte(r.ReplaceAllString(string(body), `"$1": "$2"$3`))
+
 	var errResp ResponseError
-	err = json.Unmarshal(body, &errResp)
-	if err != nil {
-		return []byte(``), err
-	}
+	_ = json.Unmarshal(body, &errResp)
 	if errResp.ErrorType != "" {
 		return []byte(``), errResp
 	}
-
 	return body, nil
 }
 
@@ -973,6 +973,7 @@ func (s *ShopeeClient) GetOrderDetails(req *GetOrderDetailsRequest) (resp *GetOr
 		return
 	}
 	err = json.Unmarshal(b, &resp)
+	//panic(b)
 	if err != nil {
 		return
 	}
