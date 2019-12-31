@@ -2,9 +2,9 @@ package shopeego
 
 type GetTopPicksListRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -22,16 +22,16 @@ type AddTopPicksRequest struct {
 	// True or False
 	IsActivated bool `json:"is_activated,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type AddTopPicksResponse struct {
 	// Collection id
-	TopPicksID int `json:"top_picks_id,omitempty"`
+	TopPicksID int64 `json:"top_picks_id,omitempty"`
 	// Whether it is activated or not.
 	IsActivated bool `json:"is_activated,omitempty"`
 	// Collection name
@@ -42,7 +42,7 @@ type AddTopPicksResponse struct {
 
 type UpdateTopPicksRequest struct {
 	// Collection id
-	TopPicksID int `json:"top_picks_id,omitempty"`
+	TopPicksID int64 `json:"top_picks_id,omitempty"`
 	// Collection name. 1 to 24 characters.
 	Name string `json:"name,omitempty"`
 	// The list of item id. Existed item_ids will overridden by the new_item_ids.
@@ -50,16 +50,16 @@ type UpdateTopPicksRequest struct {
 	// True or False. If true, it will activate this collection and deactivate the original one.
 	IsActivated bool `json:"is_activated,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type UpdateTopPicksResponse struct {
 	// Collection id
-	TopPicksID int `json:"top_picks_id,omitempty"`
+	TopPicksID int64 `json:"top_picks_id,omitempty"`
 	// Whether it is activated or not.
 	IsActivated bool `json:"is_activated,omitempty"`
 	// Collection name
@@ -70,16 +70,16 @@ type UpdateTopPicksResponse struct {
 
 type DeleteTopPicksRequest struct {
 	// Collection id. Cannot delete an activated collection.
-	TopPicksID int `json:"top_picks_id,omitempty"`
+	TopPicksID int64 `json:"top_picks_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type DeleteTopPicksResponse struct {
 	// Collection id
-	TopPicksID int `json:"top_picks_id,omitempty"`
+	TopPicksID int64 `json:"top_picks_id,omitempty"`
 }

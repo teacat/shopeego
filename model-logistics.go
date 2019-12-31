@@ -2,9 +2,9 @@ package shopeego
 
 type GetLogisticsRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -17,13 +17,13 @@ type GetLogisticsResponse struct {
 
 type UpdateShopLogisticsRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// The identity of logistic channel
-	LogisticID int `json:"logistic_id,omitempty"`
+	LogisticID int64 `json:"logistic_id,omitempty"`
 	// Whether to enable this logistic channel
 	Enabled bool `json:"enabled,omitempty"`
 	// Whether to make this logistic channel preferred. Indonestia logistics channel are not applicable.
@@ -34,9 +34,9 @@ type UpdateShopLogisticsRequest struct {
 
 type UpdateShopLogisticsResponse struct {
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// The identity of logistic channel
-	LogisticID int `json:"logistic_id,omitempty"`
+	LogisticID int64 `json:"logistic_id,omitempty"`
 	// Whether this logistic channel is enabled
 	Enabled bool `json:"enabled,omitempty"`
 	// Whether this logistic channel is preferred
@@ -49,9 +49,9 @@ type UpdateShopLogisticsResponse struct {
 
 type GetParameterForInitRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// The serial numbers of the order needs to be initiated logistic.
@@ -71,9 +71,9 @@ type GetParameterForInitResponse struct {
 
 type GetAddressRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -89,11 +89,11 @@ type GetTimeSlotRequest struct {
 	// The order serial numbers.
 	OrderSN string `json:"ordersn,omitempty"`
 	// The identify of address.
-	AddressID int `json:"address_id,omitempty"`
+	AddressID int64 `json:"address_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -109,9 +109,9 @@ type GetBranchRequest struct {
 	// The order serial numbers.
 	OrderSN string `json:"ordersn,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -127,9 +127,9 @@ type GetLogisticInfoRequest struct {
 	// The order serial numbers.
 	OrderSN string `json:"ordersn,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -155,9 +155,9 @@ type InitRequest struct {
 	// Optional parameter when GetParameterForInit returns "non-integrated" or GetLogisticsInfo returns "non-integrated" under "info_needed".
 	NonIntegrated InitRequestNonIntegrated `json:"non_integrated,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// Shopee's unique identifier for a fulfillment order.
@@ -177,9 +177,9 @@ type GetAirwayBillRequest struct {
 	// Option to get batch airway bills in single file. Default value is false.
 	IsBatch bool `json:"is_batch,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -199,9 +199,9 @@ type GetOrderLogisticsRequest struct {
 	// The order serial numbers. Make sure the order has trackingNo generated before calling this API.
 	OrderSN string `json:"ordersn,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// Shopee's unique identifier for a fulfillment order.
@@ -221,9 +221,9 @@ type GetLogisticsMessageRequest struct {
 	// The tracking number assigned by the shipping carrier for item shipment. If there are more than one tracking number in one order, this param is necessary.
 	TrackingNumber string `json:"tracking_number,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// Shopee's unique identifier for a fulfillment order.
@@ -247,9 +247,9 @@ type GetLogisticsMessageResponse struct {
 
 type GetForderWaybillRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// The set of order serial numbers. Up to 50 ordersn in one call.

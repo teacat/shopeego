@@ -32,7 +32,7 @@ type PerformanceResponsePerformance struct {
 
 type GetShopCategoriesResponseCategory struct {
 	// ShopCategory's unique identifier.
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	// ShopCategory's status. Applicable values: NORMAL, INACTIVE, DELETED.
 	Status string `json:"status,omitempty"`
 	// ShopCategory's name.
@@ -47,7 +47,7 @@ type GetShopCategoriesResponseCategory struct {
 
 type GetItemsResponseItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 }
 
 //=======================================================
@@ -63,9 +63,9 @@ type GetCategoriesResponseCategoryDaysToShipLimits struct {
 
 type GetCategoriesResponseCategory struct {
 	// The Identify of each category.
-	CategoryID int `json:"category_id,omitempty"`
+	CategoryID int64 `json:"category_id,omitempty"`
 	// The Identify of the parent of the category.
-	ParentID int `json:"parent_id,omitempty"`
+	ParentID int64 `json:"parent_id,omitempty"`
 	// The name of each category.
 	CategoryName string `json:"category_name,omitempty"`
 	// This is to indicate whether the category has children. Attributes can ONLY be fetched for the category_id WITHOUT children.
@@ -87,7 +87,7 @@ type GetAttributesResponseAttributeValue struct {
 
 type GetAttributesResponseAttribute struct {
 	// The Identify of each category.
-	AttributeID int `json:"attribute_id,omitempty"`
+	AttributeID int64 `json:"attribute_id,omitempty"`
 	// The name of each attribute.
 	AttributeName int `json:"attribute_name,omitempty"`
 	// This is to indicate whether this attribute is mandantory.
@@ -134,20 +134,20 @@ type AddRequestWholesale struct {
 
 type AddRequestAttribute struct {
 	// related to shopee.item.GetAttributes result.attributes.attribute_id
-	AttributesID int `json:"attributes_id,omitempty"`
+	AttributesID int64 `json:"attributes_id,omitempty"`
 	// related to shopee.item.GetAttributes one of result.attributes.options. Max length is 40 letters.
 	Value string `json:"value,omitempty"`
 }
 
 type AddRequestLogistic struct {
 	// related to shopee.logistics.GetLogistics result.logistics.logistic_id
-	LogisticID int `json:"logistic_id,omitempty"`
+	LogisticID int64 `json:"logistic_id,omitempty"`
 	// related to shopee.logistics.GetLogistics result.logistics.enabled only affect current item
 	Enabled bool `json:"enabled,omitempty"`
 	// Only needed when logistics fee_type = CUSTOM_PRICE.
 	ShippingFee float64 `json:"shipping_fee,omitempty,string"`
 	// If specify logistic fee_type is SIZE_SELECTION size_id is required
-	SizeID int `json:"size_id,omitempty"`
+	SizeID int64 `json:"size_id,omitempty"`
 	// when seller chooses this option, the shipping fee of this channel on item will be set to 0. Default value is False.
 	IsFree bool `json:"is_free,omitempty"`
 }
@@ -158,7 +158,7 @@ type AddRequestLogistic struct {
 
 type AddResponseItemVariation struct {
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
 	VariationSKU string `json:"variation_sku,omitempty"`
 	// Name of the variation that belongs to the same item. A seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate variation. Each variation can have a different quantity and price.
@@ -176,12 +176,12 @@ type AddResponseItemVariation struct {
 	// The original price of the variation in the listing currency.
 	OriginalPrice float64 `json:"original_price,omitempty,string"`
 	// The ID of discount activity the variation is currently in. One variation can only have one discount at a time. discount_id will be 0 if the variation has no discount applied.
-	DiscountID int `json:"discount_id,omitempty"`
+	DiscountID int64 `json:"discount_id,omitempty"`
 }
 
 type AddResponseItemAttribute struct {
 	// The Identify of each category.
-	AttributeID int `json:"attribute_id,omitempty"`
+	AttributeID int64 `json:"attribute_id,omitempty"`
 	// The name of each attribute.
 	AttributeName int `json:"attribute_name,omitempty"`
 	// This is to indicate whether this attribute is mandantory.
@@ -194,7 +194,7 @@ type AddResponseItemAttribute struct {
 
 type AddResponseItemLogistic struct {
 	// The identity of logistic channel.
-	LogisticID int `json:"logistic_id,omitempty"`
+	LogisticID int64 `json:"logistic_id,omitempty"`
 	// The name of logistic.
 	LogisticName string `json:"logistic_name,omitempty"`
 	// related to shopee.logistics.GetLogistics result.logistics.enabled only affect current item
@@ -202,7 +202,7 @@ type AddResponseItemLogistic struct {
 	// Only needed when logistics fee_type = CUSTOM_PRICE.
 	ShippingFee float64 `json:"shipping_fee,omitempty,string"`
 	// If specify logistic fee_type is SIZE_SELECTION size_id is required.
-	SizeID int `json:"size_id,omitempty"`
+	SizeID int64 `json:"size_id,omitempty"`
 	// when seller chooses this option, the shipping fee of this channel on item will be set to 0. Default value is False.
 	IsFree bool `json:"is_free,omitempty"`
 	// Estimated shipping fee calculated by weight. Don't exist if channel is no-integrated.
@@ -220,7 +220,7 @@ type AddResponseItemWholesale struct {
 
 type AddResponseItem struct {
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
 	ItemSKU string `json:"item_sku,omitempty"`
 	// Enumerated type that defines the current status of the item. Applicable values: NORMAL, DELETED, UNLIST and BANNED.
@@ -246,7 +246,7 @@ type AddResponseItem struct {
 	// the net weight of this item, the unit is KG.
 	Weight float64 `json:"weight,omitempty,string"`
 	// Could call shopee.item.GetCategories to get category detail.Related to result.categories.category_id.
-	CategoryID int `json:"category_id,omitempty"`
+	CategoryID int64 `json:"category_id,omitempty"`
 	// The original price of the item in the listing currency.
 	OriginalPrice float64 `json:"original_price,omitempty,string"`
 	// The variation list of item.
@@ -278,7 +278,7 @@ type AddResponseItem struct {
 	// This indicates whether the item is secondhand.
 	Condition string `json:"condition,omitempty"`
 	// The ID of discount activity the item is currently in. One item can only have one discount at a time. discount_id will be 0 if the item has no discount applied, or item has variation.
-	DiscountID int `json:"discount_id,omitempty"`
+	DiscountID int64 `json:"discount_id,omitempty"`
 	// Use this field to identify whether the item is pre-order. Applicable value: true/false.
 	IsPreOrder bool `json:"is_pre_order,omitempty"`
 }
@@ -289,7 +289,7 @@ type AddResponseItem struct {
 
 type UnlistItemRequestItem struct {
 	// Item's unique identifier.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// True: unlist this item; False: list this item.
 	Unlist bool `json:"unlist,omitempty"`
 }
@@ -300,14 +300,14 @@ type UnlistItemRequestItem struct {
 
 type UnlistItemResponseFailed struct {
 	// Item's unique identifier.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Error message.
 	ErrorDesciption string `json:"error_desciption,omitempty"`
 }
 
 type UnlistItemResponseSuccess struct {
 	// Item's unique identifier.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// True: item is unlisted; False: item is listed.
 	Unlist bool `json:"unlist,omitempty"`
 }
@@ -333,7 +333,7 @@ type AddVariationsRequestVariation struct {
 
 type AddVariationsResponseVariation struct {
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
 	VariationSKU string `json:"variation_sku,omitempty"`
 	// Name of the variation that belongs to the same item. A seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate variation. Each variation can have a different quantity and price.
@@ -360,14 +360,14 @@ type GetItemsListResponseItemVariation struct {
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
 	VariationSKU string `json:"variation_sku,omitempty"`
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 }
 
 type GetItemsListResponseItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// The latest update time of the item.
 	UpdateTime int `json:"update_time,omitempty"`
 	// Enumerated type that defines the current status of the item. Applicable values: NORMAL, BANNED and UNLIST.
@@ -388,7 +388,7 @@ type GetItemsListResponseItem struct {
 
 type GetItemDetailResponseItemVariation struct {
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
 	VariationSKU string `json:"variation_sku,omitempty"`
 	// Name of the variation that belongs to the same item. A seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate variation. Each variation can have a different quantity and price.
@@ -406,12 +406,12 @@ type GetItemDetailResponseItemVariation struct {
 	// The original price of the variation in the listing currency.
 	OriginalPrice float64 `json:"original_price,omitempty,string"`
 	// The ID of discount activity the variation is currently in. One variation can only have one discount at a time. discount_id will be 0 if the variation has no discount applied.
-	DiscountID int `json:"discount_id,omitempty"`
+	DiscountID int64 `json:"discount_id,omitempty"`
 }
 
 type GetItemDetailResponseItemAttribute struct {
 	// The Identify of each category
-	AttributeID int `json:"attribute_id,omitempty"`
+	AttributeID int64 `json:"attribute_id,omitempty"`
 	// The name of each attribute
 	AttributeName int `json:"attribute_name,omitempty"`
 	// This is to indicate whether this attribute is mandantory
@@ -424,7 +424,7 @@ type GetItemDetailResponseItemAttribute struct {
 
 type GetItemDetailResponseItemLogistic struct {
 	// The identity of logistic channel
-	LogisticID int `json:"logistic_id,omitempty"`
+	LogisticID int64 `json:"logistic_id,omitempty"`
 	// The name of logistic
 	LogisticName string `json:"logistic_name,omitempty"`
 	// related to shopee.logistics.GetLogistics result.logistics.enabled only affect current item
@@ -432,7 +432,7 @@ type GetItemDetailResponseItemLogistic struct {
 	// Only needed when logistics fee_type = CUSTOM_PRICE.
 	ShippingFee float64 `json:"shipping_fee,omitempty,string"`
 	// If specify logistic fee_type is SIZE_SELECTION size_id is required
-	SizeID int `json:"size_id,omitempty"`
+	SizeID int64 `json:"size_id,omitempty"`
 	// when seller chooses this option, the shipping fee of this channel on item will be set to 0. Default value is False.
 	IsFree bool `json:"is_free,omitempty"`
 	// Estimated shipping fee calculated by weight. Don't exist if channel is no-integrated.
@@ -450,9 +450,9 @@ type GetItemDetailResponseItemWholesale struct {
 
 type GetItemDetailResponseItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
 	ItemSKU string `json:"item_sku,omitempty"`
 	// Enumerated type that defines the current status of the item. Applicable values: NORMAL, DELETED, BANNED and UNLIST.
@@ -478,7 +478,7 @@ type GetItemDetailResponseItem struct {
 	// the net weight of this item, the unit is KG.
 	Weight float64 `json:"weight,omitempty,string"`
 	// Could call shopee.item.GetCategories to get category detail.Related to result.categories.category_id
-	CategoryID int `json:"category_id,omitempty"`
+	CategoryID int64 `json:"category_id,omitempty"`
 	// The original price of the item in the listing currency.
 	OriginalPrice float64 `json:"original_price,omitempty,string"`
 	// The variation list of item
@@ -512,7 +512,7 @@ type GetItemDetailResponseItem struct {
 	// This indicates whether the item is secondhand.
 	Condition string `json:"condition,omitempty"`
 	// The ID of discount activity the item is currently in. One item can only have one discount at a time. discount_id will be 0 if the item has no discount applied, or item has variation.
-	DiscountID int `json:"discount_id,omitempty"`
+	DiscountID int64 `json:"discount_id,omitempty"`
 	// Whether 2-tier variation structure is activated for this item
 	Is2TierItem bool `json:"is_2_tier_item,omitempty"`
 	// Only for TW seller. List of installments
@@ -529,7 +529,7 @@ type GetItemDetailResponseItem struct {
 
 type UpdateItemRequestVariation struct {
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Name of the variation that belongs to the same item. A seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate variation. Each variation can have a different quantity and price.
 	Name string `json:"name,omitempty"`
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
@@ -538,7 +538,7 @@ type UpdateItemRequestVariation struct {
 
 type UpdateItemRequestAttribute struct {
 	// related to shopee.item.GetAttributes result.attributes.attribute_id
-	AttributesID int `json:"attributtes_id,omitempty"`
+	AttributesID int64 `json:"attributtes_id,omitempty"`
 	// related to shopee.item.GetAttributes one of result.attributes.options
 	Value string `json:"value,omitempty"`
 }
@@ -554,13 +554,13 @@ type UpdateItemRequestWholesale struct {
 
 type UpdateItemRequestLogistic struct {
 	// related to shopee.logistics.GetLogistics result.logistics.logistic_id
-	LogisticID int `json:"logistic_id,omitempty"`
+	LogisticID int64 `json:"logistic_id,omitempty"`
 	// related to shopee.logistics.GetLogistics result.logistics.enabled only affect current item
 	Enabled bool `json:"enabled,omitempty"`
 	// Only needed when logistics fee_type = CUSTOM_PRICE.
 	ShippingFee float64 `json:"shipping_fee,omitempty,string"`
 	// If specify logistic fee_type is SIZE_SELECTION size_id is required
-	SizeID int `json:"size_id,omitempty"`
+	SizeID int64 `json:"size_id,omitempty"`
 	// when seller chooses this option, the shipping fee of this channel on item will be set to 0. Default value is False.
 	IsFree bool `json:"is_free,omitempty"`
 }
@@ -571,7 +571,7 @@ type UpdateItemRequestLogistic struct {
 
 type UpdateItemResponseItemVariation struct {
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
 	VariationSKU string `json:"variation_sku,omitempty"`
 	// Name of the variation that belongs to the same item. A seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate variation. Each variation can have a different quantity and price.
@@ -589,12 +589,12 @@ type UpdateItemResponseItemVariation struct {
 	// The original price of the variation in the listing currency.
 	OriginalPirce float64 `json:"original_pirce,omitempty,string"`
 	// The ID of discount activity the variation is currently in. One variation can only have one discount at a time. discount_id will be 0 if the variation has no discount applied.
-	DiscountID int `json:"discount_id,omitempty"`
+	DiscountID int64 `json:"discount_id,omitempty"`
 }
 
 type UpdateItemResponseItemAttribute struct {
 	// The Identify of each category
-	AttributeID int `json:"attribute_id,omitempty"`
+	AttributeID int64 `json:"attribute_id,omitempty"`
 	// The name of each attribute
 	AttributeName int `json:"attribute_name,omitempty"`
 	// This is to indicate whether this attribute is mandantory
@@ -607,7 +607,7 @@ type UpdateItemResponseItemAttribute struct {
 
 type UpdateItemResponseItemLogistic struct {
 	// The identity of logistic channel
-	LogisticID int `json:"logistic_id,omitempty"`
+	LogisticID int64 `json:"logistic_id,omitempty"`
 	// The name of logistic
 	LogisticName string `json:"logistic_name,omitempty"`
 	// related to shopee.logistics.GetLogistics result.logistics.enabled only affect current item
@@ -615,7 +615,7 @@ type UpdateItemResponseItemLogistic struct {
 	// Only needed when logistics fee_type = CUSTOM_PRICE.
 	ShippingFee float64 `json:"shipping_fee,omitempty,string"`
 	// If specify logistic fee_type is SIZE_SELECTION size_id is required
-	SizeID int `json:"size_id,omitempty"`
+	SizeID int64 `json:"size_id,omitempty"`
 	// when seller chooses this option, the shipping fee of this channel on item will be set to 0. Default value is False.
 	IsFree bool `json:"is_free,omitempty"`
 	// Estimated shipping fee calculated by weight. Don't exist if channel is no-integrated.
@@ -633,7 +633,7 @@ type UpdateItemResponseItemWholesale struct {
 
 type UpdateItemResponseItem struct {
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// An item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
 	ItemSKU string `json:"item_sku,omitempty"`
 	// Enumerated type that defines the current status of the item. Applicable values: NORMAL, DELETED and BANNED.
@@ -659,7 +659,7 @@ type UpdateItemResponseItem struct {
 	// the net weight of this item, the unit is KG.
 	Weight float64 `json:"weight,omitempty,string"`
 	// Could call shopee.item.GetCategories to get category detail.Related to result.categories.category_id
-	CategoryID int `json:"category_id,omitempty"`
+	CategoryID int64 `json:"category_id,omitempty"`
 	// The original price of the item in the listing currency.
 	OriginalPrice float64 `json:"original_price,omitempty,string"`
 	// The variation list of item
@@ -691,7 +691,7 @@ type UpdateItemResponseItem struct {
 	// This indicates whether the item is secondhand.
 	Condition string `json:"condition,omitempty"`
 	// The ID of discount activity the item is currently in. One item can only have one discount at a time. discount_id will be 0 if the item has no discount applied, or item has variation.
-	DiscountID int `json:"discount_id,omitempty"`
+	DiscountID int64 `json:"discount_id,omitempty"`
 	// Use this field to identify whether the item is pre-order. Applicable value: true/false.
 	IsPreOrder bool `json:"is_pre_order,omitempty"`
 }
@@ -702,7 +702,7 @@ type UpdateItemResponseItem struct {
 
 type UpdatePriceResponseItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The time when price of the item is updated.
 	ModifiedTime int `json:"modified_time,omitempty"`
 	// Specify the revised price of the item.
@@ -715,7 +715,7 @@ type UpdatePriceResponseItem struct {
 
 type UpdateStockResponseItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The time when price of the item is updated.
 	ModifiedTime int `json:"modified_time,omitempty"`
 	// Specify the updated stock quantity.
@@ -728,11 +728,11 @@ type UpdateStockResponseItem struct {
 
 type UpdateVariationPriceResponseItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The time when price of the item is updated.
 	ModifiedTime int `json:"modified_time,omitempty"`
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Specify the revised price of one variation of the item.
 	Price float64 `json:"price,omitempty,string"`
 }
@@ -743,13 +743,13 @@ type UpdateVariationPriceResponseItem struct {
 
 type UpdateVariationStockResponseItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The time when price of the item is updated.
 	ModifiedTime int `json:"modified_time,omitempty"`
 	// Specify the updated stock quantity.
 	Stock int `json:"stock,omitempty"`
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 }
 
 //=======================================================
@@ -758,7 +758,7 @@ type UpdateVariationStockResponseItem struct {
 
 type UpdatePriceBatchRequestItem struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// New price value for this item.
 	Price int `json:"price,omitempty"`
 }
@@ -769,7 +769,7 @@ type UpdatePriceBatchRequestItem struct {
 
 type UpdatePriceBatchResponseBatchResultFailure struct {
 	// Shopee's unique identifier for an item. Indicating items which failed to update.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Detailed information for the failed updating.
 	ErrorDescription string `json:"error_description,omitempty"`
 }
@@ -787,7 +787,7 @@ type UpdatePriceBatchResponseBatchResult struct {
 
 type UpdateStockBatchRequestItem struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// New stock value for this item.
 	Stock int `json:"stock,omitempty"`
 }
@@ -798,7 +798,7 @@ type UpdateStockBatchRequestItem struct {
 
 type UpdateStockBatchResponseBatchResultFailure struct {
 	// Shopee's unique identifier for an item. Indicating items which failed to update.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Detailed information for the failed updating.
 	ErrorDescription string `json:"error_description,omitempty"`
 }
@@ -816,11 +816,11 @@ type UpdateStockBatchResponseBatchResult struct {
 
 type UpdateVariationPriceBatchRequestVariation struct {
 	// Shopee's unique identifier for a variation of an item. Please input the variation_id of a variation to be changed. The variation_id and item_id pair must be matched in order to perform the update.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// New price value of this variation.
 	Price int `json:"price,omitempty"`
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 }
 
 //=======================================================
@@ -829,18 +829,18 @@ type UpdateVariationPriceBatchRequestVariation struct {
 
 type UpdateVariationPriceBatchResponseBatchResultFailure struct {
 	// Shopee's unique identifier for an item. Indicating items which failed to update.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Detailed information for the failed updating.
 	ErrorDescription string `json:"error_description,omitempty"`
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 }
 
 type UpdateVariationPriceBatchResponseBatchResultModification struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 }
 
 type UpdateVariationPriceBatchResponseBatchResult struct {
@@ -856,11 +856,11 @@ type UpdateVariationPriceBatchResponseBatchResult struct {
 
 type UpdateVariationStockBatchRequestVariation struct {
 	// Shopee's unique identifier for a variation of an item. Please input the variation_id of a variation to be changed. The variation_id and item_id pair must be matched in order to perform the update.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// New stock value of this variation.
 	Stock int `json:"stock,omitempty"`
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 }
 
 //=======================================================
@@ -869,18 +869,18 @@ type UpdateVariationStockBatchRequestVariation struct {
 
 type UpdateVariationStockBatchResponseBatchResultFailure struct {
 	// Shopee's unique identifier for an item. Indicating items which failed to update.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Detailed information for the failed updating.
 	ErrorDescription string `json:"error_description,omitempty"`
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 }
 
 type UpdateVariationStockBatchResponseBatchResultModification struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 }
 
 type UpdateVariationStockBatchResponseBatchResult struct {
@@ -922,7 +922,7 @@ type InitTierVariationResponseVariation struct {
 	// A list of tier variation indexes, which indicate variation's options in tier_variation['options'] list.
 	TierIndex []int `json:"tier_index,omitempty"`
 	// The identity of the variation.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 }
 
 //=======================================================
@@ -948,7 +948,7 @@ type AddTierVariationResponseVariation struct {
 	// A list of tier variation indexes, which indicate variation's options in tier_variation['options'] list.
 	TierIndex []int `json:"tier_index,omitempty"`
 	// The identity of the variation.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 }
 
 //=======================================================
@@ -1003,7 +1003,7 @@ type BoostItemResponseBatchResultFailure struct {
 	// to indicate error type.
 	ErrorCode string `json:"error_code,omitempty"`
 	// Failed item id.
-	ID int `json:"id,omitempty"`
+	ID int64 `json:"id,omitempty"`
 	// error description
 	Description string `json:"description,omitempty"`
 }
@@ -1021,7 +1021,7 @@ type BoostItemResponseBatchResult struct {
 
 type GetBoostedItemResponseItem struct {
 	// boosted items' id.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Cooldown_second time is four hours after boost. After four hours you can boost this item again.
 	CooldownSecond int `json:"cooldown_second,omitempty"`
 }
@@ -1034,9 +1034,9 @@ type GetPromotionInfoResponseItemPromotion struct {
 	//
 	PromotionType string `json:"promotion_type,omitempty"`
 	// The ID of promotion.
-	PromotionID int `json:"promotion_id,omitempty"`
+	PromotionID int64 `json:"promotion_id,omitempty"`
 	// ID of the variation that belongs to the same item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Start timestamp of promotion.
 	StartTime int `json:"start_time,omitempty"`
 	// End timestamp of promotion.
@@ -1053,14 +1053,14 @@ type GetPromotionInfoResponseItemPromotion struct {
 
 type GetPromotionInfoResponseItemError struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Error Message.
 	ErrorMsg string `json:"error_msg,omitempty"`
 }
 
 type GetPromotionInfoResponseItem struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Promotion information list.
 	Promotions []GetPromotionInfoResponseItemPromotion `json:"promotions,omitempty"`
 	// The list of error items.
@@ -1084,14 +1084,14 @@ type UploadImgResponseImage struct {
 
 type AddDiscountRequestItemVariation struct {
 	// Shopee's unique identifier for a variation of an item. If there is no variation of this item, you don't need to input this param. Dafault is 0.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// The discount price of the item.
 	VariationPromotionPrice float64 `json:"variation_promotion_price,omitempty,string"`
 }
 
 type AddDiscountRequestItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	//
 	Variations []AddDiscountRequestItemVariation `json:"variations,omitempty"`
 	// The discount price of the item. If the item has no variation, this param is necessary.
@@ -1106,14 +1106,14 @@ type AddDiscountRequestItem struct {
 
 type AddDiscountItemRequestItemVariation struct {
 	// Shopee's unique identifier for a variation of an item. If there is no variation of this item, you don't need to input this param. Dafault is 0.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// The discount price of the item.
 	VariationPromotionPrice float64 `json:"variation_promotion_price,omitempty,string"`
 }
 
 type AddDiscountItemRequestItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	//
 	Variations []AddDiscountItemRequestItemVariation `json:"variations,omitempty"`
 	// The discount price of the item. If the item has no variation, this param is necessary.
@@ -1128,7 +1128,7 @@ type AddDiscountItemRequestItem struct {
 
 type GetDiscountDetailResponseItemVariation struct {
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Name of the variation that belongs to the same item.
 	VariationName string `json:"variation_name,omitempty"`
 	// The original price before discount of the variation.
@@ -1141,7 +1141,7 @@ type GetDiscountDetailResponseItemVariation struct {
 
 type GetDiscountDetailResponseItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Name of the item in local language.
 	ItemName string `json:"item_name,omitempty"`
 	// The max number of this product in the promotion price.
@@ -1162,7 +1162,7 @@ type GetDiscountDetailResponseItem struct {
 
 type GetDiscountsListResponseDiscount struct {
 	// Shopee's unique identifier for a discount activity.
-	DiscountID int `json:"discount_id,omitempty"`
+	DiscountID int64 `json:"discount_id,omitempty"`
 	// Title of the discount.
 	DiscountName string `json:"discount_name,omitempty"`
 	// The time when discount activity start.
@@ -1179,14 +1179,14 @@ type GetDiscountsListResponseDiscount struct {
 
 type UpdateDiscountItemsRequestItemVariation struct {
 	// Shopee's unique identifier for a variation of an item. If there is no variation of this item, you don't need to input this param. Dafault is 0.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// The discount price of the item.
 	VariationPromotionPrice float64 `json:"variation_promotion_price,omitempty,string"`
 }
 
 type UpdateDiscountItemsRequestItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The max number of this product in the promotion price.
 	PurchaseLimit int `json:"purchase_limit,omitempty"`
 	// The discount price of the item.
@@ -1248,13 +1248,13 @@ type GetOrderDetailsResponseOrderAddress struct {
 
 type GetOrderDetailsResponseOrderItem struct {
 	// ID of item
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Name of item
 	ItemName string `json:"item_name,omitempty"`
 	// A item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
 	ItemSKU string `json:"item_sku,omitempty"`
 	// ID of the variation that belongs to the same item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Name of the variation that belongs to the same item.
 	// A seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate variation. Each variation can have a different quantity and price.
 	VariationName string `json:"variation_name,omitempty"`
@@ -1276,11 +1276,11 @@ type GetOrderDetailsResponseOrderItem struct {
 	// To indicate if this item is main item or sub item. True means main item, false means sub item.
 	IsMainItem bool `json:"is_main_item,omitempty"`
 	// The unique identity of an addon deal.
-	AddOnDealID int `json:"add_on_deal_id,omitempty"`
+	AddOnDealID int64 `json:"add_on_deal_id,omitempty"`
 	// The type of the promotion,
 	PromotionType string `json:"promotion_type,omitempty"`
 	// The ID of the promotion.
-	PromotionID int `json:"promotion_id,omitempty"`
+	PromotionID int64 `json:"promotion_id,omitempty"`
 }
 
 type GetOrderDetailsResponseOrder struct {
@@ -1409,9 +1409,9 @@ type GetEscrowDetailsResponseOrderBankAccount struct {
 
 type GetEscrowDetailsResponseOrderActivityItem struct {
 	// ID of item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// ID of the variation that belongs to the same item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// The number of identical items purchased at the same time by the same buyer from one listing/item.
 	QuantityPurchased int `json:"quantity_purchased,omitempty"`
 	// The price used to participate activity. E.g. itemA original price is $10, promo price is $9, and bundle deal is buy 2 get 20% off equals to $14.4. The original_price value will be $9 in this case.
@@ -1420,7 +1420,7 @@ type GetEscrowDetailsResponseOrderActivityItem struct {
 
 type GetEscrowDetailsResponseOrderActivity struct {
 	// ID of activity.
-	ActivityID int `json:"activity_id,omitempty"`
+	ActivityID int64 `json:"activity_id,omitempty"`
 	// Type of activity. Currently only one type: bundle_deal
 	ActivityType string `json:"activity_type,omitempty"`
 	// The original TOTAL price of ALL items in one activity(e.g. bundle deal. Define by activity_id) in the listing currency.
@@ -1433,13 +1433,13 @@ type GetEscrowDetailsResponseOrderActivity struct {
 
 type GetEscrowDetailsResponseOrderItem struct {
 	// ID of item
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Name of item
 	ItemName string `json:"item_name,omitempty"`
 	// A item SKU (stock keeping unit) is an identifier defined by a seller, sometimes called parent SKU. Item SKU can be assigned to an item in Shopee Listings.
 	ItemSKU string `json:"item_sku,omitempty"`
 	// ID of the variation that belongs to the same item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Name of the variation that belongs to the same item. A seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color and size combination is a separate variation. Each variation can have a different quantity and price.
 	VariationName string `json:"variation_name,omitempty"`
 	// A variation SKU (stock keeping unit) is an identifier defined by a seller. It is only intended for the seller's use. Many sellers assign a SKU to an item of a specific type, size, and color, which are variations of one item in Shopee Listings.
@@ -1474,7 +1474,7 @@ type GetEscrowDetailsResponseOrderItem struct {
 	// To indicate if this item is main item or sub item. True means main item, false means sub item.
 	IsMainItem bool `json:"is_main_item,omitempty"`
 	// The unique identity of an addon deal.
-	AddOnDealID int `json:"add_on_deal_id,omitempty"`
+	AddOnDealID int64 `json:"add_on_deal_id,omitempty"`
 }
 
 type GetEscrowDetailsResponseOrder struct {
@@ -1493,7 +1493,7 @@ type GetEscrowDetailsResponseOrder struct {
 	// The payment channel that the seller selected to receive escrow for the order.
 	EscrowChannel string `json:"escrow_channel,omitempty"`
 	// The unique identifier for a payee by the 3rd party payment service provider selected in escrow_channel.
-	PayeeID int `json:"payee_id,omitempty"`
+	PayeeID int64 `json:"payee_id,omitempty"`
 	// This object contains detailed breakdown for bank account of the seller if selected escorw_channel is Bank Transfer.
 	BankAccount GetEscrowDetailsResponseOrderBankAccount `json:"bank_account,omitempty"`
 	// This object contains the detailed breakdown for all the items in this order, including regular items(non-activity) and activity items.
@@ -1515,9 +1515,9 @@ type GetForderInfoResponseForderLog struct {
 
 type GetForderInfoResponseForderItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// The number of identical items/variations purchased at the same time by the same buyer from one listing/item.
 	Num int `json:"num,omitempty"`
 	// The original price of the item in the listing currency.
@@ -1571,7 +1571,7 @@ type GetEscrowReleasedOrdersResponseOrder struct {
 
 type SplitOrderRequestParcel struct {
 	// Itemids that will be put into a fullfillment order.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 }
 
 //=======================================================
@@ -1580,7 +1580,7 @@ type SplitOrderRequestParcel struct {
 
 type SplitOrderResponseForderItem struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 }
 
 type SplitOrderResponseForder struct {
@@ -1609,7 +1609,7 @@ type GetUnbindOrderListResponseOrder struct {
 
 type GetLogisticsResponseLogisticSize struct {
 	// The identity of size.
-	SizeID int `json:"size_id,omitempty"`
+	SizeID int64 `json:"size_id,omitempty"`
 	// The name of size.
 	Name int `json:"name,omitempty"`
 	// The pre-defined shipping fee for the specific size.
@@ -1636,7 +1636,7 @@ type GetLogisticsResponseLogisticDimension struct {
 
 type GetLogisticsResponseLogistic struct {
 	// The identity of logistic channel
-	LogisticID int `json:"logistic_id,omitempty"`
+	LogisticID int64 `json:"logistic_id,omitempty"`
 	// The name of logistic channel
 	LogisticName string `json:"logistic_name,omitempty"`
 	// This is to indicate whether this logistic channel supports COD
@@ -1659,7 +1659,7 @@ type GetLogisticsResponseLogistic struct {
 
 type GetAddressResponseAddress struct {
 	// The identity of address
-	AddressID int `json:"address_id,omitempty"`
+	AddressID int64 `json:"address_id,omitempty"`
 	// The country of specify address
 	Country string `json:"country,omitempty"`
 	// The state of specify address
@@ -1695,7 +1695,7 @@ type GetTimeSlotResponseTime struct {
 
 type GetBranchResponseBranch struct {
 	// The identity of branch.
-	BranchID int `json:"branch_id,omitempty"`
+	BranchID int64 `json:"branch_id,omitempty"`
 	// The country of specify branch.
 	Country string `json:"country,omitempty"`
 	// The state of specify branch.
@@ -1718,7 +1718,7 @@ type GetBranchResponseBranch struct {
 
 type GetLogisticInfoResponsePickupAddress struct {
 	// The identity of address.
-	AddressID int `json:"address_id,omitempty"`
+	AddressID int64 `json:"address_id,omitempty"`
 	// The country of specify branch.
 	Country string `json:"country,omitempty"`
 	// The state of specify branch.
@@ -1745,7 +1745,7 @@ type GetLogisticInfoResponsePickupAddress struct {
 
 type GetLogisticInfoResponseDropoffBranch struct {
 	// The identity of branch.
-	BranchID int `json:"branch_id,omitempty"`
+	BranchID int64 `json:"branch_id,omitempty"`
 	// The country of specify branch.
 	Country string `json:"country,omitempty"`
 	// The state of specify branch.
@@ -1787,14 +1787,14 @@ type GetLogisticInfoResponseInfo struct {
 
 type InitRequestPickup struct {
 	// The identity of address. Retrieved from shopee.logistics.GetAddress.
-	AddressID int `json:"address_id,omitempty"`
+	AddressID int64 `json:"address_id,omitempty"`
 	// The pickup time id. Retrieved from shopee.logistics.GetTimeSlot.
 	PickupItemID string `json:"pickup_item_id,omitempty"`
 }
 
 type InitRequestDropoff struct {
 	// The identity of branch. Retrieved from shopee.logistics.GetBranch branch.
-	BranchID int `json:"branch_id,omitempty"`
+	BranchID int64 `json:"branch_id,omitempty"`
 	// The real name of sender.
 	SenderRealName string `json:"sender_real_name,omitempty"`
 	// Need input this field when "tracking_no" is returned from "info_need". Please note that this tracking number is assigned by third-party shipping carrier for item shipment.
@@ -1871,7 +1871,7 @@ type GetOrderLogisticsResponseLogistic struct {
 	// The logistics service provider that the buyer selected for the order to deliver items.
 	ShippingCarrier string `json:"shipping_carrier,omitempty"`
 	// The identity of logistic channel.
-	LogisticID int `json:"logistic_id,omitempty"`
+	LogisticID int64 `json:"logistic_id,omitempty"`
 	// Only work for cross-border order. This code is required at some sorting hub. Please ensure the service_code is INCLUDED on your shipping label, otherwise the parcel cannot be processed by the warehouse. If you didn't retrieve service_code after you first called this API, please try few more times within 30 minutes.
 	ServiceCode string `json:"service_code,omitempty"`
 	// Only work for cross-border order.The name of the carrier ships cross countries.
@@ -1889,7 +1889,7 @@ type GetOrderLogisticsResponseLogistic struct {
 	// Only work for cross-border order in some special shop. The address info of the warehouse.
 	WarehouseAddress string `json:"warehouse_address,omitempty"`
 	// Only work for cross-border order in some special shop. The ID of the warehouse.
-	WarehouseID int `json:"warehouse_id,omitempty"`
+	WarehouseID int64 `json:"warehouse_id,omitempty"`
 	// This object contains detailed breakdown for the recipient address.
 	RecipientAddress GetOrderLogisticsResponseLogisticRecipientAddress `json:"recipient_address,omitempty"`
 	// This value indicates whether the order was a COD (cash on delivery) order.
@@ -1977,9 +1977,9 @@ type GetReturnListResponseReturnUser struct {
 
 type GetReturnListResponseReturnItem struct {
 	// Item id.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Name of item in local language.
 	Name string `json:"name,omitempty"`
 	// Image URLs of item.
@@ -1993,7 +1993,7 @@ type GetReturnListResponseReturnItem struct {
 	// To indicate if this item is main item or sub item. True means main item, false means sub item.
 	IsMainItem bool `json:"is_main_item,omitempty"`
 	// The unique identity of an addon deal.
-	AddOnDealID int `json:"add_on_deal_id,omitempty"`
+	AddOnDealID int64 `json:"add_on_deal_id,omitempty"`
 }
 
 type GetReturnListResponseReturn struct {
@@ -2050,7 +2050,7 @@ type GetReturnDetailResponseUser struct {
 
 type GetReturnDetailResponseItem struct {
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Name of item in local language.
 	Name string `json:"name,omitempty"`
 	// Image URLs of item.
@@ -2064,7 +2064,7 @@ type GetReturnDetailResponseItem struct {
 	// To indicate if this item is main item or sub item. True means main item, false means sub item.
 	IsMainItem bool `json:"is_main_item,omitempty"`
 	// The unique identity of an addon deal.
-	AddOnDealID int `json:"add_on_deal_id,omitempty"`
+	AddOnDealID int64 `json:"add_on_deal_id,omitempty"`
 }
 
 //=======================================================
@@ -2075,14 +2075,14 @@ type GetShopsByPartnerResponseShopSIP struct {
 	// Affiliate Shop's area
 	Country string `json:"country,omitempty"`
 	// Affiliate shop's id
-	AShopID int `json:"a_shopid,omitempty"`
+	AShopID int64 `json:"a_shopid,omitempty"`
 }
 
 type GetShopsByPartnerResponseShop struct {
 	// The two-digit code representing the country where the order was made.
 	Country string `json:"country,omitempty"`
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// The timestamp when the shop was authorized to the partner.
 	AuthTime int `json:"auth_time,omitempty"`
 	// SIP affiliate shops info list
@@ -2097,11 +2097,11 @@ type GetShopsByPartnerResponseShop struct {
 
 type GetCategoriesByCountryResponseCategory struct {
 	// The Identify of the parent of the category
-	ParentID int `json:"parent_id,omitempty"`
+	ParentID int64 `json:"parent_id,omitempty"`
 	// This is to indicate whether the category has children.
 	HasChildren bool `json:"has_children,omitempty"`
 	// The Identify of each category
-	CategoryID int `json:"category_id,omitempty"`
+	CategoryID int64 `json:"category_id,omitempty"`
 	// The name of each category
 	CategoryName string `json:"category_name,omitempty"`
 	// To indicate if this category supports size chart
@@ -2125,7 +2125,7 @@ type GetPaymentListResponseMethod struct {
 
 type GetTopPicksListResponseCollectionItem struct {
 	// Item ID
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Item name
 	ItemName string `json:"item_name,omitempty"`
 	// Item discounted price(original price if no discount). Item level price will return if it has variation.
@@ -2138,7 +2138,7 @@ type GetTopPicksListResponseCollection struct {
 	// Collection name
 	Name string `json:"name,omitempty"`
 	// Collection ID
-	TopPicksID int `json:"top_picks_id,omitempty"`
+	TopPicksID int64 `json:"top_picks_id,omitempty"`
 	// True or False
 	IsActivated bool `json:"is_activated,omitempty"`
 	// Item list of the collection
@@ -2151,7 +2151,7 @@ type GetTopPicksListResponseCollection struct {
 
 type AddTopPicksResponseItem struct {
 	// Item ID
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Item name
 	ItemName string `json:"item_name,omitempty"`
 	// Item discounted price(original price if no discount). Item level price will return if it has variation.
@@ -2166,7 +2166,7 @@ type AddTopPicksResponseItem struct {
 
 type UpdateTopPicksResponseItem struct {
 	// Item ID
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Item name
 	ItemName string `json:"item_name,omitempty"`
 	// Item discounted price(original price if no discount). Item level price will return if it has variation.
@@ -2286,7 +2286,7 @@ type GetFMTrackingNoWaybillResponseBatchResult struct {
 
 type GetShopFirstMileChannelResponseLogistic struct {
 	// The identity of logistic channel.
-	LogisticID int `json:"logistic_id,omitempty"`
+	LogisticID int64 `json:"logistic_id,omitempty"`
 	// The name of logistic.
 	LogisticName string `json:"logistic_name,omitempty"`
 	// The shipment method for bound orders, should be pickup or dropoff.

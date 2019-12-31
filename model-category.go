@@ -6,16 +6,16 @@ type AddShopCategoryRequest struct {
 	// ShopCategory's sort weight.
 	SortWeight int `json:"sort_weight,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type AddShopCategoryResponse struct {
 	// ShopCategory's unique identifier.
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	// The identifier for an API request for error tracking.
 	RequestID string `json:"request_id,omitempty"`
 }
@@ -26,9 +26,9 @@ type GetShopCategoriesRequest struct {
 	// If many items are available to retrieve, you may need to call GetItemsList multiple times to retrieve all the data. Each result set is returned as a page of entries. Use the Pagination filters to control the maximum number of entries (<= 100) to retrieve per page (i.e., per call), the offset number to start next call. This integer value is usUed to specify the maximum number of entries to return in a single ""page"" of data.
 	PaginationEntriesPerPage int `json:"pagination_entries_per_page,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -44,18 +44,18 @@ type GetShopCategoriesResponse struct {
 
 type DeleteShopCategoryRequest struct {
 	// ShopCategory's unique identifier.
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type DeleteShopCategoryResponse struct {
 	// ShopCategory's unique identifier.
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	//
 	Msg string `json:"msg,omitempty"`
 	// The identifier for an API request for error tracking
@@ -64,7 +64,7 @@ type DeleteShopCategoryResponse struct {
 
 type UpdateShopCategoryRequest struct {
 	// ShopCategory's unique identifier.
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	// ShopCategory's name.
 	Name string `json:"name,omitempty"`
 	// ShopCategory's sort weight.
@@ -72,16 +72,16 @@ type UpdateShopCategoryRequest struct {
 	// ShopCategory's status. Applicable values: NORMAL, INACTIVE, DELETED.
 	Status string `json:"status,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type UpdateShopCategoryResponse struct {
 	// ShopCategory's unique identifier.
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	// ShopCategory's name.
 	Name string `json:"name,omitempty"`
 	// ShopCategory's sort weight.
@@ -94,13 +94,13 @@ type UpdateShopCategoryResponse struct {
 
 type AddItemsRequest struct {
 	// ShopCategory's unique identifier.
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	// Shopee's unique identifiers list for an item.
 	Items []int `json:"items,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -109,7 +109,7 @@ type AddItemsResponse struct {
 	// List of invalid item ids.
 	InvalidItemID []int `json:"invalid_item_id,omitempty"`
 	// ShopCategory's unique identifier.
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	// Number of items in the shop category.
 	Count int `json:"count,omitempty"`
 	// The identifier for an API request for error tracking.
@@ -118,11 +118,11 @@ type AddItemsResponse struct {
 
 type GetItemsRequest struct {
 	// ShopCategory's unique identifier.
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -136,20 +136,20 @@ type GetItemsResponse struct {
 
 type DeleteItemsRequest struct {
 	// The id of the shop category
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	// The list of items need to be deleted
 	Items []int `json:"items,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type DeleteItemsResponse struct {
 	// The id of the shop category
-	ShopCategoryID int `json:"shop_category_id,omitempty"`
+	ShopCategoryID int64 `json:"shop_category_id,omitempty"`
 	// The list of item ids which are invalid
 	InvalidItemID []int `json:"invalid_item_id,omitempty"`
 	// count of items under this shop category after deletion

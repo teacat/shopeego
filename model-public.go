@@ -2,7 +2,7 @@ package shopeego
 
 type GetShopsByPartnerRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -16,7 +16,7 @@ type GetShopsByPartnerResponse struct {
 
 type GetCategoriesByCountryRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// Two-digit country code(capital letter).
@@ -36,7 +36,7 @@ type GetCategoriesByCountryResponse struct {
 
 type GetPaymentListRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// ID/MY/SG/VN/PH/TH/TW

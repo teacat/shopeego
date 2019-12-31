@@ -36,9 +36,9 @@ var (
 type ClientOptions struct {
 	Secret string
 	// 非必要
-	//PartnerID int
+	//PartnerID int64
 	// 非必要
-	//ShopID int
+	//ShopID int64
 	//
 	IsSandbox bool
 }
@@ -973,7 +973,6 @@ func (s *ShopeeClient) GetOrderDetails(req *GetOrderDetailsRequest) (resp *GetOr
 		return
 	}
 	err = json.Unmarshal(b, &resp)
-	//panic(b)
 	if err != nil {
 		return
 	}

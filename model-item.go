@@ -2,9 +2,9 @@ package shopeego
 
 type GetCategoriesRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// Indicate the translation language. Language values include: en(English), vi(Vietnamese), id(Indonesian), th(Thai), zh-Hant(Traditional Chinese), zh-Hans(Simplified Chinese), ms-my(Malaysian Malay). If the selected language is not supported in certain shop location, the response will be in default language.
@@ -20,11 +20,11 @@ type GetCategoriesResponse struct {
 
 type GetAttributesRequest struct {
 	// The Identify of category. Should call shopee.item.GetCategories to get category_id first. Attributes can ONLY be fetched for the category_id WITHOUT children.
-	CategoryID int `json:"category_id,omitempty"`
+	CategoryID int64 `json:"category_id,omitempty"`
 	// Indicate the translation language. Language values include: en(English), vi(Vietnamese), id(Indonesian), th(Thai), zh-Hant(Traditional Chinese), zh-Hans(Simplified Chinese), ms-my(Malaysian Malay). If the selected language is not supported in certain shop location, the response will be in default language.
 	Language string `json:"language,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// Two-characters country code(capital letter) for the attributes. Should be provided if no "shopid".
@@ -32,7 +32,7 @@ type GetAttributesRequest struct {
 	// Is cross-border or not. Should be provided if no "shopid".
 	IsCB bool `json:"is_cb,omitempty"`
 	// Shopee's unique identifier for a shop. Should be provided if no "country" and "is_cb".
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 }
 
 type GetAttributesResponse struct {
@@ -44,7 +44,7 @@ type GetAttributesResponse struct {
 
 type AddRequest struct {
 	// Should call shopee.item.GetCategories to get category first.Related to result.categories.category_id
-	CategoryID int `json:"category_id,omitempty"`
+	CategoryID int64 `json:"category_id,omitempty"`
 	// Name of the item in local language.
 	Name string `json:"name,omitempty"`
 	// Description of the item in local language. HTML is not supported.
@@ -76,9 +76,9 @@ type AddRequest struct {
 	// The wholesales tier list. Please put the wholesale tier info in order by min count.
 	Wholesales []AddRequestWholesale `json:"wholesales,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// Url of size chart image. Only particular categories support it. max size: 500KB. 2000*2000 pixels
@@ -93,7 +93,7 @@ type AddRequest struct {
 
 type AddResponse struct {
 	//
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Item's info.
 	Item AddResponseItem `json:"item,omitempty"`
 	//
@@ -108,18 +108,18 @@ type AddResponse struct {
 
 type DeleteRequest struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type DeleteResponse struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	//
 	Msg string `json:"msg,omitempty"`
 	// The identifier for an API request for error tracking
@@ -128,9 +128,9 @@ type DeleteResponse struct {
 
 type UnlistItemRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// List of item_ids and expected status. Up to 50 items for one call.
@@ -148,20 +148,20 @@ type UnlistItemResponse struct {
 
 type AddVariationsRequest struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The variation of item is to list out all models of this product. For example, iPhone has model of White and Black, then its variations includes "White iPhone" and "Black iPhone".
 	Variations []AddVariationsRequestVariation `json:"variations,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type AddVariationsResponse struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The time when stock of the variation is updated.
 	ModifiedTime int `json:"modified_time,omitempty"`
 	// The variation list of item.
@@ -172,22 +172,22 @@ type AddVariationsResponse struct {
 
 type DeleteVariationRequest struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Shopee's unique identifier for a variation of an item. Please input the variation_id of a variation to be changed. The variation_id and item_id pair must be matched in order to perform the update.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type DeleteVariationResponse struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Shopee's unique identifier for a variation of an item.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// The time when stock of the variation is updated.
 	ModifiedTime int `json:"modified_time,omitempty"`
 	// The identifier for an API request for error tracking
@@ -204,9 +204,9 @@ type GetItemsListRequest struct {
 	// The update_time_from and update_time_to fields specify a date range for retrieving orders (based on the item update time). The update_time_to field is the ending date range. The maximum date range that may be specified with the update_time_from and update_time_to fields is 15 days.
 	UpdateTimeTo int `json:"update_time_to,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -222,11 +222,11 @@ type GetItemsListResponse struct {
 
 type GetItemDetailRequest struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -242,9 +242,9 @@ type GetItemDetailResponse struct {
 
 type UpdateItemRequest struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Should call shopee.item.GetItemDetail to get category first.Related to result.categories.category_id
-	CategoryID int `json:"category_id,omitempty"`
+	CategoryID int64 `json:"category_id,omitempty"`
 	// Name of the item in local language.
 	Name string `json:"name,omitempty"`
 	// Description of the item in local language. HTML is not supported.
@@ -276,16 +276,16 @@ type UpdateItemRequest struct {
 	// Use this field to identify whether the item is pre-order. Applicable value: true/false.
 	IsPreOrder bool `json:"is_pre_order,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type UpdateItemResponse struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	//
 	Item UpdateItemResponseItem `json:"item,omitempty"`
 	//
@@ -296,20 +296,20 @@ type UpdateItemResponse struct {
 
 type AddItemImgRequest struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Image URLs of the item. It contains at most 9 URLs. Could get the url by api GetItemDetail
 	Images []string `json:"images,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type AddItemImgResponse struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Image URLs for fail download.
 	FailImage []string `json:"fail_image,omitempty"`
 	// Image URLs of item.
@@ -320,13 +320,13 @@ type AddItemImgResponse struct {
 
 type UpdateItemImgRequest struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Image URLs of the item. Up to 9 images(12 images for TW mall seller), max 2.0 MB each.Image format accepted: JPG, JPEG, PNG.Suggested dimension: 1024 x 1024 px. Max size: 2MB
 	Images []string `json:"images,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -335,31 +335,31 @@ type UpdateItemImgResponse struct {
 	// Image URLs of the item. Up to 9 images, max 2.0 MB each.Image format accepted: JPG, JPEG, PNG.Suggested dimension: 1024 x 1024 px. Max size: 2MB
 	Images []string `json:"images,omitempty"`
 	// Shopee's unique identifier for a shop.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type InsertItemImgRequest struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Image URL of the item.
 	ImageURL string `json:"image_url,omitempty"`
 	// The position that insert the image. It starts with 1 and the max number is 9. If the position is bigger than existing position, the image would be placed on the last position.
 	ImagePosition int `json:"image_position,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type InsertItemImgResponse struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The time when stock of the variation is updated.
 	ModifiedTime int `json:"modified_time,omitempty"`
 	// Image URLs of item.
@@ -370,15 +370,15 @@ type InsertItemImgResponse struct {
 
 type DeleteItemImgRequest struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Image URLs of the item. It contains at most 9 URLs.Could get the url by api GetItemDetail
 	Images []string `json:"images,omitempty"`
 	// Image positions of the item. Positions start with 1 and the max number is 9. If the position can not match the old image position, this position would be ignored It contains at most 9 positions. Param position and param images can not been empty at the same time.If there are images and positions at the same time, positions is ignored.
 	Positions []int `json:"positions,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -390,13 +390,13 @@ type DeleteItemImgResponse struct {
 
 type UpdatePriceRequest struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Specify the revised price of the item. This value will be ignored if there is variation level price input.
 	Price float64 `json:"price,omitempty,string"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -410,13 +410,13 @@ type UpdatePriceResponse struct {
 
 type UpdateStockRequest struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Specify the updated stock quantity. This value will be ignored if there is variation level stock input.
 	Stock int `json:"stock,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -430,15 +430,15 @@ type UpdateStockResponse struct {
 
 type UpdateVariationPriceRequest struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Specify the revised price of one variation of the item.
 	Price float64 `json:"price,omitempty,string"`
 	// Shopee's unique identifier for a variation of an item. Please input the variation_id of a variation to be changed. The variation_id and item_id pair must be matched in order to perform the update.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -452,15 +452,15 @@ type UpdateVariationPriceResponse struct {
 
 type UpdateVariationStockRequest struct {
 	// Shopee's unique identifier for an item. Please input the item_id of an item to be changed.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Specify the updated stock quantity.
 	Stock int `json:"stock,omitempty"`
 	// Shopee's unique identifier for a variation of an item. Please input the variation_id of a variation to be changed. The variation_id and item_id pair must be matched in order to perform the update.
-	VariationID int `json:"variation_id,omitempty"`
+	VariationID int64 `json:"variation_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -474,9 +474,9 @@ type UpdateVariationStockResponse struct {
 
 type UpdatePriceBatchRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// List of items to update price. Up to 50 items in one call.
@@ -492,9 +492,9 @@ type UpdatePriceBatchResponse struct {
 
 type UpdateStockBatchRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// List of items to update stock. Up to 50 items in one call.
@@ -510,9 +510,9 @@ type UpdateStockBatchResponse struct {
 
 type UpdateVariationPriceBatchRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// List of variations to update price. Up to 50 variations in one call.
@@ -528,9 +528,9 @@ type UpdateVariationPriceBatchResponse struct {
 
 type UpdateVariationStockBatchRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// List of variations to update price. Up to 50 variations in one call.
@@ -546,22 +546,22 @@ type UpdateVariationStockBatchResponse struct {
 
 type InitTierVariationRequest struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Tier_variation list. Up to 2 tiers.
 	TierVariation []InitTierVariationRequestTierVariation `json:"tier_variation,omitempty"`
 	// 2-Tier variation list.
 	Variation []InitTierVariationRequestVariation `json:"variation,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type InitTierVariationResponse struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
 	// Current variation ids under this item
@@ -570,20 +570,20 @@ type InitTierVariationResponse struct {
 
 type AddTierVariationRequest struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// 2-Tier variation list.
 	Variation []AddTierVariationRequestVariation `json:"variation,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type AddTierVariationResponse struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
 	// Current variations information under this item.
@@ -592,18 +592,18 @@ type AddTierVariationResponse struct {
 
 type GetVariationRequest struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type GetVariationResponse struct {
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Tier_variation list.
 	TierVariation []GetVariationResponseTierVariation `json:"tier_variation,omitempty"`
 	// Item's variation list.
@@ -614,40 +614,40 @@ type GetVariationResponse struct {
 
 type UpdateTierVariationListRequest struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// Tier_variation list. Length must be 1 or 2.
 	TierVariation []UpdateTierVariationListRequestTierVariation `json:"tier_variation,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type UpdateTierVariationListResponse struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
 }
 
 type UpdateTierVariationIndexRequest struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// 2-Tier variation list.
 	Variation []UpdateTierVariationIndexRequestVariation `json:"variation,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type UpdateTierVariationIndexResponse struct {
 	// The identity of product item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
 }
@@ -656,9 +656,9 @@ type BoostItemRequest struct {
 	// A list of item ids to be boosted. You can input a maximum of 5 items per request.
 	ItemID []int `json:"item_id,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -672,9 +672,9 @@ type BoostItemResponse struct {
 
 type GetBoostedItemRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -688,13 +688,13 @@ type GetBoostedItemResponse struct {
 
 type SetItemInstallmentTenuresRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// List of installments, applicable values: 3, 6, 12, 24. If the list is empty, it means you wanna close the installment.
 	Tenures []int `json:"tenures,omitempty"`
 }
@@ -703,16 +703,16 @@ type SetItemInstallmentTenuresResponse struct {
 	// List of installments
 	Tenures []int `json:"tenures,omitempty"`
 	// Shopee's unique identifier for an item.
-	ItemID int `json:"item_id,omitempty"`
+	ItemID int64 `json:"item_id,omitempty"`
 	// The identifier of the API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
 }
 
 type GetPromotionInfoRequest struct {
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
@@ -728,9 +728,9 @@ type GetRecommendCatsRequest struct {
 	// The title of a particular item, used to get recommended category ids.
 	Name string `json:"name,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
-	PartnerID int `json:"partner_id,omitempty"`
+	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
-	ShopID int `json:"shopid,omitempty"`
+	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 }
