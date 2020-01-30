@@ -52,6 +52,7 @@ var replaces []string = []string{
 	"item_price",
 	"variation_price",
 	"payout_amount",
+	"deal_price",
 	"item_max_weight",
 	"item_min_weight",
 }
