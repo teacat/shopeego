@@ -1493,7 +1493,7 @@ type GetEscrowDetailsResponseOrder struct {
 	// The payment channel that the seller selected to receive escrow for the order.
 	EscrowChannel string `json:"escrow_channel,omitempty"`
 	// The unique identifier for a payee by the 3rd party payment service provider selected in escrow_channel.
-	PayeeID int64 `json:"payee_id,omitempty"`
+	PayeeID string `json:"payee_id,omitempty"`
 	// This object contains detailed breakdown for bank account of the seller if selected escorw_channel is Bank Transfer.
 	BankAccount GetEscrowDetailsResponseOrderBankAccount `json:"bank_account,omitempty"`
 	// This object contains the detailed breakdown for all the items in this order, including regular items(non-activity) and activity items.
