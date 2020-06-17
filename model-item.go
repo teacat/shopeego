@@ -218,6 +218,8 @@ type GetItemsListResponse struct {
 	More bool `json:"more,omitempty"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
+	// The total count of items.
+	Total int64 `json:"total,omitempty"`
 }
 
 type GetItemDetailRequest struct {
@@ -711,6 +713,8 @@ type SetItemInstallmentTenuresResponse struct {
 type GetPromotionInfoRequest struct {
 	// Shopee's unique identifier for a shop. Required for all requests.
 	ShopID int64 `json:"shopid,omitempty"`
+	// The list of item_id. Up to 50 item_ids in one call.
+	ItemIDList []int64 `json:"item_id_list,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
@@ -740,4 +744,50 @@ type GetRecommendCatsResponse struct {
 	CategoryIDs []string `json:"category_i_ds,omitempty"`
 	// The identifier of the API request for error tracking.
 	RequestID string `json:"request_id,omitempty"`
+}
+
+type GetCommentRequest struct {
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int64 `json:"partner_id,omitempty"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int64 `json:"shopid,omitempty"`
+	// The identity of product item.
+	ItemID int64 `json:"item_id,omitempty"`
+	// The identity of comment.
+	CMTID int64 `json:"cmt_id,omitempty"`
+	// Specifies the starting entry of data to return in the current call. Default is 0. if data is more than one page, the offset can be some entry to start next call.
+	PaginationOffset int64 `json:"pagination_offset,omitempty"`
+	// If many items are available to retrieve, you may need to call GetItemsList multiple times to retrieve all the data. Each result set is returned as a page of entries. Use the Pagination filters to control the maximum number of entries (<= 100) to retrieve per page (i.e., per call), the offset number to start next call. This integer value is usUed to specify the maximum number of entries to return in a single ""page"" of data.
+	PaginationEntriesPerPage int64 `json:"pagination_entries_per_page,omitempty"`
+}
+
+type GetCommentResponse struct {
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int64 `json:"shopid,omitempty"`
+	// This is to indicate whether the comment list is more than one page. If this value is true, you may want to continue to check next page to retrieve the rest of comments.
+	More bool `json:"more,omitempty"`
+	//
+	ItemCMTList []GetCommentResponseItemCMTList `json:"item_cmt_list,omitempty"`
+	// The identifier for an API request for error tracking
+	RequestID string `json:"request_id,omitempty"`
+}
+
+type ReplyCommentsRequest struct {
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int64 `json:"partner_id,omitempty"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int64 `json:"shopid,omitempty"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int64 `json:"timestamp,omitempty"`
+	//
+	CMTList ReplyCommentsRequestCMTList `json:"cmt_list,omitempty"`
+}
+
+type ReplyCommentsResponse struct {
+	// The identifier for an API request for error tracking
+	RequestID string `json:"request_id,omitempty"`
+	//
+	SuccList []ReplyCommentsResponseSuccList `json:"succ_list,omitempty"`
+	//
+	Errors []ReplyCommentsResponseError `json:"errors,omitempty"`
 }
