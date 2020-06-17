@@ -36,6 +36,14 @@ type GetShopInfoResponse struct {
 	InstallmentStatus int `json:"installment_status,omitempty"`
 	// SIP affiliate shops info list
 	SIPAShops []GetShopInfoResponseShop `json:"sip_a_shops,omitempty"`
+	// Use this filed to indicate whether the shop is a cross-border shop.
+	IsCB bool `json:"is_cb,omitempty"`
+	// The days-to-ship value for non-pre orders.
+	NonPreOrderDTS int64 `json:"non_pre_order_dts,omitempty"`
+	// The timestamp when the shop was authorized to the partner.
+	AuthTime int64 `json:"auth_time,omitempty"`
+	// Use this field to indicate the expiration date for shop authorization.
+	ExpireTime int64 `json:"expire_time,omitempty"`
 }
 
 type UpdateShopInfoRequest struct {
