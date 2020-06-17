@@ -159,3 +159,25 @@ type GetShopFirstMileChannelResponse struct {
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
 }
+
+type FirstMileUnbindRequest struct {
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int64 `json:"shopid,omitempty"`
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int64 `json:"partner_id,omitempty"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int64 `json:"timestamp,omitempty"`
+	// The first-mile tracking number.
+	FMTN string `json:"fm_tn,omitempty"`
+	//
+	OrderList FirstMileUnbindRequestOrderList `json:"order_list,omitempty"`
+}
+
+type FirstMileUnbindResponse struct {
+	// The first-mile tracking number.
+	FMTN string `json:"fm_tn,omitempty"`
+	// This is to indicate whether orders are unbound successfully.
+	Success bool `json:"success,omitempty"`
+	//
+	FailList FirstMileUnbindResponseFailList `json:"fail_list,omitempty"`
+}
