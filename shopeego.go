@@ -54,10 +54,18 @@ func NewClient(opts *ClientOptions) Client {
 
 // Client 定義了一個蝦皮的客戶端該有什麼功能。
 type Client interface {
+	//=======================================================
+	// Shop
+	//=======================================================
+
 	GetShopInfo(*GetShopInfoRequest) (*GetShopInfoResponse, error)
 	UpdateShopInfo(*UpdateShopInfoRequest) (*UpdateShopInfoResponse, error)
 	Performance(*PerformanceRequest) (*PerformanceResponse, error)
 	SetShopInstallmentStatus(*SetShopInstallmentStatusRequest) (*SetShopInstallmentStatusResponse, error)
+
+	//=======================================================
+	// ShopCategory
+	//=======================================================
 
 	AddShopCategory(*AddShopCategoryRequest) (*AddShopCategoryResponse, error)
 	GetShopCategories(*GetShopCategoriesRequest) (*GetShopCategoriesResponse, error)
@@ -66,6 +74,10 @@ type Client interface {
 	AddItems(*AddItemsRequest) (*AddItemsResponse, error)
 	GetItems(*GetItemsRequest) (*GetItemsResponse, error)
 	DeleteItems(*DeleteItemsRequest) (*DeleteItemsResponse, error)
+
+	//=======================================================
+	// Item
+	//=======================================================
 
 	GetCategories(*GetCategoriesRequest) (*GetCategoriesResponse, error)
 	GetAttributes(*GetAttributesRequest) (*GetAttributesResponse, error)
@@ -99,8 +111,18 @@ type Client interface {
 	SetItemInstallmentTenures(*SetItemInstallmentTenuresRequest) (*SetItemInstallmentTenuresResponse, error)
 	GetPromotionInfo(*GetPromotionInfoRequest) (*GetPromotionInfoResponse, error)
 	GetRecommendCats(*GetRecommendCatsRequest) (*GetRecommendCatsResponse, error)
+	GetComment(*GetCommentRequest) (*GetCommentResponse, error)
+	ReplyComments(*ReplyCommentsRequest) (*ReplyCommentsResponse, error)
+
+	//=======================================================
+	// Image
+	//=======================================================
 
 	UploadImg(*UploadImgRequest) (*UploadImgResponse, error)
+
+	//=======================================================
+	// Discount
+	//=======================================================
 
 	AddDiscount(*AddDiscountRequest) (*AddDiscountResponse, error)
 	AddDiscountItem(*AddDiscountItemRequest) (*AddDiscountItemResponse, error)
@@ -110,6 +132,10 @@ type Client interface {
 	GetDiscountsList(*GetDiscountsListRequest) (*GetDiscountsListResponse, error)
 	UpdateDiscount(*UpdateDiscountRequest) (*UpdateDiscountResponse, error)
 	UpdateDiscountItems(*UpdateDiscountItemsRequest) (*UpdateDiscountItemsResponse, error)
+
+	//=======================================================
+	// Orders
+	//=======================================================
 
 	GetOrdersList(*GetOrdersListRequest) (*GetOrdersListResponse, error)
 	GetOrdersByStatus(*GetOrdersByStatusRequest) (*GetOrdersByStatusResponse, error)
@@ -124,6 +150,11 @@ type Client interface {
 	SplitOrder(*SplitOrderRequest) (*SplitOrderResponse, error)
 	UndoSplitOrder(*UndoSplitOrderRequest) (*UndoSplitOrderResponse, error)
 	GetUnbindOrderList(*GetUnbindOrderListRequest) (*GetUnbindOrderListResponse, error)
+	MyIncome(*MyIncomeRequest) (*MyIncomeResponse, error)
+
+	//=======================================================
+	// Logistics
+	//=======================================================
 
 	GetLogistics(*GetLogisticsRequest) (*GetLogisticsResponse, error)
 	UpdateShopLogistics(*UpdateShopLogisticsRequest) (*UpdateShopLogisticsResponse, error)
@@ -137,20 +168,38 @@ type Client interface {
 	GetOrderLogistics(*GetOrderLogisticsRequest) (*GetOrderLogisticsResponse, error)
 	GetLogisticsMessage(*GetLogisticsMessageRequest) (*GetLogisticsMessageResponse, error)
 	GetForderWaybill(*GetForderWaybillRequest) (*GetForderWaybillResponse, error)
+	SetAddress(*SetAddressRequest) (*SetAddressResponse, error)
+	DeleteAddress(*DeleteAddressRequest) (*DeleteAddressResponse, error)
+
+	//=======================================================
+	// Returns
+	//=======================================================
 
 	ConfirmReturn(*ConfirmReturnRequest) (*ConfirmReturnResponse, error)
 	DisputeReturn(*DisputeReturnRequest) (*DisputeReturnResponse, error)
 	GetReturnList(*GetReturnListRequest) (*GetReturnListResponse, error)
 	GetReturnDetail(*GetReturnDetailRequest) (*GetReturnDetailResponse, error)
 
+	//=======================================================
+	// Public
+	//=======================================================
+
 	GetShopsByPartner(*GetShopsByPartnerRequest) (*GetShopsByPartnerResponse, error)
 	GetCategoriesByCountry(*GetCategoriesByCountryRequest) (*GetCategoriesByCountryResponse, error)
 	GetPaymentList(*GetPaymentListRequest) (*GetPaymentListResponse, error)
+
+	//=======================================================
+	// TopPicks
+	//=======================================================
 
 	GetTopPicksList(*GetTopPicksListRequest) (*GetTopPicksListResponse, error)
 	AddTopPicks(*AddTopPicksRequest) (*AddTopPicksResponse, error)
 	UpdateTopPicks(*UpdateTopPicksRequest) (*UpdateTopPicksResponse, error)
 	DeleteTopPicks(*DeleteTopPicksRequest) (*DeleteTopPicksResponse, error)
+
+	//=======================================================
+	// FirstMileTracking
+	//=======================================================
 
 	GenerateFMTrackingNo(*GenerateFMTrackingNoRequest) (*GenerateFMTrackingNoResponse, error)
 	GetShopFMTrackingNo(*GetShopFMTrackingNoRequest) (*GetShopFMTrackingNoResponse, error)
@@ -158,6 +207,20 @@ type Client interface {
 	GetFmTnDetail(*GetFmTnDetailRequest) (*GetFmTnDetailResponse, error)
 	GetFMTrackingNoWaybill(*GetFMTrackingNoWaybillRequest) (*GetFMTrackingNoWaybillResponse, error)
 	GetShopFirstMileChannel(*GetShopFirstMileChannelRequest) (*GetShopFirstMileChannelResponse, error)
+	FirstMileUnbind(*FirstMileUnbindRequest) (*FirstMileUnbindResponse, error)
+
+	//=======================================================
+	// Payment
+	//=======================================================
+
+	GetTransactionList(*GetTransactionListRequest) (*GetTransactionListResponse, error)
+
+	//=======================================================
+	// Push
+	//=======================================================
+
+	GetPushConfig(*GetPushConfigRequest) (*GetPushConfigResponse, error)
+	SetPushConfig(*SetPushConfigRequest) (*SetPushConfigResponse, error)
 }
 
 // ShopeeClient represents a client to Shopee
@@ -811,6 +874,32 @@ func (s *ShopeeClient) GetRecommendCats(req *GetRecommendCatsRequest) (resp *Get
 	return
 }
 
+// GetComment Use this api to get comment by shopid/itemid/comment_id
+func (s *ShopeeClient) GetComment(req *GetCommentRequest) (resp *GetCommentResponse, err error) {
+	b, err := s.post("GetComment", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
+// ReplyComments Use this api to reply comments from buyers in batch
+func (s *ShopeeClient) ReplyComments(req *ReplyCommentsRequest) (resp *ReplyCommentsResponse, err error) {
+	b, err := s.post("ReplyComments", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
 //=======================================================
 // Image
 //=======================================================
@@ -1109,6 +1198,19 @@ func (s *ShopeeClient) GetUnbindOrderList(req *GetUnbindOrderListRequest) (resp 
 	return
 }
 
+// MyIncome Use this API to fetch the accounting detail of order.
+func (s *ShopeeClient) MyIncome(req *MyIncomeRequest) (resp *MyIncomeResponse, err error) {
+	b, err := s.post("MyIncome", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
 //=======================================================
 // Logistics
 //=======================================================
@@ -1260,6 +1362,32 @@ func (s *ShopeeClient) GetLogisticsMessage(req *GetLogisticsMessageRequest) (res
 // GetForderWaybill Use this API to get airwaybill for fulfillment orders.
 func (s *ShopeeClient) GetForderWaybill(req *GetForderWaybillRequest) (resp *GetForderWaybillResponse, err error) {
 	b, err := s.post("GetForderWaybill", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
+// SetAddress Use this API to set default_address/pick_up_address/return_address of shop. Please use GetAddress API to fetch the address_id.
+func (s *ShopeeClient) SetAddress(req *SetAddressRequest) (resp *SetAddressResponse, err error) {
+	b, err := s.post("SetAddress", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
+// DeleteAddress Use this API to delete the default/pick_up/return address of shop by address_id. Please use GetAddress API to fetch the address_id.
+func (s *ShopeeClient) DeleteAddress(req *DeleteAddressRequest) (resp *DeleteAddressResponse, err error) {
+	b, err := s.post("DeleteAddress", req)
 	if err != nil {
 		return
 	}
@@ -1497,6 +1625,66 @@ func (s *ShopeeClient) GetFMTrackingNoWaybill(req *GetFMTrackingNoWaybillRequest
 // GetShopFirstMileChannel Use this call to get all supported logistic channels for first mile.
 func (s *ShopeeClient) GetShopFirstMileChannel(req *GetShopFirstMileChannelRequest) (resp *GetShopFirstMileChannelResponse, err error) {
 	b, err := s.post("GetShopFirstMileChannel", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
+// FirstMileUnbind Use this API to unbind orders with the first-mile tracking number. Only applicable to cross-border sellers in China.
+func (s *ShopeeClient) FirstMileUnbind(req *FirstMileUnbindRequest) (resp *FirstMileUnbindResponse, err error) {
+	b, err := s.post("FirstMileUnbind", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
+//=======================================================
+// Payment
+//=======================================================
+
+// GetTransactionList Use this API to get the transaction records of wallet.
+func (s *ShopeeClient) GetTransactionList(req *GetTransactionListRequest) (resp *GetTransactionListResponse, err error) {
+	b, err := s.post("GetTransactionList", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
+//=======================================================
+// Push
+//=======================================================
+
+// GetPushConfig Use this API to get the configuration information of push service.
+func (s *ShopeeClient) GetPushConfig(req *GetPushConfigRequest) (resp *GetPushConfigResponse, err error) {
+	b, err := s.post("GetPushConfig", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
+// SetPushConfig Use this API to get the configuration information of push service.
+func (s *ShopeeClient) SetPushConfig(req *SetPushConfigRequest) (resp *SetPushConfigResponse, err error) {
+	b, err := s.post("SetPushConfig", req)
 	if err != nil {
 		return
 	}

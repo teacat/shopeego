@@ -58,6 +58,8 @@ var availablePaths map[string]string = map[string]string{
 	"SetItemInstallmentTenures": "api/v1/item/installment/set",
 	"GetPromotionInfo":          "api/v1/item/promotion/get",
 	"GetRecommendCats":          "api/v1/item/categories/get_recommend",
+	"GetComment":                "api/v1/items/comments/get",
+	"ReplyComments":             "api/v1/items/comments/reply",
 
 	//=======================================================
 	// Image
@@ -95,6 +97,7 @@ var availablePaths map[string]string = map[string]string{
 	"SplitOrder":              "api/v1/orders/split",
 	"UndoSplitOrder":          "api/v1/orders/unsplit",
 	"GetUnbindOrderList":      "api/v1/orders/unbind/list",
+	"MyIncome":                "api/v1/orders/income",
 
 	//=======================================================
 	// Logistics
@@ -112,6 +115,8 @@ var availablePaths map[string]string = map[string]string{
 	"GetOrderLogistics":   "api/v1/logistics/order/get",
 	"GetLogisticsMessage": "api/v1/logistics/tracking",
 	"GetForderWaybill":    "api/v1/logistics/forder_waybill/get_mass",
+	"SetAddress":          "api/v1/logistics/address/set",
+	"DeleteAddress":       "api/v1/logistics/address/delete",
 
 	//=======================================================
 	// Returns
@@ -149,4 +154,18 @@ var availablePaths map[string]string = map[string]string{
 	"GetFmTnDetail":           "api/v1/fm_tn/detail",
 	"GetFMTrackingNoWaybill":  "api/v1/fm_tn/waybill",
 	"GetShopFirstMileChannel": "api/v1/fm_tn/channels",
+	"FirstMileUnbind":         "api/v1/fm_tn/unbind",
+
+	//=======================================================
+	// Payment
+	//=======================================================
+
+	"GetTransactionList": "api/v1/wallet/transaction/list",
+
+	//=======================================================
+	// Push
+	//=======================================================
+
+	"GetPushConfig": "api/v1/push/get_config",
+	"SetPushConfig": "api/v1/push/set_config",
 }
