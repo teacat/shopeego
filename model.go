@@ -407,6 +407,16 @@ type GetItemDetailResponseItemVariation struct {
 	OriginalPrice float64 `json:"original_price,omitempty,string"`
 	// The ID of discount activity the variation is currently in. One variation can only have one discount at a time. discount_id will be 0 if the variation has no discount applied.
 	DiscountID int64 `json:"discount_id,omitempty"`
+	// Use this field to get the locked stock of variation by promotions.
+	ReservedStock int64 `json:"reserved_stock,omitempty"`
+	// Use this field to indicate the after-tax price of variation.
+	InflatedPrice float64 `json:"inflated_price,omitempty,string"`
+	// Use this field to indicate the after-tax original price of variation.
+	InflatedOriginalPrice float64 `json:"inflated_original_price,omitempty,string"`
+	// The settlement price of SIP item.
+	SIPItemPrice float64 `json:"sip_item_price,omitempty,string"`
+	// The strategy of creating sip_item_price. auto: automatically created; manual: manually created.
+	PriceSource string `json:"price_source,omitempty"`
 }
 
 type GetItemDetailResponseItemAttribute struct {
@@ -1349,6 +1359,10 @@ type GetOrderDetailsResponseOrder struct {
 	FMTN string `json:"fmtn,omitempty"`
 	// Use this field to get reason for buyer, seller, and system cancellation.
 	CancelReason string `json:"cancel_reason,omitempty"`
+	// Cross-border tax imposed by the Indonesian government on sellers.
+	EscrowTax float64 `json:"escrow_tax,omitempty,string"`
+	// Use this filed to judge whether the actual_shipping_fee is confirmed.
+	IsActualShippingFeeConfirmed bool `json:"is_actual_shipping_fee_confirmed,omitempty"`
 }
 
 //=======================================================
@@ -1396,6 +1410,14 @@ type GetEscrowDetailsResponseOrderIncomeDetail struct {
 	SellerReturnRefundAmount float64 `json:"seller_return_refund_amount,omitempty,string"`
 	// The amount offset via payment promotion. May include bank payment promotion and Shopee payment promotion.
 	CreditCardPromotion float64 `json:"credit_card_promotion,omitempty,string"`
+	// True means incoming won't change any more.
+	IsCompleted bool `json:"is_completed,omitempty"`
+	// Use this field to fetch the list of voucher codes.
+	VoucherCodeList []string `json:"voucher_code_list,omitempty"`
+	// The transaction_fee of seller.
+	SellerTransactionFee float64 `json:"seller_transaction_fee,omitempty,string"`
+	// The transaction_fee of buyer.
+	BuyerTransactionFee float64 `json:"buyer_transaction_fee,omitempty,string"`
 }
 
 type GetEscrowDetailsResponseOrderBankAccount struct {
@@ -1674,6 +1696,8 @@ type GetAddressResponseAddress struct {
 	District string `json:"district,omitempty"`
 	// The town of specify address
 	Town string `json:"town,omitempty"`
+	// The flag of shop address, applicable values: default_address, pickup_address, return_address
+	AddressFlag []string `json:"address_flag,omitempty"`
 }
 
 //=======================================================
@@ -1741,6 +1765,8 @@ type GetLogisticInfoResponsePickupAddress struct {
 	Date int `json:"date,omitempty"`
 	// The text description of pickup time. Only applicable for certain channels.
 	TimeText string `json:"time_text,omitempty"`
+	// The flag of shop address, applicable values: default_address, pickup_address, return_address
+	AddressFlag []string `json:"address_flag,omitempty"`
 }
 
 type GetLogisticInfoResponseDropoffBranch struct {
@@ -1894,6 +1920,75 @@ type GetOrderLogisticsResponseLogistic struct {
 	RecipientAddress GetOrderLogisticsResponseLogisticRecipientAddress `json:"recipient_address,omitempty"`
 	// This value indicates whether the order was a COD (cash on delivery) order.
 	COD bool `json:"cod,omitempty"`
+	// The sort_code of recipient.
+	RecipientSortCode GetOrderLogisticsResponseLogisticRecipientSortCode `json:"recipient_sort_code,omitempty"`
+	// The sort_code of sender.
+	SenderSortCode GetOrderLogisticsResponseLogisticSenderSortCode `json:"sender_sort_code,omitempty"`
+	// Only used for local TW sellers.
+	ThirdPartyLogisticInfo GetOrderLogisticsResponseLogisticThirdPartyLogisticInfo `json:"third_party_logistic_info,omitempty"`
+}
+
+type GetOrderLogisticsResponseLogisticRecipientSortCode struct {
+	// The first-level sort_code of recipient.
+	FirstRecipientSortCode string `json:"first_recipient_sort_code,omitempty"`
+	// The second-level sort_code of recipient.
+	SecondRecipientSortCode string `json:"second_recipient_sort_code,omitempty"`
+	// The third-level sort_code of recipient.
+	ThirdRecipientSortCode string `json:"third_recipient_sort_code,omitempty"`
+}
+
+type GetOrderLogisticsResponseLogisticSenderSortCode struct {
+	// The first-level sort_code of sender.
+	FirstSenderSortCode string `json:"first_sender_sort_code,omitempty"`
+	// The second-level sort_code of sender.
+	SecondSenderSortCode string `json:"second_sender_sort_code,omitempty"`
+	// The third-level sort_code of sender.
+	ThirdSenderSortCode string `json:"third_sender_sort_code,omitempty"`
+}
+
+type GetOrderLogisticsResponseLogisticThirdPartyLogisticInfo struct {
+	// Use this field to indicate the order category.
+	ServiceDescription string `json:"service_description,omitempty"`
+	// The manufacturer barcode.
+	Barcode string `json:"barcode,omitempty"`
+	// The purchase_time of the store.
+	PurchaseTime string `json:"purchase_time,omitempty"`
+	// The return_time of the store.
+	ReturnTime string `json:"return_time,omitempty"`
+	// The name of manufacturers.
+	ManufacturesName string `json:"manufacturers_name,omitempty"`
+	// The website of manufacturers.
+	ManufacturesWebsite string `json:"manufacturers_website,omitempty"`
+	// The identification of recipient area.
+	RecipientArea string `json:"recipient_area,omitempty"`
+	// The route code of the waybill.
+	RouteStep string `json:"route_step,omitempty"`
+	// The tally code of the waybill.
+	Suda5Code string `json:"suda5_code,omitempty"`
+	// The code of large logistics.
+	LargeLogisticsID string `json:"large_logistics_id,omitempty"`
+	// The parent code of the waybill.
+	ParentID string `json:"parent_id,omitempty"`
+	// Use this field to indicate the return cycle.
+	ReturnCycle string `json:"return_cycle,omitempty"`
+	// Use this field to indicate the return mode.
+	ReturnMode string `json:"return_mode,omitempty"`
+	// The reminder of stork work.
+	Prompt string `json:"prompt,omitempty"`
+	// Shopee's unique identifier for an order.
+	OrderNo string `json:"order_no,omitempty"`
+	// The QR code of the waybill.
+	QRCode string `json:"qrcode,omitempty"`
+	// The supplier name of channel.
+	ECSupplierName string `json:"ec_supplier_name,omitempty"`
+	// Use this field to indicate the first barcode.
+	ECBarCode16 string `json:"ec_bar_code16,omitempty"`
+	// The device code.
+	EquipmentID string `json:"equipment_id,omitempty"`
+	// The child code for B2C Family-mart.
+	EShopID string `json:"eshop_id,omitempty"`
+	// Use this field to indicate the pick barcode.
+	ECBarCode9 string `json:"ec_bar_code9,omitempty"`
 }
 
 //=======================================================
@@ -2291,4 +2386,232 @@ type GetShopFirstMileChannelResponseLogistic struct {
 	LogisticName string `json:"logistic_name,omitempty"`
 	// The shipment method for bound orders, should be pickup or dropoff.
 	ShipmentMethod string `json:"shipment_method,omitempty"`
+}
+
+//=======================================================
+// GetPushConfigResponse
+//=======================================================
+
+type GetPushConfigResponseDeatiledConfig struct {
+	// 0 stands for off and 1 stands for on.
+	OrderStatus int `json:"order_status,omitempty"`
+	// 0 stands for off and 1 stands for on.
+	OrderTrackingNo int `json:"order_trackingno,omitempty"`
+	// 0 stands for off and 1 stands for on.
+	ShopUpdate int `json:"shop_update,omitempty"`
+	// 0 stands for off and 1 stands for on.
+	BannedItem int `json:"banned_item,omitempty"`
+	// 0 stands for off and 1 stands for on.
+	ItemPromotion int `json:"item_promotion,omitempty"`
+	// 0 stands for off and 1 stands for on.
+	ReservedStockChange int `json:"reserved_stock_change,omitempty"`
+}
+
+//=======================================================
+// SetPushConfigRequest
+//=======================================================
+
+type SetPushConfigRequestDeatiledConfig struct {
+	// 0 stands for off and 1 stands for on.
+	OrderStatus int `json:"order_status,omitempty"`
+	// 0 stands for off and 1 stands for on.
+	OrderTrackingNo int `json:"order_trackingno,omitempty"`
+	// 0 stands for off and 1 stands for on.
+	ShopUpdate int `json:"shop_update,omitempty"`
+	// 0 stands for off and 1 stands for on.
+	BannedItem int `json:"banned_item,omitempty"`
+	// 0 stands for off and 1 stands for on.
+	ItemPromotion int `json:"item_promotion,omitempty"`
+	// 0 stands for off and 1 stands for on.
+	ReservedStockChange int `json:"reserved_stock_change,omitempty"`
+}
+
+//=======================================================
+// GetTransactionListResponse
+//=======================================================
+
+type GetTransactionListResponseTransactionListPayOrderList struct {
+	// Shopee's unique identifier for an order.
+	OrderSN string `json:"ordersn,omitempty"`
+	// Name of the shop.
+	ShopName string `json:"shop_name,omitempty"`
+}
+
+type GetTransactionListResponseTransactionList struct {
+	// The ID of transaction.
+	TransactionID int64 `json:"transaction_id,omitempty"`
+	// The status of the transaction，available values: FAILED,COMPLETED,PENDING,INITIAL.
+	Status string `json:"status,omitempty"`
+	// The type of wallet, available values: shopee pay, jko pay.
+	WalletType string `json:"wallet_type,omitempty"`
+	// The type of transaction.
+	TransactionType string `json:"transaction_type,omitempty"`
+	// The amount of transaction.
+	Amount float64 `json:"amount,omitempty,string"`
+	// The current balance of this account.
+	CurrentBalance float64 `json:"current_balance,omitempty,string"`
+	// The create time of the transaction.
+	CreateTime int64 `json:"create_time,omitempty"`
+	// Shopee's unique identifier for an order.
+	OrderSN string `json:"ordersn,omitempty"`
+	// The serial number of return.
+	RefundSN string `json:"refund_sn,omitempty"`
+	// The type of withdrawal.
+	WithdrawalType string `json:"withdrawal_type,omitempty"`
+	// This field indicates the transaction fee.
+	TransactionFee float64 `json:"transaction_fee,omitempty,string"`
+	// The detailed description of TOPUP SUCCESS and TOPUP FAILED.
+	Description string `json:"description,omitempty"`
+	// The name of buyer.
+	BuyerName string `json:"buyer_name,omitempty"`
+	// List of ordersn included in the transaction.
+	PayOrderList GetTransactionListResponseTransactionListPayOrderList `json:"pay_order_list,omitempty"`
+}
+
+//=======================================================
+// FirstMileUnbindResponse
+//=======================================================
+
+type FirstMileUnbindResponseFailList struct {
+	// The reason why the order/fulfillment order cannot be unbound.
+	Reason string `json:"reason,omitempty"`
+	// Shopee's unique identifier for an order.
+	OrderSN string `json:"ordersn,omitempty"`
+	// The unique identifier for a fulfillment order.
+	ForderID string `json:"forder_id,omitempty"`
+}
+
+//=======================================================
+// FirstMileUnbindRequest
+//=======================================================
+
+type FirstMileUnbindRequestOrderList struct {
+	// Shopee's unique identifier for an order.
+	OrderSN string `json:"ordersn,omitempty"`
+	// The unique identifier for a fulfillment order.
+	ForderID string `json:"forder_id,omitempty"`
+}
+
+//=======================================================
+// MyIncomeResponse
+//=======================================================
+
+type MyIncomeResponseOrderIncome struct {
+	// The total amount that the seller is expected to receive for the order and will change before order completed. escrow_amount=buyer_total_amount+shopee_discount+voucher_from_shopee+coins+payment_promotion-buyer_transaction_fee-cross_border_tax-commission_fee-service_fee-seller_transaction_fee-seller_coin_cash_back-escrow_tax-drc_adjustable_refund+final_shipping_fee（could be positive/negative)
+	EscrowAmount float64 `json:"escrow_amount,omitempty,string"`
+	// The total amount that paid by buyer.buyer_total_amount= original price -seller_discount -shopee_discount -voucher_from_seller -voucher_from_shopee -coin -payment_promotion +buyer_paid_shipping_fee +buyer_transaction_fee +cross_border_tax
+	BuyerTotalAmount float64 `json:"buyer_total_amount,omitempty,string"`
+	// The original price of the item before ANY promotion/discount in the listing currency. It returns the subtotal of that specific item if quantity exceeds 1.
+	OriginalPrice float64 `json:"original_price,omitempty,string"`
+	// Final sum of each item seller discount of a specific order.
+	SellerDiscount float64 `json:"seller_discount,omitempty,string"`
+	// Final sum of each item Shopee discount of a specific order. This amount will rebate to seller.
+	ShopeeDiscount float64 `json:"shopee_discount,omitempty,string"`
+	// Final value of voucher provided by Seller for the order.
+	VoucherFromSeller float64 `json:"voucher_from_seller,omitempty,string"`
+	// Final value of voucher provided by Shopee for the order.
+	VoucherFromShopee float64 `json:"voucher_from_shopee,omitempty,string"`
+	// Final value of coins used by seller for the order.
+	Coins float64 `json:"coins,omitempty,string"`
+	// The shipping fee paid by buyer.
+	BuyerPaidShippingFee float64 `json:"buyer_paid_shipping_fee,omitempty,string"`
+	// Tansaction fee paid by buyer for the order.
+	BuyerTransactionFee float64 `json:"buyer_transaction_fee,omitempty,string"`
+	// Amount incurred by Buyer for purchasing items outside of home country. Amount may change after Return Refund.
+	CrossBorderTax float64 `json:"cross_border_tax,omitempty,string"`
+	// The amount offset via payment promotion.
+	PaymentPromotion float64 `json:"payment_promotion,omitempty,string"`
+	// The commission fee charged by Shopee platform if applicable.
+	CommissionFee float64 `json:"commission_fee,omitempty,string"`
+	// Amount charged by Shopee to seller for additional services.
+	ServiceFee float64 `json:"service_fee,omitempty,string"`
+	// Tansaction fee paid by seller for the order.
+	SellerTransactionFee float64 `json:"seller_transaction_fee,omitempty,string"`
+	// Compensation to seller in case of lost parcel
+	SellerLostCompensation float64 `json:"seller_lost_compensation,omitempty,string"`
+	// Value of coins provided by Seller for purchasing with his or her store for the order.
+	SellerCoinCashBack float64 `json:"seller_coin_cash_back,omitempty,string"`
+	// Cross-border tax imposed by the Indonesian government on sellers.
+	EscrowTax float64 `json:"escrow_tax,omitempty,string"`
+	// Final adjusted amount that seller has to bear as part of escrow. This amount could be negative or positive. = min(actual_shipping_fee, shopee_shipping_rebate) + shipping_discount_from_3pl - actual_shipping_fee
+	FinalShippingFee float64 `json:"final_shipping_fee,omitempty,string"`
+	// The final shipping cost of order and it is negative. For Non-integrated logistics channel is 0.
+	ActualShippingFee float64 `json:"actual_shipping_fee,omitempty,string"`
+	// The platform shipping subsidy to the seller.
+	ShopeeShippingRebate float64 `json:"shopee_shipping_rebate,omitempty,string"`
+	// The discount of shipping fee from 3PL. Currently only applicable to ID
+	ShippingFeeDiscountFrom3PL float64 `json:"shipping_fee_discount_from_3pl,omitempty,string"`
+	// The shipping discount defined by seller.
+	SellerShippinhDiscount float64 `json:"seller_shipping_discount,omitempty,string"`
+	// The estimated shipping fee is an estimation calculated by Shopee based on specific logistics courier's standard.
+	EstimatedShippingFee float64 `json:"estimated_shipping_fee,omitempty,string"`
+	// The list of voucher code provided by seller.
+	SellerVoucherCode []string `json:"seller_voucher_code,omitempty,string"`
+	// The adjustable refund amount from Shopee Dispute Resolution Center.
+	DRCAdjustableRefund float64 `json:"drc_adjustable_refund,omitempty,string"`
+	// The identifier for an API request for error tracking.
+	RequestID string `json:"request_id,omitempty,string"`
+	// The list of the serial number of refund.
+	RefundIDList []string `json:"refund_id_list,omitempty,string"`
+}
+
+//=======================================================
+// GetCommentResponse
+//=======================================================
+
+type GetCommentResponseItemCMTListCMTReply struct {
+	// The content of reply
+	Reply string `json:"reply,omitempty"`
+	// The status of comment, available values: DELETE/NORMAL/VALID/HIDDEN
+	Status string `json:"status,omitempty"`
+}
+
+type GetCommentResponseItemCMTList struct {
+	// The identity of comment.
+	CMTID int64 `json:"cmt_id,omitempty"`
+	// Content of the comment.
+	Comment string `json:"comment,omitempty"`
+	// Username of the buyer who posted the comment.
+	BuyerUsername string `json:"buyer_username,omitempty"`
+	// Commented ordersn
+	OrderSN string `json:"ordersn,omitempty"`
+	// Commented item's id
+	ItemID int64 `json:"item_id,omitempty"`
+	// Shopee's unique identifier for a variation of an item.
+	VariationID int64 `json:"variation_id,omitempty"`
+	// The create time of the comment
+	CreateTime int64 `json:"create_time,omitempty"`
+	// The status of comment, available values: DELETE/NORMAL/VALID/HIDDEN
+	Status string `json:"status,omitempty"`
+	// Buyer's rating for the item
+	RatingStar int64 `json:"rating_star,omitempty"`
+	// The edit status of comment, available values: EXPIRED/EDITABLE/HAVE_EDIT_ONCE
+	Editable string `json:"editable,omitempty"`
+	// The status of comment, available values: DELETE/NORMAL/VALID/HIDDEN
+	CMTReply GetCommentResponseItemCMTListCMTReply `json:"cmt_reply,omitempty"`
+}
+
+//=======================================================
+// ReplyCommentsRequest
+//=======================================================
+
+type ReplyCommentsRequestCMTList struct {
+	// The identity of comment.
+	CMTID int64 `json:"cmt_id,omitempty"`
+	// Content of the comment.
+	Comment string `json:"comment,omitempty"`
+}
+
+//=======================================================
+// ReplyCommentsResponse
+//=======================================================
+
+type ReplyCommentsResponseSuccList struct {
+	CMTID int64 `json:"cmt_id,omitempty"`
+}
+
+type ReplyCommentsResponseError struct {
+	// The identity of comment.
+	CMTID    int64  `json:"cmt_id,omitempty"`
+	ErrorMsg string `json:"error_msg,omitempty"`
 }
