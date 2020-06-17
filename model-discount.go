@@ -175,6 +175,8 @@ type UpdateDiscountRequest struct {
 	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
+	// Use this field to indicate whether or not to end discount.
+	EndDiscount bool `json:"end_discount,omitempty"`
 }
 
 type UpdateDiscountResponse struct {
