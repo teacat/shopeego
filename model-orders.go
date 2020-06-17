@@ -283,3 +283,25 @@ type GetUnbindOrderListResponse struct {
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
 }
+
+type MyIncomeRequest struct {
+	// Shopee's unique identifier for an order.
+	OrderSN string `json:"ordersn,omitempty"`
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int64 `json:"partner_id,omitempty"`
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int64 `json:"shopid,omitempty"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int64 `json:"timestamp,omitempty"`
+}
+
+type MyIncomeResponse struct {
+	// Shopee's unique identifier for an order.
+	OrderSN string `json:"ordersn,omitempty"`
+	// The username of buyer.
+	BuyerUserName string `json:"buyer_user_name,omitempty"`
+	// The list of the serial number of return.
+	ReturnSNList []string `json:"returnsn_list,omitempty"`
+	//
+	OrderIncome MyIncomeResponseOrderIncome `json:"order_income,omitempty"`
+}
