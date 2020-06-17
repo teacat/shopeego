@@ -756,9 +756,9 @@ type GetCommentRequest struct {
 	// The identity of comment.
 	CMTID int64 `json:"cmt_id,omitempty"`
 	// Specifies the starting entry of data to return in the current call. Default is 0. if data is more than one page, the offset can be some entry to start next call.
-	PaginationOffset int64 `json:"pagination_offset,omitempty"`
+	PaginationOffset int `json:"pagination_offset,omitempty"`
 	// If many items are available to retrieve, you may need to call GetItemsList multiple times to retrieve all the data. Each result set is returned as a page of entries. Use the Pagination filters to control the maximum number of entries (<= 100) to retrieve per page (i.e., per call), the offset number to start next call. This integer value is usUed to specify the maximum number of entries to return in a single ""page"" of data.
-	PaginationEntriesPerPage int64 `json:"pagination_entries_per_page,omitempty"`
+	PaginationEntriesPerPage int `json:"pagination_entries_per_page,omitempty"`
 }
 
 type GetCommentResponse struct {
@@ -778,7 +778,7 @@ type ReplyCommentsRequest struct {
 	// Shopee's unique identifier for a shop. Required for all requests.
 	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int64 `json:"timestamp,omitempty"`
+	Timestamp int `json:"timestamp,omitempty"`
 	//
 	CMTList ReplyCommentsRequestCMTList `json:"cmt_list,omitempty"`
 }

@@ -2451,7 +2451,7 @@ type GetTransactionListResponseTransactionList struct {
 	// The current balance of this account.
 	CurrentBalance float64 `json:"current_balance,omitempty,string"`
 	// The create time of the transaction.
-	CreateTime int64 `json:"create_time,omitempty"`
+	CreateTime int `json:"create_time,omitempty"`
 	// Shopee's unique identifier for an order.
 	OrderSN string `json:"ordersn,omitempty"`
 	// The serial number of return.
@@ -2580,11 +2580,11 @@ type GetCommentResponseItemCMTList struct {
 	// Shopee's unique identifier for a variation of an item.
 	VariationID int64 `json:"variation_id,omitempty"`
 	// The create time of the comment
-	CreateTime int64 `json:"create_time,omitempty"`
+	CreateTime int `json:"create_time,omitempty"`
 	// The status of comment, available values: DELETE/NORMAL/VALID/HIDDEN
 	Status string `json:"status,omitempty"`
 	// Buyer's rating for the item
-	RatingStar int64 `json:"rating_star,omitempty"`
+	RatingStar int `json:"rating_star,omitempty"`
 	// The edit status of comment, available values: EXPIRED/EDITABLE/HAVE_EDIT_ONCE
 	Editable string `json:"editable,omitempty"`
 	// The status of comment, available values: DELETE/NORMAL/VALID/HIDDEN

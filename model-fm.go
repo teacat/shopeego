@@ -166,7 +166,7 @@ type FirstMileUnbindRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int64 `json:"timestamp,omitempty"`
+	Timestamp int `json:"timestamp,omitempty"`
 	// The first-mile tracking number.
 	FMTN string `json:"fm_tn,omitempty"`
 	//

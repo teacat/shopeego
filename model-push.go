@@ -24,7 +24,7 @@ type SetPushConfigRequest struct {
 	// The callback url of push mechanism.
 	CallbackURL string `json:"callback_url,omitempty"`
 	// The shutdown time caused by low successful rate of push mechanism.
-	ShutTime int64 `json:"shut_time,omitempty"`
+	ShutTime int `json:"shut_time,omitempty"`
 	//
 	DeatiledConfig GetPushConfigResponseDeatiledConfig `json:"detailed_config,omitempty"`
 	// Use this filed to set shops that need to be blocked.

@@ -292,7 +292,7 @@ type MyIncomeRequest struct {
 	// Shopee's unique identifier for a shop. Required for all requests.
 	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int64 `json:"timestamp,omitempty"`
+	Timestamp int `json:"timestamp,omitempty"`
 }
 
 type MyIncomeResponse struct {

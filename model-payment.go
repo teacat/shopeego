@@ -6,7 +6,7 @@ type GetTransactionListRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int64 `json:"timestamp,omitempty"`
+	Timestamp int `json:"timestamp,omitempty"`
 	// Specifies the starting entry of data to return in the current call. Default is 0. if data is more than one page, the offset can be some entry to start next call.
 	PaginationOffset int64 `json:"pagination_offset,omitempty"`
 	// If many transactions are available to retrieve, you may need to call GetTransactionList multiple times to retrieve all the data. Each result set is returned as a page of entries. Default is 40. Use the Pagination filters to control the maximum number of entries (<= 100) to retrieve per page (i.e., per call), the offset number to start next call. This integer value is usUed to specify the maximum number of entries to return in a single ""page"" of data.

@@ -273,7 +273,7 @@ type SetAddressRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int64 `json:"timestamp,omitempty"`
+	Timestamp int `json:"timestamp,omitempty"`
 	// The identity of default address.
 	DefaultAddressID int64 `json:"default_address_id,omitempty"`
 	// The identity of pick_up address.
@@ -293,7 +293,7 @@ type DeleteAddressRequest struct {
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int64 `json:"partner_id,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
-	Timestamp int64 `json:"timestamp,omitempty"`
+	Timestamp int `json:"timestamp,omitempty"`
 	// The identity of address
 	AddressID int64 `json:"address_id,omitempty"`
 }
