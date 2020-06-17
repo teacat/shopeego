@@ -266,3 +266,39 @@ type GetForderWaybillResponse struct {
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
 }
+
+type SetAddressRequest struct {
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int64 `json:"shopid,omitempty"`
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int64 `json:"partner_id,omitempty"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int64 `json:"timestamp,omitempty"`
+	// The identity of default address.
+	DefaultAddressID int64 `json:"default_address_id,omitempty"`
+	// The identity of pick_up address.
+	PickUpAddressID int64 `json:"pick_up_address_id,omitempty"`
+	// The identity of return address.
+	ReturnAddressID int64 `json:"return_address_id,omitempty"`
+}
+
+type SetAddressResponse struct {
+	// The identifier for an API request for error tracking
+	RequestID string `json:"request_id,omitempty"`
+}
+
+type DeleteAddressRequest struct {
+	// Shopee's unique identifier for a shop. Required for all requests.
+	ShopID int64 `json:"shopid,omitempty"`
+	// Partner ID is assigned upon registration is successful. Required for all requests.
+	PartnerID int64 `json:"partner_id,omitempty"`
+	// This is to indicate the timestamp of the request. Required for all requests.
+	Timestamp int64 `json:"timestamp,omitempty"`
+	// The identity of address
+	AddressID int64 `json:"address_id,omitempty"`
+}
+
+type DeleteAddressResponse struct {
+	// The identifier for an API request for error tracking
+	RequestID string `json:"request_id,omitempty"`
+}
