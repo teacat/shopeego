@@ -58,168 +58,276 @@ type Client interface {
 	// Shop
 	//=======================================================
 
+	// GetShopInfo Use this call to get information of shop
 	GetShopInfo(*GetShopInfoRequest) (*GetShopInfoResponse, error)
+	// UpdateShopInfo Use this call to update information of shop
 	UpdateShopInfo(*UpdateShopInfoRequest) (*UpdateShopInfoResponse, error)
+	// Performance Shop performance includes the indexes from "My Performance" of Seller Center.
 	Performance(*PerformanceRequest) (*PerformanceResponse, error)
+	// SetShopInstallmentStatus Only for TW whitelisted shop.Use this API to set the installment status of shop.
 	SetShopInstallmentStatus(*SetShopInstallmentStatusRequest) (*SetShopInstallmentStatusResponse, error)
 
 	//=======================================================
 	// ShopCategory
 	//=======================================================
 
+	// AddShopCategory Use this call to add a new collecion
 	AddShopCategory(*AddShopCategoryRequest) (*AddShopCategoryResponse, error)
+	// GetShopCategories Use this call to get list of in-shop categories
 	GetShopCategories(*GetShopCategoriesRequest) (*GetShopCategoriesResponse, error)
+	// DeleteShopCategory Use this call to delete a existing collecion
 	DeleteShopCategory(*DeleteShopCategoryRequest) (*DeleteShopCategoryResponse, error)
+	// UpdateShopCategory Use this call to update a existing collecion
 	UpdateShopCategory(*UpdateShopCategoryRequest) (*UpdateShopCategoryResponse, error)
+	// AddItems Use this call to add items list to certain shop_category
 	AddItems(*AddItemsRequest) (*AddItemsResponse, error)
+	// GetItems Use this call to get items list of certain shop_category
 	GetItems(*GetItemsRequest) (*GetItemsResponse, error)
+	// DeleteItems Use this api to delete items from shop category
 	DeleteItems(*DeleteItemsRequest) (*DeleteItemsResponse, error)
 
 	//=======================================================
 	// Item
 	//=======================================================
 
+	// GetCategories Use this call to get categories of product item
 	GetCategories(*GetCategoriesRequest) (*GetCategoriesResponse, error)
+	// GetAttributes Use this call to get attributes of product item
 	GetAttributes(*GetAttributesRequest) (*GetAttributesResponse, error)
+	// Add Use this call to add a product item. Should get dependency by calling below API first
+	// shopee.item.GetCategories
+	// shopee.item.GetAttributes
+	// shopee.logistics.GetLogistics
 	Add(*AddRequest) (*AddResponse, error)
+	// Delete Use this call to delete a product item.
 	Delete(*DeleteRequest) (*DeleteResponse, error)
+	// UnlistItem Use this api to unlist or list items in batch.
 	UnlistItem(*UnlistItemRequest) (*UnlistItemResponse, error)
+	// AddVariations Use this call to add item variations, it only supports non-tier-variation items.
 	AddVariations(*AddVariationsRequest) (*AddVariationsResponse, error)
+	// DeleteVariation Use this call to delete item variation
 	DeleteVariation(*DeleteVariationRequest) (*DeleteVariationResponse, error)
+	// GetItemsList Use this call to get a list of items
 	GetItemsList(*GetItemsListRequest) (*GetItemsListResponse, error)
+	// GetItemDetail Use this call to get detail of item
 	GetItemDetail(*GetItemDetailRequest) (*GetItemDetailResponse, error)
+	// UpdateItem Use this call to update a product item. Should get dependency by calling below API first
+	// shopee.item.GetItemDetail
 	UpdateItem(*UpdateItemRequest) (*UpdateItemResponse, error)
+	// AddItemImg Use this call to add product item images.
 	AddItemImg(*AddItemImgRequest) (*AddItemImgResponse, error)
+	// UpdateItemImg Override and update all the existing images of an item.
 	UpdateItemImg(*UpdateItemImgRequest) (*UpdateItemImgResponse, error)
+	// InsertItemImg Use this call to add one item image in assigned position.
 	InsertItemImg(*InsertItemImgRequest) (*InsertItemImgResponse, error)
+	// DeleteItemImg Use this call to delete a product item image.
 	DeleteItemImg(*DeleteItemImgRequest) (*DeleteItemImgResponse, error)
+	// UpdatePrice Use this call to update item price
 	UpdatePrice(*UpdatePriceRequest) (*UpdatePriceResponse, error)
+	// UpdateStock Use this call to update item stock
 	UpdateStock(*UpdateStockRequest) (*UpdateStockResponse, error)
+	// UpdateVariationPrice Use this call to update item variation price
 	UpdateVariationPrice(*UpdateVariationPriceRequest) (*UpdateVariationPriceResponse, error)
+	// UpdateVariationStock Use this call to update item variation stock
 	UpdateVariationStock(*UpdateVariationStockRequest) (*UpdateVariationStockResponse, error)
+	// UpdatePriceBatch Update items price in batch.
 	UpdatePriceBatch(*UpdatePriceBatchRequest) (*UpdatePriceBatchResponse, error)
+	// UpdateStockBatch Update items stock in batch.
 	UpdateStockBatch(*UpdateStockBatchRequest) (*UpdateStockBatchResponse, error)
+	// UpdateVariationPriceBatch Update variations price in batch.
 	UpdateVariationPriceBatch(*UpdateVariationPriceBatchRequest) (*UpdateVariationPriceBatchResponse, error)
+	// UpdateVariationStockBatch Update variations stock in batch.
 	UpdateVariationStockBatch(*UpdateVariationStockBatchRequest) (*UpdateVariationStockBatchResponse, error)
+	// InitTierVariation Initialize a non-tier-variation item to a tier-variation item, upload variation image and initialize stock and price for each variation. This API cannot edit existed tier_variation and variation price/stock.
 	InitTierVariation(*InitTierVariationRequest) (*InitTierVariationResponse, error)
+	// AddTierVariation Use this api to add new tier variations in batch. Tier variation index of variations in the same item must be unique.
 	AddTierVariation(*AddTierVariationRequest) (*AddTierVariationResponse, error)
+	// GetVariation Use this call to get tier-variation basic information under an item
 	GetVariation(*GetVariationRequest) (*GetVariationResponse, error)
+	// UpdateTierVariationList Use this api to update tier-variation list or upload variation image of a tier-variation item.
 	UpdateTierVariationList(*UpdateTierVariationListRequest) (*UpdateTierVariationListResponse, error)
+	// UpdateTierVariationIndex Use this api to update existing tier index under the same variation_id.
 	UpdateTierVariationIndex(*UpdateTierVariationIndexRequest) (*UpdateTierVariationIndexResponse, error)
+	// BoostItem Use this api to boost multiple items at once.
 	BoostItem(*BoostItemRequest) (*BoostItemResponse, error)
+	// GetBoostedItem Use this api to get all boosted items.
 	GetBoostedItem(*GetBoostedItemRequest) (*GetBoostedItemResponse, error)
+	// SetItemInstallmentTenures Only for TW whitelisted shop. Use this API to set the installment tenures of items.
 	SetItemInstallmentTenures(*SetItemInstallmentTenuresRequest) (*SetItemInstallmentTenuresResponse, error)
+	// GetPromotionInfo Use this api to get ongoing and upcoming promotions.
 	GetPromotionInfo(*GetPromotionInfoRequest) (*GetPromotionInfoResponse, error)
+	// GetRecommendCats Use this API to get recommended category ids according to item name.
 	GetRecommendCats(*GetRecommendCatsRequest) (*GetRecommendCatsResponse, error)
+	// GetComment Use this api to get comment by shopid/itemid/comment_id
 	GetComment(*GetCommentRequest) (*GetCommentResponse, error)
+	// ReplyComments Use this api to reply comments from buyers in batch
 	ReplyComments(*ReplyCommentsRequest) (*ReplyCommentsResponse, error)
 
 	//=======================================================
 	// Image
 	//=======================================================
 
+	// UploadImg Use this optional API to pre-validate your image urls and convert them to Shopee image url to use in item upload APIs. This way your potential invalid urls will not block your item upload process.
 	UploadImg(*UploadImgRequest) (*UploadImgResponse, error)
 
 	//=======================================================
 	// Discount
 	//=======================================================
 
+	// AddDiscount Use this api to add shop discount activity
 	AddDiscount(*AddDiscountRequest) (*AddDiscountResponse, error)
+	// AddDiscountItem Use this api to add shop discount item
 	AddDiscountItem(*AddDiscountItemRequest) (*AddDiscountItemResponse, error)
+	// DeleteDiscount Use this api to delete one discount activity BEFORE it starts.
 	DeleteDiscount(*DeleteDiscountRequest) (*DeleteDiscountResponse, error)
+	// DeleteDiscountItem Use this api to delete items of the discount activity
 	DeleteDiscountItem(*DeleteDiscountItemRequest) (*DeleteDiscountItemResponse, error)
+	// GetDiscountDetail Use this api to get one shop discount activity detail
 	GetDiscountDetail(*GetDiscountDetailRequest) (*GetDiscountDetailResponse, error)
+	// GetDiscountsList Use this api to get shop discount activity list
 	GetDiscountsList(*GetDiscountsListRequest) (*GetDiscountsListResponse, error)
+	// UpdateDiscount Use this api to update one discount information
 	UpdateDiscount(*UpdateDiscountRequest) (*UpdateDiscountResponse, error)
+	// UpdateDiscountItems Use this api to update items of the discount activity
 	UpdateDiscountItems(*UpdateDiscountItemsRequest) (*UpdateDiscountItemsResponse, error)
 
 	//=======================================================
 	// Orders
 	//=======================================================
 
+	// GetOrdersList GetOrdersList is the recommended call to use for order management. Use this call to retrieve basic information of all orders which are updated within specific period of time. More details of each order can be retrieved from GetOrderDetails. [Only the recent one month orders can be fetch through this API. Please use GetOrderBySatus API to fetch more orders.]
 	GetOrdersList(*GetOrdersListRequest) (*GetOrdersListResponse, error)
+	// GetOrdersByStatus GetOrdersByStatus is the recommended call to use for order management. Use this call to retrieve basic information of all orders which are specific status. More details of each order can be retrieved from GetOrderDetails.
 	GetOrdersByStatus(*GetOrdersByStatusRequest) (*GetOrdersByStatusResponse, error)
+	// GetOrderDetails Use this call to retrieve detailed information about one or more orders based on OrderSN.
 	GetOrderDetails(*GetOrderDetailsRequest) (*GetOrderDetailsResponse, error)
+	// GetEscrowDetails Use this call to retrieve detailed escrow information about one order based on OrderSN.
 	GetEscrowDetails(*GetEscrowDetailsRequest) (*GetEscrowDetailsResponse, error)
+	// AddOrderNote Use this call to add note for an order
 	AddOrderNote(*AddOrderNoteRequest) (*AddOrderNoteResponse, error)
+	// CancelOrder Use this call to cancel an order from the seller side.
 	CancelOrder(*CancelOrderRequest) (*CancelOrderResponse, error)
+	// AcceptBuyerCancellation Use this call to accept buyer cancellation
 	AcceptBuyerCancellation(*AcceptBuyerCancellationRequest) (*AcceptBuyerCancellationResponse, error)
+	// RejectBuyerCancellation Use this call to reject buyer cancellation
 	RejectBuyerCancellation(*RejectBuyerCancellationRequest) (*RejectBuyerCancellationResponse, error)
+	// GetForderInfo Use this call to retrieve detailed information of all the fulfill orders(forder) under a single regular order based on ordersn.
 	GetForderInfo(*GetForderInfoRequest) (*GetForderInfoResponse, error)
+	// GetEscrowReleasedOrders Use this api to get orders' release time and escrow amount.
 	GetEscrowReleasedOrders(*GetEscrowReleasedOrdersRequest) (*GetEscrowReleasedOrdersResponse, error)
+	// SplitOrder Use this API to split order into fulfillment orders. This feature is only enabled for whitelisted shops.
 	SplitOrder(*SplitOrderRequest) (*SplitOrderResponse, error)
+	// UndoSplitOrder Use this API to cancel split order from the seller side.
 	UndoSplitOrder(*UndoSplitOrderRequest) (*UndoSplitOrderResponse, error)
+	// GetUnbindOrderList Use this call to get a list of unbind orders.
 	GetUnbindOrderList(*GetUnbindOrderListRequest) (*GetUnbindOrderListResponse, error)
+	// MyIncome Use this API to fetch the accounting detail of order.
 	MyIncome(*MyIncomeRequest) (*MyIncomeResponse, error)
 
 	//=======================================================
 	// Logistics
 	//=======================================================
 
+	// GetLogistics Use this call to get all supported logistic channels.
 	GetLogistics(*GetLogisticsRequest) (*GetLogisticsResponse, error)
+	// UpdateShopLogistics Configure shop level logistics
 	UpdateShopLogistics(*UpdateShopLogisticsRequest) (*UpdateShopLogisticsResponse, error)
+	// GetParameterForInit Use this call to get all required param for logistic initiation.
 	GetParameterForInit(*GetParameterForInitRequest) (*GetParameterForInitResponse, error)
+	// GetAddress For integrated logistics channel, use this call to get pickup address for pickup mode order.
 	GetAddress(*GetAddressRequest) (*GetAddressResponse, error)
+	// GetTimeSlot For integrated logistics channel, use this call to get pickup timeslot for pickup mode order.
 	GetTimeSlot(*GetTimeSlotRequest) (*GetTimeSlotResponse, error)
+	// GetBranch For integrated logistics channel, use this call to get dropoff location for dropoff mode order.
 	GetBranch(*GetBranchRequest) (*GetBranchResponse, error)
+	// GetLogisticInfo Get all the logistics info of an order to Init.
+	// This API consolidates the output of GetParameterForInit, GetAddresss, GetTimeSlot and GetBranch based on each order so that developer can get all the required parameters ready in this API for Init.This API is an alternative of GetParameterForInit, GetAddresss, GetTimeSlot and GetBranch as a set.
 	GetLogisticInfo(*GetLogisticInfoRequest) (*GetLogisticInfoResponse, error)
+	// Init Use this call to initiate logistics including arrange Pickup, Dropoff or shipment for non-integrated logistic channels. Should call shopee.logistics.GetLogisticInfo to fetch all required param first. It's recommended to initiate logistics one hour AFTER the orders were placed since there is one-hour window buyer can cancel any order without request to seller.
 	Init(*InitRequest) (*InitResponse, error)
+	// GetAirwayBill Use this API to get airway bill for orders. AirwayBill is only fetchable when the order status is under READY_TO_SHIP and RETRY_SHIP.
 	GetAirwayBill(*GetAirwayBillRequest) (*GetAirwayBillResponse, error)
+	// GetOrderLogistics  Use this call to fetch the logistics information of an order, these info can be used for airwaybill printing. Dedicated for crossborder SLS order airwaybill. May not be applicable for local channel airwaybill.
 	GetOrderLogistics(*GetOrderLogisticsRequest) (*GetOrderLogisticsResponse, error)
+	// GetLogisticsMessage Use this call to get the logistics tracking information of an order.
 	GetLogisticsMessage(*GetLogisticsMessageRequest) (*GetLogisticsMessageResponse, error)
+	// GetForderWaybill Use this API to get airwaybill for fulfillment orders.
 	GetForderWaybill(*GetForderWaybillRequest) (*GetForderWaybillResponse, error)
+	// SetAddress Use this API to set default_address/pick_up_address/return_address of shop. Please use GetAddress API to fetch the address_id.
 	SetAddress(*SetAddressRequest) (*SetAddressResponse, error)
+	// DeleteAddress Use this API to delete the default/pick_up/return address of shop by address_id. Please use GetAddress API to fetch the address_id.
 	DeleteAddress(*DeleteAddressRequest) (*DeleteAddressResponse, error)
 
 	//=======================================================
 	// Returns
 	//=======================================================
 
+	// ConfirmReturn Confirm return
 	ConfirmReturn(*ConfirmReturnRequest) (*ConfirmReturnResponse, error)
+	// DisputeReturn Dispute return
 	DisputeReturn(*DisputeReturnRequest) (*DisputeReturnResponse, error)
+	// GetReturnList Get return list
 	GetReturnList(*GetReturnListRequest) (*GetReturnListResponse, error)
+	// GetReturnDetail Use this api to get detail information of a returned order
 	GetReturnDetail(*GetReturnDetailRequest) (*GetReturnDetailResponse, error)
 
 	//=======================================================
 	// Public
 	//=======================================================
 
+	// GetShopsByPartner Use this call to get basic info of shops which have authorized to the partner.
 	GetShopsByPartner(*GetShopsByPartnerRequest) (*GetShopsByPartnerResponse, error)
+	// GetCategoriesByCountry Use this api to get categories list filtered by country and cross border without using shopID.
 	GetCategoriesByCountry(*GetCategoriesByCountryRequest) (*GetCategoriesByCountryResponse, error)
+	// GetPaymentList The supported payment method list by country
 	GetPaymentList(*GetPaymentListRequest) (*GetPaymentListResponse, error)
 
 	//=======================================================
 	// TopPicks
 	//=======================================================
 
+	// GetTopPicksList Get the list of all collections.
 	GetTopPicksList(*GetTopPicksListRequest) (*GetTopPicksListResponse, error)
+	// AddTopPicks Add one collection. One shop can have up to 10 collections.
 	AddTopPicks(*AddTopPicksRequest) (*AddTopPicksResponse, error)
+	// UpdateTopPicks Use this API to update the collection name, the item list in a collection, or to activate a collection.
 	UpdateTopPicks(*UpdateTopPicksRequest) (*UpdateTopPicksResponse, error)
+	// DeleteTopPicks Delete a collection
 	DeleteTopPicks(*DeleteTopPicksRequest) (*DeleteTopPicksResponse, error)
 
 	//=======================================================
 	// FirstMileTracking
 	//=======================================================
 
+	// GenerateFMTrackingNo Use this API to generate first-mile tracking number for the shipment method of pickup. Please note that the prerequisite for using this API is that the order status is ready_to_ship and the tracking number of order has been obtained. Only applicable to cross-border sellers in China.
 	GenerateFMTrackingNo(*GenerateFMTrackingNoRequest) (*GenerateFMTrackingNoResponse, error)
+	// GetShopFMTrackingNo Use this API to fetch first-mile tracking numbers of the shop. Only applicable to cross-border sellers in China.
 	GetShopFMTrackingNo(*GetShopFMTrackingNoRequest) (*GetShopFMTrackingNoResponse, error)
+	// FirstMileCodeBindOrder Use this API to bind orders with the first-mile tracking number. Only applicable to cross-border sellers in China.
 	FirstMileCodeBindOrder(*FirstMileCodeBindOrderRequest) (*FirstMileCodeBindOrderResponse, error)
+	// GetFmTnDetail Use this API to fetch the detailed information of first-mile tracking number. Only applicable to cross-border sellers in China.
 	GetFmTnDetail(*GetFmTnDetailRequest) (*GetFmTnDetailResponse, error)
+	// GetFMTrackingNoWaybill Use the API to get the waybill of first-mile tracking number.Please note that this API only used for the shipment method of pickup. Only applicable to cross-border sellers in China.
 	GetFMTrackingNoWaybill(*GetFMTrackingNoWaybillRequest) (*GetFMTrackingNoWaybillResponse, error)
+	// GetShopFirstMileChannel Use this call to get all supported logistic channels for first mile. Only applicable to cross-border sellers in China.
 	GetShopFirstMileChannel(*GetShopFirstMileChannelRequest) (*GetShopFirstMileChannelResponse, error)
+	// FirstMileUnbind Use this API to unbind orders with the first-mile tracking number. Only applicable to cross-border sellers in China.
 	FirstMileUnbind(*FirstMileUnbindRequest) (*FirstMileUnbindResponse, error)
 
 	//=======================================================
 	// Payment
 	//=======================================================
 
+	// GetTransactionList Use this API to get the transaction records of wallet.
 	GetTransactionList(*GetTransactionListRequest) (*GetTransactionListResponse, error)
 
 	//=======================================================
 	// Push
 	//=======================================================
 
+	// GetPushConfig Use this API to get the configuration information of push service.
 	GetPushConfig(*GetPushConfigRequest) (*GetPushConfigResponse, error)
+	// SetPushConfig Use this API to set the configuration information of push service.
 	SetPushConfig(*SetPushConfigRequest) (*SetPushConfigResponse, error)
 }
 
