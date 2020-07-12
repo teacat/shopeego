@@ -149,11 +149,11 @@ type InitRequest struct {
 	// The order serial numbers.
 	OrderSN string `json:"ordersn,omitempty"`
 	// Required parameter ONLY if GetParameterForInit returns "pickup" or if GetLogisticsInfo returns "pickup" under "info_needed" for the same order. Developer should still include "pickup" field in the call even if "pickup" has empty value.
-	Pickup InitRequestPickup `json:"pickup,omitempty"`
+	Pickup *InitRequestPickup `json:"pickup,omitempty"`
 	// Required parameter ONLY if GetParameterForInit returns "dropoff" or if GetLogisticsInfo returns "dropoff" under "info_needed" for the same order. Developer should still include "dropoff" field in the call even if "dropoff" has empty value.
-	Dropoff InitRequestDropoff `json:"dropoff,omitempty"`
+	Dropoff *InitRequestDropoff `json:"dropoff,omitempty"`
 	// Optional parameter when GetParameterForInit returns "non-integrated" or GetLogisticsInfo returns "non-integrated" under "info_needed".
-	NonIntegrated InitRequestNonIntegrated `json:"non_integrated,omitempty"`
+	NonIntegrated *InitRequestNonIntegrated `json:"non_integrated,omitempty"`
 	// Partner ID is assigned upon registration is successful. Required for all requests.
 	PartnerID int64 `json:"partner_id,omitempty"`
 	// Shopee's unique identifier for a shop. Required for all requests.
