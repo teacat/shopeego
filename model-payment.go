@@ -27,8 +27,4 @@ type GetTransactionListResponse struct {
 	HasMore bool `json:"has_more,omitempty"`
 	//
 	TransactionList []GetTransactionListResponseTransactionList `json:"transaction_list,omitempty"`
-	// Name of the shop.
-	ShopName string `json:"shop_name,omitempty"`
-	// Withdraw ID when transaction type is withdraw_created, withdrawal_completed, withdrawal_cancelled.
-	WithdrawID float64 `json:"withdraw_id,omitempty,string"`
 }

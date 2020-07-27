@@ -1363,6 +1363,10 @@ type GetOrderDetailsResponseOrder struct {
 	EscrowTax float64 `json:"escrow_tax,omitempty,string"`
 	// Use this filed to judge whether the actual_shipping_fee is confirmed.
 	IsActualShippingFeeConfirmed bool `json:"is_actual_shipping_fee_confirmed,omitempty"`
+	// Buyer's CPF number for taxation and invoice purposes. Only for Brazil order.
+	BuyerCPFID string `json:"buyer_cpf_id,omitempty"`
+	// Use this field to indicate the order is fulfilled by shopee or seller. Applicable values: fulfilled_by_shopee, fulfilled_by_cb_seller, fulfilled_by_local_seller.
+	OrderFlag string `json:"order_flag,omitempty"`
 }
 
 //=======================================================
@@ -2335,6 +2339,10 @@ type GetFmTnDetailResponseOrder struct {
 	ForderID string `json:"forder_id,omitempty"`
 	// The tracking number of SLS for orders/forders.
 	SLSTN string `json:"slstn,omitempty"`
+	// Use this filed to indicate whether the order has been picked up by carrier.
+	IsPickUpDone bool `json:"is_pick_up_done,omitempty"`
+	// Use this filed to indicate whether the order has arrived at transit warehouse.
+	IsArrivedTWS bool `json:"is_arrived_tws,omitempty"`
 }
 
 //=======================================================
@@ -2466,6 +2474,14 @@ type GetTransactionListResponseTransactionList struct {
 	BuyerName string `json:"buyer_name,omitempty"`
 	// List of ordersn included in the transaction.
 	PayOrderList GetTransactionListResponseTransactionListPayOrderList `json:"pay_order_list,omitempty"`
+	// Name of the shop.
+	ShopName string `json:"shop_name,omitempty"`
+	// Withdraw ID when transaction type is withdraw_created, withdrawal_completed, withdrawal_cancelled.
+	WithdrawID float64 `json:"withdraw_id,omitempty,string"`
+	// The reason for ADJUSTMENT_ADD and ADJUSTMENT_MINUS.
+	Reason string `json:"reason,omitempty"`
+	// Use this field to indicate the event where a withdrawal is split into several withdrawals due to the withdrawal limit.
+	RootWithdrawID float64 `json:"root_withdrawal_id,omitempty"`
 }
 
 //=======================================================
@@ -2549,6 +2565,14 @@ type MyIncomeResponseOrderIncome struct {
 	SellerVoucherCode []string `json:"seller_voucher_code,omitempty,string"`
 	// The adjustable refund amount from Shopee Dispute Resolution Center.
 	DRCAdjustableRefund float64 `json:"drc_adjustable_refund,omitempty,string"`
+	// Final amount paid by the buyer for the items in a specific order.
+	CostOfGoodsSold float64 `json:"cost_of_goods_sold,omitempty,string"`
+	// Amount paid by the buyer for the items in a specific order.
+	OriginalCostOfGoodsSold float64 `json:"original_cost_of_goods_sold,omitempty,string"`
+	// Sum of each item Shopee discount of a specific order
+	OriginalShopeeDiscount float64 `json:"original_shopee_discount,omitempty,string"`
+	// Amount returned to Seller in the event of Partial Return.
+	SellerReturnRefund float64 `json:"seller_return_refund,omitempty,string"`
 	// The identifier for an API request for error tracking.
 	RequestID string `json:"request_id,omitempty,string"`
 	// The list of the serial number of refund.

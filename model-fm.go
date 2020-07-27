@@ -97,6 +97,8 @@ type GetFmTnDetailRequest struct {
 	Timestamp int `json:"timestamp,omitempty"`
 	// The first-mile tracking number.
 	FMTN string `json:"fmtn,omitempty"`
+	// This field indicates the current page number. By default, each page returns 100 orders, if the current page is less than 100, it returns all
+	Page int `json:"page,omitempty"`
 }
 
 type GetFmTnDetailResponse struct {
