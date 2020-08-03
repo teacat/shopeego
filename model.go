@@ -1804,11 +1804,11 @@ type GetLogisticInfoResponseDropoff struct {
 
 type GetLogisticInfoResponseInfo struct {
 	// Logistics information for pickup mode order.
-	Pickup *[]string `json:"pickup,omitempty"`
+	Pickup []string `json:"pickup,omitempty"`
 	// Logistics information for dropoff mode order.
-	Dropoff *[]string `json:"dropoff,omitempty"`
+	Dropoff []string `json:"dropoff,omitempty"`
 	// The parameters required based on each specific order to Init. Must use the fields included under info_needed to call Init.
-	NonIntegrated *[]string `json:"non_integrated,omitempty"`
+	NonIntegrated []string `json:"non_integrated,omitempty"`
 }
 
 //=======================================================
