@@ -143,3 +143,14 @@ type SetShopInstallmentStatusResponse struct {
 	// The status of whether shop support installment: 1 means true and 0 means false.
 	InstallmentStatus int `json:"installment_status,omitempty"`
 }
+
+type AuthPartnerRequest struct {
+	// The credential retrieved in the APP console
+	PartnerID int64 `json:"partner_id,omitempty"`
+	// An encrypted string generated in accordance with Shopee rule
+	// Token string `json:"token,omitempty"`
+	// Redirect url. The url to which the page directs after the authorization is completed. It can be any url(e.g. your company official website).
+	Redirect string `json:"redirect,omitempty"`
+	// Needs to be consistent with the timestamp in sign base string. Expires in 5 minutes.
+	Timestamp int `json:"timestamp,omitempty"`
+}
