@@ -18,12 +18,12 @@ $ go get gopkg.in/teacat/shopeego.v1
 
 ```golang
 // 初始化一個 Shopee 客戶端。
-client := shopeego.NewClient(&ClientOptions{
+client := shopeego.NewClient(&shopeego.ClientOptions{
 	Secret: "0c2c7b3bd59c2503f49a307fcf49dc985df43a1214821d5453e9ba54ca8e2e44",
 })
 
 // 取得指定商店的資料。
-shop := client.GetShopInfo(&GetShopInfoRequest{
+shop, _ := client.GetShopInfo(&shopeego.GetShopInfoRequest{
 	PartnerID: 841237,
 	ShopID:    307271,
 	Timestamp: int(time.Now().Unix()),
@@ -36,9 +36,9 @@ fmt.Println(shop.ShopName) // 輸出：yamiodymel
 
 這個 API 套件在開發的時候發現了下列幾個問題。
 
-* 有些[「必填欄位」被標註為「可選」](https://github.com/minchao/shopee-php/issues/5)。
-* 名為 `name` 的名稱欄位[但型態卻是 `float64` 或 `int`](https://open.shopee.com/documents?module=2&type=1&id=373)。
-* 欄位明明是 `float64` 但卻會收到空字串作為零值（這部份 Shopeego 已經透過[字串更換](https://github.com/teacat/shopeego/blob/master/replaces.go)將 `""` 改為 `"0"` 以便解析了）。
+-   有些[「必填欄位」被標註為「可選」](https://github.com/minchao/shopee-php/issues/5)。
+-   名為 `name` 的名稱欄位[但型態卻是 `float64` 或 `int`](https://open.shopee.com/documents?module=2&type=1&id=373)。
+-   欄位明明是 `float64` 但卻會收到空字串作為零值（這部份 Shopeego 已經透過[字串更換](https://github.com/teacat/shopeego/blob/master/replaces.go)將 `""` 改為 `"0"` 以便解析了）。
 
 這些問題你可能會在使用時遇到，當遇到 API 無法正常使用或是出現 `error_param` 時，請考慮到 Issue 中回報。
 
