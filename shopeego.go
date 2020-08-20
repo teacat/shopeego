@@ -1,17 +1,16 @@
 package shopeego
 
 import (
-	"bytes"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
-	"net/http"
 	"regexp"
 	"strings"
+
+	"github.com/parnurzeal/gorequest"
 )
 
 var (
@@ -33,6 +32,21 @@ var (
 	ErrNotExists = errors.New("shopeego: not exists")
 )
 
+const (
+	// ClientVersionV1 for Open API V1, see: https://open.shopee.com/documents?module=63&type=2&id=53.
+	ClientVersionV1 ClientVersion = iota
+	// ClientVersionV2 for Open API V2, see: https://open.shopee.com/documents?module=63&type=2&id=56.
+	ClientVersionV2
+)
+
+// ClientVersion is the API version of the client should be using.
+type ClientVersion int
+
+const (
+	urlTestSandbox string = "https://partner.uat.shopeemobile.com/"
+	urlStandard    string = "https://partner.shopeemobile.com/"
+)
+
 type ClientOptions struct {
 	Secret string
 	// 非必要
@@ -41,6 +55,8 @@ type ClientOptions struct {
 	//ShopID int64
 	//
 	IsSandbox bool
+	//
+	Version ClientVersion
 }
 
 // CONSTS
@@ -49,11 +65,14 @@ func NewClient(opts *ClientOptions) Client {
 	return &ShopeeClient{
 		Secret:    opts.Secret,
 		IsSandbox: opts.IsSandbox,
+		Version:   opts.Version,
 	}
 }
 
 // Client 定義了一個蝦皮的客戶端該有什麼功能。
 type Client interface {
+	// SetAccessToken(t string) *ShopeeClient
+
 	//=======================================================
 	// Shop
 	//=======================================================
@@ -66,6 +85,8 @@ type Client interface {
 	Performance(*PerformanceRequest) (*PerformanceResponse, error)
 	// SetShopInstallmentStatus Only for TW whitelisted shop.Use this API to set the installment status of shop.
 	SetShopInstallmentStatus(*SetShopInstallmentStatusRequest) (*SetShopInstallmentStatusResponse, error)
+	//
+	AuthPartner(*AuthPartnerRequest) string
 
 	//=======================================================
 	// ShopCategory
@@ -329,12 +350,23 @@ type Client interface {
 	GetPushConfig(*GetPushConfigRequest) (*GetPushConfigResponse, error)
 	// SetPushConfig Use this API to set the configuration information of push service.
 	SetPushConfig(*SetPushConfigRequest) (*SetPushConfigResponse, error)
+
+	//=======================================================
+	// Auth (V2)
+	//=======================================================
+
+	// GetAccessToken Use this API and the code to obtain the access_token and refresh_token.
+	GetAccessToken(*GetAccessTokenRequest) (*GetAccessTokenResponse, error)
+	// RefreshAccessToken Use this API to refresh the access_token after it expires.
+	RefreshAccessToken(*RefreshAccessTokenRequest) (*RefreshAccessTokenResponse, error)
 }
 
 // ShopeeClient represents a client to Shopee
 type ShopeeClient struct {
-	Secret    string
-	IsSandbox bool
+	Secret      string
+	accessToken string
+	IsSandbox   bool
+	Version     ClientVersion
 }
 
 // ResponseError defines a error response
@@ -342,28 +374,97 @@ type ResponseError struct {
 	RequestID string `json:"request_id,omitempty"`
 	Msg       string `json:"msg,omitempty"`
 	ErrorType string `json:"error,omitempty"`
+	Message   string `json:"message,omitempty"`
 }
 
 func (e ResponseError) Error() string {
-	return fmt.Sprintf("shopeego: %s - %s", e.ErrorType, e.Msg)
+	// 如果 `msg` 是空的，就試試看 V2 的 `message`
+	msg := e.Msg
+	if msg == "" {
+		msg = e.Message
+	}
+	return fmt.Sprintf("shopeego: %s - %s", e.ErrorType, msg)
 }
 
 //
 func (s *ShopeeClient) getPath(method string) string {
 	var host string
 	if s.IsSandbox {
-		host = "https://partner.uat.shopeemobile.com/"
+		host = urlTestSandbox
 	} else {
-		host = "https://partner.shopeemobile.com/"
+		host = urlStandard
 	}
-	return fmt.Sprintf("%s%s", host, availablePaths[method])
+	// 依照不同版本處理 API 前輟。
+	switch s.Version {
+	case ClientVersionV1:
+		return fmt.Sprintf("%sapi/v1/%s", host, availablePaths[method])
+	default:
+		return fmt.Sprintf("%sapi/v2/%s", host, availablePaths[method])
+	}
 }
 
-//
-func (s *ShopeeClient) sign(url string, body []byte) string {
+// signV1 會簽署 V1 API。
+func (s *ShopeeClient) signV1(url string, body []byte) string {
 	h := hmac.New(sha256.New, []byte(s.Secret))
 	io.WriteString(h, fmt.Sprintf("%s|%s", url, string(body)))
 	return fmt.Sprintf("%x", h.Sum(nil))
+}
+
+// signV2 會簽署 V2 API。
+func (s *ShopeeClient) signV2(url string, b []byte) string {
+	h := hmac.New(sha256.New, []byte(s.Secret))
+	p := s.getBodyPart(b)
+	if s.IsSandbox {
+		url = "/api/" + strings.TrimLeft(url, urlTestSandbox)
+	} else {
+		url = "/api/" + strings.TrimLeft(url, urlStandard)
+	}
+	io.WriteString(h, fmt.Sprintf("%d%s%d%s%d", p.partnerID, url, p.timestamp, s.accessToken, p.shopID))
+	return fmt.Sprintf("%x", h.Sum(nil))
+}
+
+type bodyPart struct {
+	partnerID int64
+	timestamp int
+	shopID    int64
+}
+
+//
+func (s *ShopeeClient) getBodyPart(b []byte) bodyPart {
+	var p bodyPart
+	var t map[string]interface{}
+	err := json.Unmarshal(b, &t)
+	if err != nil {
+		return p
+	}
+	if v, ok := t["partner_id"].(float64); ok {
+		p.partnerID = int64(v)
+	}
+	if v, ok := t["timestamp"].(float64); ok {
+		p.timestamp = int(v)
+	}
+	if v, ok := t["shopid"].(float64); ok {
+		p.shopID = int64(v)
+	}
+	if v, ok := t["shop_id"].(float64); ok {
+		p.shopID = int64(v)
+	}
+	return p
+}
+
+func (s *ShopeeClient) SetAccessToken(t string) *ShopeeClient {
+	s.accessToken = t
+	return s
+}
+
+//
+func (s *ShopeeClient) makeV2Query(url string, b []byte) string {
+	p := s.getBodyPart(b)
+	q := fmt.Sprintf("?partner_id=%d&shop_id=%d&timestamp=%d&sign=%s", p.partnerID, p.shopID, p.timestamp, s.signV2(url, b))
+	if s.accessToken != "" {
+		q += fmt.Sprintf("&access_token=%s", s.accessToken)
+	}
+	return q
 }
 
 //
@@ -374,21 +475,22 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	}
 	url := s.getPath(method)
 
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(body))
-	req.Header.Set("Authorization", s.sign(url, body))
-	req.Header.Set("Content-Type", "application/json")
-
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
+	req := gorequest.New().Type("json")
+	switch s.Version {
+	// 如果是 V1 就在 Header 安插 Sign。
+	case ClientVersionV1:
+		req = req.Post(url).Set("Authorization", s.signV1(url, body)).Send(string(body))
+	// 如果是 V2 的 API，就在 Body 中自動安插 Sign。
+	case ClientVersionV2:
+		req = req.Post(fmt.Sprintf("%s%s", url, s.makeV2Query(url, body))).Set("Authorization", s.signV1(url, body)).Send(string(body))
 	}
-	defer resp.Body.Close()
 
-	body, err = ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return []byte(``), err
+	_, respBody, errs := req.End()
+	panic(respBody)
+	if len(errs) != 0 {
+		return []byte(``), errs[0]
 	}
+	body = []byte(respBody)
 
 	//
 	replaceConcat := strings.Join(replaces, "|")
@@ -461,6 +563,24 @@ func (s *ShopeeClient) SetShopInstallmentStatus(req *SetShopInstallmentStatusReq
 		return
 	}
 	return
+}
+
+// AuthPartner for V2.
+func (s *ShopeeClient) AuthPartner(req *AuthPartnerRequest) string {
+	url := s.getPath("AuthPartner")
+	switch s.Version {
+	// V1
+	case ClientVersionV1:
+		h := sha256.Sum256([]byte(fmt.Sprintf("%s%s", s.Secret, req.Redirect)))
+		token := fmt.Sprintf("%x", h[:])
+		return fmt.Sprintf("%s?id=%d&token=%s&redirect=%s", url, req.PartnerID, token, req.Redirect)
+	// V2
+	default:
+		h := hmac.New(sha256.New, []byte(s.Secret))
+		io.WriteString(h, fmt.Sprintf("%d%s%d", req.PartnerID, "/api/v2/shop/auth_partner", req.Timestamp))
+		token := fmt.Sprintf("%x", h.Sum(nil))
+		return fmt.Sprintf("%s?partner_id=%d&redirect=%s&sign=%s&timestamp=%d", url, req.PartnerID, req.Redirect, token, req.Timestamp)
+	}
 }
 
 //=======================================================
@@ -1793,6 +1913,36 @@ func (s *ShopeeClient) GetPushConfig(req *GetPushConfigRequest) (resp *GetPushCo
 // SetPushConfig Use this API to get the configuration information of push service.
 func (s *ShopeeClient) SetPushConfig(req *SetPushConfigRequest) (resp *SetPushConfigResponse, err error) {
 	b, err := s.post("SetPushConfig", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
+//=======================================================
+// Auth (V2)
+//=======================================================
+
+// GetAccessToken Use this API and the code to obtain the access_token and refresh_token.
+func (s *ShopeeClient) GetAccessToken(req *GetAccessTokenRequest) (resp *GetAccessTokenResponse, err error) {
+	b, err := s.post("GetAccessToken", req)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(b, &resp)
+	if err != nil {
+		return
+	}
+	return
+}
+
+// RefreshAccessToken Use this API to refresh the access_token after it expires.
+func (s *ShopeeClient) RefreshAccessToken(req *RefreshAccessTokenRequest) (resp *RefreshAccessTokenResponse, err error) {
+	b, err := s.post("RefreshAccessToken", req)
 	if err != nil {
 		return
 	}
