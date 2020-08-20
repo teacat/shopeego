@@ -21,9 +21,9 @@ type PerformanceResponsePerformance struct {
 	// Null, not applicable.
 	Unit string `json:"unit,omitempty"`
 	// Your target performance index.
-	Target float64 `json:"target,omitempty,string"`
+	Target float64 `json:"target,omitempty"`
 	// Your actual performance index.
-	My float64 `json:"my,omitempty,string"`
+	My float64 `json:"my,omitempty"`
 }
 
 //=======================================================
