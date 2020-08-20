@@ -486,7 +486,6 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	}
 
 	_, respBody, errs := req.End()
-	panic(respBody)
 	if len(errs) != 0 {
 		return []byte(``), errs[0]
 	}
