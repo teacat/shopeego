@@ -475,21 +475,31 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	}
 	url := s.getPath(method)
 
-	req := gorequest.New().Type("json")
+	req, err := http.NewRequest("POST", url, strings.NewReader(string(body)))
+	req.Header.Add("Content-Type", "application/json")
+
 	switch s.Version {
 	// 如果是 V1 就在 Header 安插 Sign。
 	case ClientVersionV1:
-		req = req.Post(url).Set("Authorization", s.signV1(url, body)).Send(string(body))
+		req.Header.Add("Authorization", s.signV1(url, body))
 	// 如果是 V2 的 API，就在 Body 中自動安插 Sign。
 	case ClientVersionV2:
-		req = req.Post(fmt.Sprintf("%s%s", url, s.makeV2Query(url, body))).Set("Authorization", s.signV1(url, body)).Send(string(body))
+		req, err = http.NewRequest("POST", fmt.Sprintf("%s%s", url, s.makeV2Query(url, body)), strings.NewReader(string(body)))
+		req.Header.Add("Authorization", s.signV1(url, body))
 	}
 
-	_, respBody, errs := req.End()
-	if len(errs) != 0 {
-		return []byte(``), errs[0]
+	//Do request by native lib
+	client := &http.Client{}
+	res, err := client.Do(req)
+	defer res.Body.Close()
+	if err != nil {
+		return []byte(``), err
 	}
-	body = []byte(respBody)
+
+	body, err = ioutil.ReadAll(res.Body)
+	if err != nil {
+		return []byte(``), err
+	}
 
 	//
 	replaceConcat := strings.Join(replaces, "|")
