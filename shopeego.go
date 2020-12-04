@@ -1,17 +1,18 @@
 package shopeego
 
 import (
+	"bytes"
 	"crypto/hmac"
 	"crypto/sha256"
-	"encoding/json"
 	"errors"
 	"fmt"
+	jsoniter "github.com/json-iterator/go"
 	"io"
-	"regexp"
+	"io/ioutil"
+	"net/http"
 	"strings"
-
-	"github.com/parnurzeal/gorequest"
 )
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 var (
 	// There are errors in the input parameters
@@ -131,7 +132,8 @@ type Client interface {
 	// GetItemsList Use this call to get a list of items
 	GetItemsList(*GetItemsListRequest) (*GetItemsListResponse, error)
 	// GetItemDetail Use this call to get detail of item
-	GetItemDetail(*GetItemDetailRequest) (*GetItemDetailResponse, error)
+	//GetItemDetail(*GetItemDetailRequest) (*GetItemDetailResponse, error)
+	GetItemDetail(*GetItemDetailRequest) (map[string]interface{}, error)
 	// UpdateItem Use this call to update a product item. Should get dependency by calling below API first
 	// shopee.item.GetItemDetail
 	UpdateItem(*UpdateItemRequest) (*UpdateItemResponse, error)
@@ -471,7 +473,7 @@ func (s *ShopeeClient) makeV2Query(url string, b []byte) string {
 func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	body, err := json.Marshal(in)
 	if err != nil {
-		return []byte(``), err
+		return nil, err
 	}
 	url := s.getPath(method)
 
@@ -484,38 +486,37 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 		req.Header.Add("Authorization", s.signV1(url, body))
 	// 如果是 V2 的 API，就在 Body 中自動安插 Sign。
 	case ClientVersionV2:
-		req, err = http.NewRequest("POST", fmt.Sprintf("%s%s", url, s.makeV2Query(url, body)), strings.NewReader(string(body)))
+		req, err = http.NewRequest("POST", fmt.Sprintf("%s%s", url, s.makeV2Query(url, body)), bytes.NewReader(body))
 		req.Header.Add("Authorization", s.signV1(url, body))
 	}
 
 	//Do request by native lib
 	client := &http.Client{}
 	res, err := client.Do(req)
-	defer res.Body.Close()
 	if err != nil {
-		return []byte(``), err
+		return nil, err
 	}
-
+	defer res.Body.Close()
 	body, err = ioutil.ReadAll(res.Body)
 	if err != nil {
-		return []byte(``), err
-	}
-
-	//
-	replaceConcat := strings.Join(replaces, "|")
-	for _, v := range replaces {
-		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": ""`, v), fmt.Sprintf(`"%s": "0"`, v)))
-	}
-
-	var r = regexp.MustCompile(fmt.Sprintf(`"(%s)": ([^"].*?)(,|})`, replaceConcat))
-	body = []byte(r.ReplaceAllString(string(body), `"$1": "$2"$3`))
-
-	var errResp ResponseError
-	_ = json.Unmarshal(body, &errResp)
-	if errResp.ErrorType != "" {
-		return []byte(``), errResp
+		return nil, err
 	}
 	return body, nil
+	//
+	//replaceConcat := strings.Join(replaces, "|")
+	//for _, v := range replaces {
+	//	body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": ""`, v), fmt.Sprintf(`"%s": "0"`, v)))
+	//}
+	//
+	//var r = regexp.MustCompile(fmt.Sprintf(`"(%s)": ([^"].*?)(,|})`, replaceConcat))
+	//body = []byte(r.ReplaceAllString(string(body), `"$1": "$2"$3`))
+	//
+	//var errResp ResponseError
+	//_ = json.Unmarshal(body, &errResp)
+	//if errResp.ErrorType != "" {
+	//	return []byte(``), errResp
+	//}
+	//return body, nil
 }
 
 //=======================================================
@@ -799,7 +800,19 @@ func (s *ShopeeClient) GetItemsList(req *GetItemsListRequest) (resp *GetItemsLis
 }
 
 // GetItemDetail Use this call to get detail of item
-func (s *ShopeeClient) GetItemDetail(req *GetItemDetailRequest) (resp *GetItemDetailResponse, err error) {
+//func (s *ShopeeClient) GetItemDetail(req *GetItemDetailRequest) (resp *GetItemDetailResponse, err error) {
+//	b, err := s.post("GetItemDetail", req)
+//	if err != nil {
+//		return
+//	}
+//	err = json.Unmarshal(b, &resp)
+//	if err != nil {
+//		return
+//	}
+//	return
+//}
+
+func (s *ShopeeClient) GetItemDetail(req *GetItemDetailRequest) (resp map[string]interface{}, err error) {
 	b, err := s.post("GetItemDetail", req)
 	if err != nil {
 		return

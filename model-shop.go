@@ -17,7 +17,7 @@ type GetShopInfoResponse struct {
 	// The two-digit code representing the country where the order was made.
 	Country string `json:"country,omitempty"`
 	// Description of the shop.
-	ShopDescripion string `json:"shop_descripion,omitempty"`
+	ShopDescription string `json:"shop_description,omitempty"`
 	// List of videos URLs of the shop.
 	Videos []string `json:"videos,omitempty"`
 	// List of images URLs of the shop.
