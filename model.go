@@ -1932,6 +1932,12 @@ type GetOrderLogisticsResponseLogistic struct {
 	SenderSortCode GetOrderLogisticsResponseLogisticSenderSortCode `json:"sender_sort_code,omitempty"`
 	// Only used for local TW sellers.
 	ThirdPartyLogisticInfo GetOrderLogisticsResponseLogisticThirdPartyLogisticInfo `json:"third_party_logistic_info,omitempty"`
+	// Buyer's CPF number for taxation and invoice purposes. Only for Brazil order.
+	BuyerCPFID string `json:"buyer_cpf_id,omitempty"`
+	// First mile tracking NO. for CrossBoard BR seller can be used to self-design CB Brazil AWB.
+	ShopeeTrackingNo string `json:"shopee_tracking_no,omitempty"`
+	// The last-mile tracking number. Only for Cross Board BR seller.
+	LMTN string `json:"lm_tn,omitempty"`
 }
 
 type GetOrderLogisticsResponseLogisticRecipientSortCode struct {
