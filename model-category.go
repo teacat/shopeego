@@ -125,6 +125,10 @@ type GetItemsRequest struct {
 	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
+	// Specifies the starting entry of data to return in the current call. Default is 0. if data is more than one page, the offset can be some entry to start next call.
+	PaginationOffset int `json:"pagination_offset,omitempty"`
+	// If many items are available to retrieve, you may need to call GetItems multiple times to retrieve all the data. Each result set is returned as a page of entries. Use the Pagination filters to control the maximum number of entries (<= 1000) to retrieve per page (i.e., per call), the offset number to start next call. This integer value is used to specify the maximum number of entries to return in a single "page" of data. And the default will be 1000 as well.
+	PaginationEntriesPerPage int `json:"pagination_entries_per_page,omitempty"`
 }
 
 type GetItemsResponse struct {
