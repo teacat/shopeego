@@ -116,6 +116,8 @@ type GetFmTnDetailResponse struct {
 	DeclareDate string `json:"declare_date,omitempty"`
 	// The identifier for an API request for error tracking
 	RequestID string `json:"request_id,omitempty"`
+	// This field represents the total number of pages calculated by 100 orders per page.
+	TotalPage int `json:"total_page,omitempty"`
 }
 
 type GetFMTrackingNoWaybillRequest struct {
