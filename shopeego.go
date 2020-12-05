@@ -6,12 +6,15 @@ import (
 	"crypto/sha256"
 	"errors"
 	"fmt"
-	jsoniter "github.com/json-iterator/go"
 	"io"
 	"io/ioutil"
 	"net/http"
+	"regexp"
 	"strings"
+
+	jsoniter "github.com/json-iterator/go"
 )
+
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 var (
@@ -132,8 +135,7 @@ type Client interface {
 	// GetItemsList Use this call to get a list of items
 	GetItemsList(*GetItemsListRequest) (*GetItemsListResponse, error)
 	// GetItemDetail Use this call to get detail of item
-	//GetItemDetail(*GetItemDetailRequest) (*GetItemDetailResponse, error)
-	GetItemDetail(*GetItemDetailRequest) (map[string]interface{}, error)
+	GetItemDetail(*GetItemDetailRequest) (*GetItemDetailResponse, error)
 	// UpdateItem Use this call to update a product item. Should get dependency by calling below API first
 	// shopee.item.GetItemDetail
 	UpdateItem(*UpdateItemRequest) (*UpdateItemResponse, error)
@@ -501,22 +503,29 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	return body, nil
-	//
-	//replaceConcat := strings.Join(replaces, "|")
-	//for _, v := range replaces {
-	//	body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": ""`, v), fmt.Sprintf(`"%s": "0"`, v)))
-	//}
-	//
-	//var r = regexp.MustCompile(fmt.Sprintf(`"(%s)": ([^"].*?)(,|})`, replaceConcat))
-	//body = []byte(r.ReplaceAllString(string(body), `"$1": "$2"$3`))
-	//
-	//var errResp ResponseError
-	//_ = json.Unmarshal(body, &errResp)
-	//if errResp.ErrorType != "" {
-	//	return []byte(``), errResp
-	//}
-	//return body, nil
+
+	var errResp ResponseError
+	_ = json.Unmarshal(body, &errResp)
+	if errResp.ErrorType != "" {
+		return nil, errResp
+	}
+
+	return s.patchFloat(body), nil
+}
+
+// patchFloat 會修正無法將 JSON 的字串值轉換成 Float64 型態的錯誤，這主要是因為 Shopee 會在某些時候以 `""`（空字串）當作是 Float64 的零值，
+// 但對於 Golang 來說，Float64 的零值必須是 `"0"`，所以這個函式會將 Raw JSON 裡的所有相關（請參閱 `replaces.go` 關鍵詞表） `""` 轉換為 `"0"` 以便正確解析。
+//
+// 這個函式修正了 `json: invalid use of ,string struct tag, trying to unmarshal unquoted value into float64` 錯誤。
+// 相關 Issue： https://github.com/teacat/shopeego/issues/6
+func (s *ShopeeClient) patchFloat(body []byte) []byte {
+	replaceConcat := strings.Join(replaces, "|")
+	for _, v := range replaces {
+		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": ""`, v), fmt.Sprintf(`"%s": "0"`, v)))
+	}
+
+	var r = regexp.MustCompile(fmt.Sprintf(`"(%s)": ([^"].*?)(,|})`, replaceConcat))
+	return []byte(r.ReplaceAllString(string(body), `"$1": "$2"$3`))
 }
 
 //=======================================================
@@ -800,19 +809,7 @@ func (s *ShopeeClient) GetItemsList(req *GetItemsListRequest) (resp *GetItemsLis
 }
 
 // GetItemDetail Use this call to get detail of item
-//func (s *ShopeeClient) GetItemDetail(req *GetItemDetailRequest) (resp *GetItemDetailResponse, err error) {
-//	b, err := s.post("GetItemDetail", req)
-//	if err != nil {
-//		return
-//	}
-//	err = json.Unmarshal(b, &resp)
-//	if err != nil {
-//		return
-//	}
-//	return
-//}
-
-func (s *ShopeeClient) GetItemDetail(req *GetItemDetailRequest) (resp map[string]interface{}, err error) {
+func (s *ShopeeClient) GetItemDetail(req *GetItemDetailRequest) (resp *GetItemDetailResponse, err error) {
 	b, err := s.post("GetItemDetail", req)
 	if err != nil {
 		return
