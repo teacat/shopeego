@@ -1367,6 +1367,8 @@ type GetOrderDetailsResponseOrder struct {
 	BuyerCPFID string `json:"buyer_cpf_id,omitempty"`
 	// Use this field to indicate the order is fulfilled by shopee or seller. Applicable values: fulfilled_by_shopee, fulfilled_by_cb_seller, fulfilled_by_local_seller.
 	OrderFlag string `json:"order_flag,omitempty"`
+	// The last-mile tracking number. Only for Cross Board BR seller.
+	LMTN string `json:"lm_tn,omitempty"`
 }
 
 //=======================================================
