@@ -1356,7 +1356,7 @@ type GetOrderDetailsResponseOrder struct {
 	// Could be one of buyer, seller or system
 	CancelBy string `json:"cancel_by,omitempty"`
 	// The first-mile tracking number.
-	FMTN string `json:"fmtn,omitempty"`
+	FMTN string `json:"fm_tn,omitempty"`
 	// Use this field to get reason for buyer, seller, and system cancellation.
 	CancelReason string `json:"cancel_reason,omitempty"`
 	// Cross-border tax imposed by the Indonesian government on sellers.
@@ -1577,7 +1577,7 @@ type GetForderInfoResponseForder struct {
 	//
 	LogisticsInfo []GetForderInfoResponseForderLogisticsInfo `json:"logistics_info,omitempty"`
 	// The first-mile tracking number.
-	FMTN string `json:"fmtn,omitempty"`
+	FMTN string `json:"fm_tn,omitempty"`
 	// The last-mile tracking number. Only for Cross Board BR seller.
 	LMTN string `json:"lm_tn,omitempty"`
 }
@@ -2313,7 +2313,7 @@ type GetShopFMTrackingNoResponseFMTNList struct {
 	// The logistics status for bound orders.
 	Status string `json:"status,omitempty"`
 	// The first-mile tracking number.
-	FMTN string `json:"fmtn,omitempty"`
+	FMTN string `json:"fm_tn,omitempty"`
 }
 
 //=======================================================
@@ -2367,12 +2367,12 @@ type GetFMTrackingNoWaybillResponseError struct {
 	// The detail information of this error.
 	ErrorDescription string `json:"error_description,omitempty"`
 	// The first-mile tracking number.
-	FMTN string `json:"fmtn,omitempty"`
+	FMTN string `json:"fm_tn,omitempty"`
 }
 
 type GetFMTrackingNoWaybillResponseResultWaybill struct {
 	// The first-mile tracking number.
-	FMTN string `json:"fmtn,omitempty"`
+	FMTN string `json:"fm_tn,omitempty"`
 	// The url of retrieving waybill.
 	Waybill string `json:"waybill,omitempty"`
 }

@@ -58,7 +58,7 @@ type FirstMileCodeBindOrderRequest struct {
 	// The set of ordersn. You can specify up to 50 ordersns in this call.
 	OrderList []FirstMileCodeBindOrderRequestOrder `json:"order_list,omitempty"`
 	// The first-mile tracking number.
-	FMTN string `json:"fmtn,omitempty"`
+	FMTN string `json:"fm_tn,omitempty"`
 	// The shipment method for bound orders, should be pickup or dropoff.
 	ShipmentMethod string `json:"shipment_method,omitempty"`
 	// The identity of logistic channel
@@ -81,7 +81,7 @@ type FirstMileCodeBindOrderResponse struct {
 	// This is to indicate whether orders are bound successfully.
 	Success bool `json:"success,omitempty"`
 	// The first-mile tracking number.
-	FMTN string `json:"fmtn,omitempty"`
+	FMTN string `json:"fm_tn,omitempty"`
 	//
 	FailList []FirstMileCodeBindOrderResponseFail `json:"fail_list,omitempty"`
 	// The identifier for an API request for error tracking
@@ -96,7 +96,7 @@ type GetFmTnDetailRequest struct {
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
 	// The first-mile tracking number.
-	FMTN string `json:"fmtn,omitempty"`
+	FMTN string `json:"fm_tn,omitempty"`
 	// This field indicates the current page number. By default, each page returns 100 orders, if the current page is less than 100, it returns all
 	Page int `json:"page,omitempty"`
 }
@@ -105,7 +105,7 @@ type GetFmTnDetailResponse struct {
 	// The identity of logistic channel
 	LogisticID int64 `json:"logistic_id,omitempty"`
 	// The first-mile tracking number.
-	FMTN string `json:"fmtn,omitempty"`
+	FMTN string `json:"fm_tn,omitempty"`
 	// The shipment method for bound orders, should be pickup or dropoff.
 	ShipmentMethod string `json:"shipment_method,omitempty"`
 	// The logistics status for first-mile tracking number.
