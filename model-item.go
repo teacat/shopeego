@@ -209,6 +209,8 @@ type GetItemsListRequest struct {
 	ShopID int64 `json:"shopid,omitempty"`
 	// This is to indicate the timestamp of the request. Required for all requests.
 	Timestamp int `json:"timestamp,omitempty"`
+	// true:return item in all status; false:return items without item deleted by seller; default: false.
+	NeedDeletedItem bool `json:"need_deleted_item,omitempty"`
 }
 
 type GetItemsListResponse struct {
