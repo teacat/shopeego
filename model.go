@@ -1598,6 +1598,8 @@ type GetEscrowReleasedOrdersResponseOrder struct {
 type SplitOrderRequestParcel struct {
 	// Itemids that will be put into a fullfillment order.
 	ItemID int64 `json:"item_id,omitempty"`
+	// Variation_id that will be put into a fulfillment order, if no variation please input variation_id:0.
+	VariationID int64 `json:"variation_id"`
 }
 
 //=======================================================
