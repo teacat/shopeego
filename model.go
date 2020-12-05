@@ -89,7 +89,7 @@ type GetAttributesResponseAttribute struct {
 	// The Identify of each category.
 	AttributeID int64 `json:"attribute_id,omitempty"`
 	// The name of each attribute.
-	AttributeName int `json:"attribute_name,omitempty"`
+	AttributeName string `json:"attribute_name,omitempty"`
 	// This is to indicate whether this attribute is mandantory.
 	IsMandatory bool `json:"is_mandatory,omitempty"`
 	// Enumerated type that defines the type of the attribute. Applicable values: See Data Definition- AttributeType.
@@ -183,7 +183,7 @@ type AddResponseItemAttribute struct {
 	// The Identify of each category.
 	AttributeID int64 `json:"attribute_id,omitempty"`
 	// The name of each attribute.
-	AttributeName int `json:"attribute_name,omitempty"`
+	AttributeName string `json:"attribute_name,omitempty"`
 	// This is to indicate whether this attribute is mandantory.
 	IsMandatory bool `json:"is_mandatory,omitempty"`
 	// Enumerated type that defines the type of the attribute. Applicable values: See Data Definition- AttributeType.
@@ -423,7 +423,7 @@ type GetItemDetailResponseItemAttribute struct {
 	// The Identify of each category
 	AttributeID int64 `json:"attribute_id,omitempty"`
 	// The name of each attribute
-	AttributeName int `json:"attribute_name,omitempty"`
+	AttributeName string `json:"attribute_name,omitempty"`
 	// This is to indicate whether this attribute is mandantory
 	IsMandatory bool `json:"is_mandatory,omitempty"`
 	// Enumerated type that defines the type of the attribute. Applicable values: See Data Definition- AttributeType.
@@ -606,7 +606,7 @@ type UpdateItemResponseItemAttribute struct {
 	// The Identify of each category
 	AttributeID int64 `json:"attribute_id,omitempty"`
 	// The name of each attribute
-	AttributeName int `json:"attribute_name,omitempty"`
+	AttributeName string `json:"attribute_name,omitempty"`
 	// This is to indicate whether this attribute is mandantory
 	IsMandatory bool `json:"is_mandatory,omitempty"`
 	// Enumerated type that defines the type of the attribute. Applicable values: See Data Definition- AttributeType.
