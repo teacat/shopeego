@@ -1578,6 +1578,8 @@ type GetForderInfoResponseForder struct {
 	LogisticsInfo []GetForderInfoResponseForderLogisticsInfo `json:"logistics_info,omitempty"`
 	// The first-mile tracking number.
 	FMTN string `json:"fmtn,omitempty"`
+	// The last-mile tracking number. Only for Cross Board BR seller.
+	LMTN string `json:"lm_tn,omitempty"`
 }
 
 //=======================================================
