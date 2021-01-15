@@ -90,4 +90,6 @@ var replaces []string = []string{
 	"inflated_price",
 	"inflated_original_price",
 	"sip_item_price",
+	"buyer_cancel_reason",
+	"cancel_reason",
 }
