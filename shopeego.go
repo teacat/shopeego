@@ -521,11 +521,11 @@ func (s *ShopeeClient) post(method string, in interface{}) ([]byte, error) {
 func (s *ShopeeClient) patchFloat(body []byte) []byte {
 	replaceConcat := strings.Join(replaces, "|")
 	for _, v := range replaces {
-		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s": ""`, v), fmt.Sprintf(`"%s": "0"`, v)))
+		body = []byte(strings.ReplaceAll(string(body), fmt.Sprintf(`"%s":""`, v), fmt.Sprintf(`"%s":"0"`, v)))
 	}
 
-	var r = regexp.MustCompile(fmt.Sprintf(`"(%s)": ([^"].*?)(,|})`, replaceConcat))
-	return []byte(r.ReplaceAllString(string(body), `"$1": "$2"$3`))
+	var r = regexp.MustCompile(fmt.Sprintf(`"(%s)":([^"].*?)(,|})`, replaceConcat))
+	return []byte(r.ReplaceAllString(string(body), `"$1":"$2"$3`))
 }
 
 //=======================================================
