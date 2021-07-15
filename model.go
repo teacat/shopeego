@@ -1280,7 +1280,7 @@ type GetOrderDetailsResponseOrderItem struct {
 	// This value indicates whether buyer buy the order item in wholesale price.
 	IsWholesale bool `json:"is_wholesale,omitempty"`
 	// The weight of the item
-	Weight float64 `json:"weight,omitempty,string"`
+	Weight float64 `json:"weight,omitempty"`
 	// To indicate if this item belongs to an addon deal.
 	IsAddOnDeal bool `json:"is_add_on_deal,omitempty"`
 	// To indicate if this item is main item or sub item. True means main item, false means sub item.
